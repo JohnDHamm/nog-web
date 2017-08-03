@@ -11,6 +11,8 @@ import Navbar from './components/navbar'
 import Home from './components/home';
 import Userhome from './components/userhome';
 import PatternSnowflake from './components/pattern-snowflake';
+import PatternTree from './components/pattern-tree';
+
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -22,6 +24,7 @@ ReactDOM.render(
 				<Switch>
 					<Route path="/userhome/:id" component={Userhome} />
 					<Route path="/pattern-snowflake/:id" component={PatternSnowflake} />
+					<Route path="/pattern-tree/:id" component={PatternTree} />
 					<Route path="/" component={Home} />
 				</Switch>
 			</div>

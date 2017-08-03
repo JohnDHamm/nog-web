@@ -1,14 +1,15 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserPatterns, getNogTypes } from '../actions';
+import { Link } from 'react-router-dom';
+
+import { getUserPatterns } from '../actions';
 
 class Userhome extends Component {
 
 	componentWillMount() {
 		const { id } = this.props.match.params;
 		this.props.getUserPatterns(id);
-		this.props.getNogTypes();
 	}
 
 	getNogName(nogId) {
@@ -17,11 +18,14 @@ class Userhome extends Component {
 
 	renderPatterns() {
 		return _.map(this.props.userPatterns, pattern => {
+			let nogTypeName = this.getNogName(pattern.nogTypeId);
 			return (
-				<div key={pattern._id}>
-					<p>name: {pattern.name}</p>
-					<p>nog style: {this.getNogName(pattern.nogTypeId)}</p>
-				</div>
+				<Link to={`/pattern-${nogTypeName}/${pattern._id}`} key={pattern._id}>
+					<div style={{border: '1px solid #ddd'}}>
+						<p>name: {pattern.name}</p>
+						<p>nog style: {nogTypeName}</p>
+					</div>
+				</Link>
 			)
 		})
 	}
@@ -29,8 +33,6 @@ class Userhome extends Component {
 	render() {
 		const { user } = this.props.user;
 		const { userPatterns, nogTypes } = this.props;
-		console.log("userPatterns", userPatterns);
-		console.log("nogTypes", nogTypes);
 
 		return (
 			<div>
@@ -45,4 +47,4 @@ function mapStateToProps({ user, userPatterns, nogTypes }) {
 	return { user, userPatterns, nogTypes };
 }
 
-export default connect(mapStateToProps, { getUserPatterns, getNogTypes })(Userhome);
+export default connect(mapStateToProps, { getUserPatterns })(Userhome);
