@@ -5,7 +5,7 @@ import { getUserPatterns } from '../actions';
 
 class Userhome extends Component {
 
-	componentDidMount() {
+	componentWillMount() {
 		const { id } = this.props.match.params;
 		this.props.getUserPatterns(id);
 	}
