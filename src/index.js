@@ -20,7 +20,7 @@ ReactDOM.render(
 			<div>
 				<Navbar />
 				<Switch>
-					<Route path="/userhome" component={Userhome} />
+					<Route path="/userhome/:id" component={Userhome} />
 					<Route path="/pattern-snowflake/:id" component={PatternSnowflake} />
 					<Route path="/" component={Home} />
 				</Switch>
