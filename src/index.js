@@ -1,28 +1,31 @@
 // import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import promise from 'redux-promise';
+import reducers from './reducers';
 
+import Navbar from './components/navbar'
+import Home from './components/home';
+import Userhome from './components/userhome';
+import PatternSnowflake from './components/pattern-snowflake';
 
-// Create new component. Component should produce some HTML
-class App extends Component {
-	constructor (props) {
-		super (props);
-		this.state = {
-			currentUserName: 'Santa',
-			// selectedVideo: null
-			};
-	}
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
-	render () {
-		return (
+ReactDOM.render(
+	<Provider store={createStoreWithMiddleware(reducers)}>
+		<BrowserRouter>
 			<div>
-				<h2>Hello {this.state.currentUserName}.</h2>
+				<Navbar />
+				<Switch>
+					<Route path="/userhome" component={Userhome} />
+					<Route path="/pattern-snowflake/:id" component={PatternSnowflake} />
+					<Route path="/" component={Home} />
+				</Switch>
 			</div>
-		);
-	}
-}
-
-
-// Take this cmponent's generated HTML and put it in the DOM
-ReactDOM.render(<App />, document.querySelector('#container'));
-	// instantiated componenet <App /> (self-closing tag), component render target (parent in DOM)
+		</BrowserRouter>
+  </Provider>
+	, document.querySelector('#container')
+);
