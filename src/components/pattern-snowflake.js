@@ -5,17 +5,19 @@ import { connect } from 'react-redux';
 import { setCurrentPattern } from '../actions';
 
 import PatternInfo from './patternInfo';
+import SingleColorPalette from './singleColorPalette';
 
 class PatternSnowflake extends Component {
 
 	componentWillMount() {
 		const { id } = this.props.match.params;
-		// console.log("selected pattern:", this.props.userPatterns[id]);
+		console.log("selected pattern:", this.props.userPatterns[id]);
 		this.props.setCurrentPattern(this.props.userPatterns[id]);
 	}
 
 	render() {
 		const pattern = this.props.currentPattern;
+		const defaultColor = pattern.defaultColor;
 		const { values } = this.props;
 		const styles = {
 			root: {
@@ -23,7 +25,7 @@ class PatternSnowflake extends Component {
 				height: '100vh',
 				position: 'relative'
 			}
-		}
+		};
 
 		return (
 			<div style={styles.root}>
@@ -31,6 +33,7 @@ class PatternSnowflake extends Component {
 					name={pattern.name}
 					description={pattern.description}
 					defaultSpeed={pattern.defaultSpeed} />
+				<SingleColorPalette />
 			</div>
 		);
 	}
