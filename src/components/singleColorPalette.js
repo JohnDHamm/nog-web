@@ -12,10 +12,10 @@ class SingleColorPalette extends Component {
 				position: 'absolute',
 				top: 0,
 				right: 0,
-				width: 70,
-				height: 70,
+				width: 60,
+				height: 60,
 				borderRadius: '50%',
-				border: '1px solid white',
+				border: '1px solid #333',
 				backgroundColor: `${currentPattern.defaultColor}`
 			}
 		};
