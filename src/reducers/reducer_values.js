@@ -4,7 +4,7 @@ export default function() {
 		nogRed: '#701626',
 		nogGreen: '#195816',
 		nogBackground: '#222',
-		nogGrayText: '#DDD'
+		nogGrayText: '#555'
 	}
 
 }
