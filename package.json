@@ -30,11 +30,13 @@
     "babel-preset-stage-1": "^6.1.18",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
+    "material-ui": "^0.18.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-promise": "^0.5.3",
     "webpack": "^1.12.9"
