@@ -6,6 +6,7 @@ import { setCurrentPattern } from '../actions';
 
 import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
+import MultiColorPalette from './multiColorPalette';
 
 class PatternSnowflake extends Component {
 
@@ -33,7 +34,7 @@ class PatternSnowflake extends Component {
 					name={pattern.name}
 					description={pattern.description}
 					defaultSpeed={pattern.defaultSpeed} />
-				<SingleColorPalette />
+				{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
 			</div>
 		);
 	}

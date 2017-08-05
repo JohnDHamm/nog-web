@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class SingleColorPalette extends Component {
+class InstanceSnowflake extends Component {
 
 	render() {
 		const { currentPattern, values } = this.props;
 		const styles = {
 			root: {
-				marginTop: 20,
-				marginRight: 20,
 				position: 'absolute',
-				top: 0,
-				right: 0,
-				width: 60,
-				height: 60,
+				top: '50%',
+				left: '50%',
+				backgroundColor: '#333'
+			},
+			light: {
+				width: 20,
+				height: 20,
 				borderRadius: '50%',
 				border: '1px solid #333',
-				backgroundColor: `${currentPattern.defaultColor}`
+			},
+			lightColor_1: {
+				backgroundColor: `${currentPattern.}`
 			}
 		};
 
@@ -31,4 +34,4 @@ function mapStateToProps({ currentPattern, values }) {
 	return { currentPattern, values };
 }
 
-export default connect(mapStateToProps)(SingleColorPalette);
+export default connect(mapStateToProps)(InstanceSnowflake);
