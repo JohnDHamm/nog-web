@@ -12,10 +12,11 @@ class InstanceSnowflake extends Component {
 		const { currentPattern, currentColorPalette, values } = this.props;
 		const instance = currentPattern.instances[0];
 		// console.log("instance", instance);
-		const containerSize = 420;
+		const containerSize = 190;
 		const halfContainer = containerSize / 2;
 		const lightDia = containerSize * (20 / 420);
 		const lightOffset = lightDia / 2;
+		const lightBorderSize = containerSize < 210 ? 0 : 1;
 		const styles = {
 			root: {
 				position: 'absolute',
@@ -33,7 +34,7 @@ class InstanceSnowflake extends Component {
 				width: `${lightDia}`,
 				height: `${lightDia}`,
 				borderRadius: '50%',
-				border: `1px solid ${values.nogGrayText}`,
+				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
 				position: 'absolute'
 			},
 			lightColor_0: {
@@ -62,128 +63,128 @@ class InstanceSnowflake extends Component {
 				backgroundColor: this.getColor(`${instance.lightsColor[4]}`)
 			},
 			lightColor_5: {
-				top: 175,
-				right: 157,
+				top: '41.7%',
+				right: '37.4%',
 				backgroundColor: this.getColor(`${instance.lightsColor[5]}`)
 			},
 			lightColor_6: {
-				top: 93,
-				right: 95,
+				top: '22.1%',
+				right: '22.6%',
 				backgroundColor: this.getColor(`${instance.lightsColor[6]}`)
 			},
 			lightColor_7: {
-				top: 103,
-				right: 33,
+				top: '24.55%',
+				right: '7.65%',
 				backgroundColor: this.getColor(`${instance.lightsColor[7]}`)
 			},
 			lightColor_8: {
-				top: 162,
-				right: 55,
+				top: '38.6%',
+				right: '13%',
 				backgroundColor: this.getColor(`${instance.lightsColor[8]}`)
 			},
 			lightColor_9: {
 				top: `calc(50% - ${lightOffset}px)`,
-				right: 93,
+				right: '22.05%',
 				backgroundColor: this.getColor(`${instance.lightsColor[9]}`)
 			},
 			lightColor_10: {
-				bottom: 175,
-				right: 157,
+				bottom: '41.7%',
+				right: '37.4%',
 				backgroundColor: this.getColor(`${instance.lightsColor[10]}`)
 			},
 			lightColor_11: {
-				bottom: 162,
-				right: 55,
+				bottom: '38.6%',
+				right: '13%',
 				backgroundColor: this.getColor(`${instance.lightsColor[11]}`)
 			},
 			lightColor_12: {
-				bottom: 103,
-				right: 33,
+				bottom: '24.62%',
+				right: '7.65%',
 				backgroundColor: this.getColor(`${instance.lightsColor[12]}`)
 			},
 			lightColor_13: {
-				bottom: 93,
-				right: 95,
+				bottom: '22.1%',
+				right: '22.6%',
 				backgroundColor: this.getColor(`${instance.lightsColor[13]}`)
 			},
 			lightColor_14: {
-				bottom: 106,
-				right: 146,
+				bottom: '25.3%',
+				right: '34.6%',
 				backgroundColor: this.getColor(`${instance.lightsColor[14]}`)
 			},
 			lightColor_15: {
-				bottom: 150,
+				bottom: '36%',
 				left: `calc(50% - ${lightOffset}px)`,
 				backgroundColor: this.getColor(`${instance.lightsColor[15]}`)
 			},
 			lightColor_16: {
-				bottom: 55,
-				right: 160,
+				bottom: '13%',
+				right: '38%',
 				backgroundColor: this.getColor(`${instance.lightsColor[16]}`)
 			},
 			lightColor_17: {
-				bottom: 7,
+				bottom: '1.7%',
 				left: `calc(50% - ${lightOffset}px)`,
 				backgroundColor: this.getColor(`${instance.lightsColor[17]}`)
 			},
 			lightColor_18: {
-				bottom: 55,
-				left: 160,
+				bottom: '13%',
+				left: '38%',
 				backgroundColor: this.getColor(`${instance.lightsColor[18]}`)
 			},
 			lightColor_19: {
-				bottom: 106,
-				left: 146,
+				bottom: '25.3%',
+				left: '34.8%',
 				backgroundColor: this.getColor(`${instance.lightsColor[19]}`)
 			},
 			lightColor_20: {
-				bottom: 175,
-				left: 157,
+				bottom: '41.7%',
+				left: '37.4%',
 				backgroundColor: this.getColor(`${instance.lightsColor[20]}`)
 			},
 			lightColor_21: {
-				bottom: 93,
-				left: 94,
+				bottom: '22.1%',
+				left: '22.6%',
 				backgroundColor: this.getColor(`${instance.lightsColor[21]}`)
 			},
 			lightColor_22: {
-				bottom: 103,
-				left: 32,
+				bottom: '24.62%',
+				left: '7.65%',
 				backgroundColor: this.getColor(`${instance.lightsColor[22]}`)
 			},
 			lightColor_23: {
-				bottom: 162,
-				left: 54,
+				bottom: '38.6%',
+				left: '13%',
 				backgroundColor: this.getColor(`${instance.lightsColor[23]}`)
 			},
 			lightColor_24: {
 				bottom: `calc(50% - ${lightOffset}px)`,
-				left: 92,
+				left: '22.05%',
 				backgroundColor: this.getColor(`${instance.lightsColor[24]}`)
 			},
 			lightColor_25: {
-				top: 175,
-				left: 156,
+				top: '41.7%',
+				left: '37.4%',
 				backgroundColor: this.getColor(`${instance.lightsColor[25]}`)
 			},
 			lightColor_26: {
-				top: 162,
-				left: 54,
+				top: '38.6%',
+				left: '13%',
 				backgroundColor: this.getColor(`${instance.lightsColor[26]}`)
 			},
 			lightColor_27: {
-				top: 103,
-				left: 32,
+				top: '24.62%',
+				left: '7.65%',
 				backgroundColor: this.getColor(`${instance.lightsColor[27]}`)
 			},
 			lightColor_28: {
-				top: 93,
-				left: 94,
+				top: '22.1%',
+				left: '22.6%',
 				backgroundColor: this.getColor(`${instance.lightsColor[28]}`)
 			},
 			lightColor_29: {
-				top: 106,
-				left: 146,
+				top: '25.3%',
+				left: '34.8%',
 				backgroundColor: this.getColor(`${instance.lightsColor[29]}`)
 			},
 		};
