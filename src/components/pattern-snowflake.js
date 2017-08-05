@@ -7,6 +7,7 @@ import { setCurrentPattern } from '../actions';
 import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
 import MultiColorPalette from './multiColorPalette';
+import InstanceSnowflake from './instance_snowflake';
 
 class PatternSnowflake extends Component {
 
@@ -18,7 +19,7 @@ class PatternSnowflake extends Component {
 
 	render() {
 		const pattern = this.props.currentPattern;
-		const defaultColor = pattern.defaultColor;
+		// const defaultColor = pattern.defaultColor;
 		const { values } = this.props;
 		const styles = {
 			root: {
@@ -35,6 +36,7 @@ class PatternSnowflake extends Component {
 					description={pattern.description}
 					defaultSpeed={pattern.defaultSpeed} />
 				{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
+				<InstanceSnowflake />
 			</div>
 		);
 	}
