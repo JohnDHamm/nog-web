@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import EmptyColor from './emptyColor';
+
 import { setCurrentColorPalette } from '../actions';
 
 class MultiColorPalette extends Component {
@@ -9,6 +11,10 @@ class MultiColorPalette extends Component {
 		const { currentPattern } = this.props;
 		const customColors = currentPattern.customColors;
 		this.props.setCurrentColorPalette(customColors);
+	}
+
+	checkEmptyColor(color) {
+		return color === 'empty' ? true : false;
 	}
 
 	render() {
@@ -85,40 +91,32 @@ class MultiColorPalette extends Component {
 		return (
 			<div style={styles.root}>
 				<div style={styles.paletteRow}>
-					<div style={{ ...styles.circle, ...styles.default_1 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_2 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_3 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_4 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_5 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_6 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_7 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.default_8 }}>
-					</div>
+					<div style={{ ...styles.circle, ...styles.default_1 }} />
+					<div style={{ ...styles.circle, ...styles.default_2 }} />
+					<div style={{ ...styles.circle, ...styles.default_3 }} />
+					<div style={{ ...styles.circle, ...styles.default_4 }} />
+					<div style={{ ...styles.circle, ...styles.default_5 }} />
+					<div style={{ ...styles.circle, ...styles.default_6 }} />
+					<div style={{ ...styles.circle, ...styles.default_7 }} />
+					<div style={{ ...styles.circle, ...styles.default_8 }} />
 				</div>
 				<div style={styles.paletteRow}>
-					<div style={{ ...styles.circle, ...styles.custom_1 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_2 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_3 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_4 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_5 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_6 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_7 }}>
-					</div>
-					<div style={{ ...styles.circle, ...styles.custom_8 }}>
-					</div>
+					{ this.checkEmptyColor(currentColorPalette[8]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_1 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[9]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_2 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[10]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_3 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[11]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_4 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[12]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_5 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[13]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_6 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[14]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_7 }} />) }
+					{ this.checkEmptyColor(currentColorPalette[15]) ? (<EmptyColor />) : (
+						<div style={{ ...styles.circle, ...styles.custom_8 }} />) }
 				</div>
 			</div>
 		);
