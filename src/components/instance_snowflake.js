@@ -9,10 +9,10 @@ class InstanceSnowflake extends Component {
 	}
 
 	render() {
-		const { currentPattern, currentColorPalette, values } = this.props;
-		const instance = currentPattern.instances[0];
+		const { currentPattern, currentColorPalette, values, instanceNumber, instanceSize, instanceLocation } = this.props;
+		const instance = currentPattern.instances[instanceNumber];
 		// console.log("instance", instance);
-		const containerSize = 190;
+		const containerSize = instanceSize;
 		const halfContainer = containerSize / 2;
 		const lightDia = containerSize * (20 / 420);
 		const lightOffset = lightDia / 2;
@@ -20,19 +20,19 @@ class InstanceSnowflake extends Component {
 		const styles = {
 			root: {
 				position: 'absolute',
-				top: 100,
-				left: `calc(50% - ${halfContainer}px)`,
+				top: instanceLocation.top,
+				left: instanceLocation.left,
 			},
 			container: {
 				position: 'relative',
-				width: `${containerSize}`,
-				height: `${containerSize}`,
+				width: containerSize,
+				height: containerSize,
 				backgroundImage: 'url(../src/img/snowflake_currentInstance_bgImage.png',
 				backgroundSize: '100% 100%'
 			},
 			light: {
-				width: `${lightDia}`,
-				height: `${lightDia}`,
+				width: lightDia,
+				height: lightDia,
 				borderRadius: '50%',
 				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
 				position: 'absolute'
@@ -188,7 +188,6 @@ class InstanceSnowflake extends Component {
 				backgroundColor: this.getColor(`${instance.lightsColor[29]}`)
 			},
 		};
-
 
 		return (
 			<div style={styles.root}>
