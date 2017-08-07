@@ -8,6 +8,7 @@ import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
 import MultiColorPalette from './multiColorPalette';
 import InstanceSnowflake from './instance_snowflake';
+import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
 
@@ -47,7 +48,6 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
-		console.log("this.state.numInstances", this.state.numInstances);
 		const pattern = this.props.currentPattern;
 		const { values } = this.props;
 		const styles = {
@@ -100,7 +100,7 @@ class PatternSnowflake extends Component {
 					</div>
 				}
 
-				{instanceDisplayArray[3] !== null && <InstanceSnowflake
+				{instanceDisplayArray[3] !== null && <InstanceCurrentSnowflake
 					instanceNumber={instanceDisplayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{

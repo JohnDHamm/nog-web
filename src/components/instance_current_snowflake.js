@@ -1,11 +1,78 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class InstanceSnowflake extends Component {
+class InstanceCurrentSnowflake extends Component {
 
 	getColor(colNum) {
 		const { currentColorPalette } = this.props;
 		return currentColorPalette[colNum];
+	}
+
+	renderLights() {
+		const { currentPattern, currentColorPalette, values, instanceNumber, instanceSize, instanceLocation } = this.props;
+
+		const instance = currentPattern.instances[instanceNumber];
+		console.log("instance", instance);
+		const thisLightArray = instance.lightsColor;
+		console.log("thisLightArray", thisLightArray);
+
+		const containerSize = instanceSize;
+		const halfContainer = containerSize / 2;
+		const lightDia = containerSize * (20 / 420);
+		const lightOffset = lightDia / 2;
+		const lightBorderSize = containerSize < 210 ? 0 : 1;
+
+		const testLights = {
+			0: {
+				lightNum: 0,
+				lightColor: '#ff00ff',
+				top: '36%',
+				left: `calc(50% - ${lightOffset}px)`,
+			},
+			1: {
+				lightNum: 1,
+				lightColor: '#00ff00',
+				top: '13%',
+				left: '38.2%'
+			},
+			16: {
+				lightNum: 16,
+				lightColor: '#ffff00',
+				bottom: '13%',
+				right: '38%'
+			}
+		}
+
+		const styles = {
+			lightTest: {
+				width: lightDia,
+				height: lightDia,
+				borderRadius: '50%',
+				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
+				position: 'absolute'
+			},
+			lightColor_0: {
+				// left: `calc(50% - ${lightOffset}px)`,
+				top: '36%',
+				// backgroundColor: this.getColor(`${instance.lightsColor[0]}`)
+			},
+		}
+
+		return _.map(testLights, light => {
+			console.log("light", light);
+			return (
+				<div key={light.lightNum}
+					style={{ ...styles.lightTest,
+						backgroundColor: light.lightColor,
+						left: light.left,
+						top: light.top,
+						right: light.right,
+						bottom: light.bottom
+					}} />
+			);
+		})
+
 	}
 
 	render() {
@@ -210,36 +277,7 @@ class InstanceSnowflake extends Component {
 							{instanceNumber + 1}
 						</div>
 					</div>
-					<div style={{ ...styles.light, ...styles.lightColor_0 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_1 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_2 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_3 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_4 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_5 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_6 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_7 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_8 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_9 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_10 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_11 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_12 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_13 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_14 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_15 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_16 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_17 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_18 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_19 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_20 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_21 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_22 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_23 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_24 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_25 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_26 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_27 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_28 }} />
-					<div style={{ ...styles.light, ...styles.lightColor_29 }} />
+					{this.renderLights()}
 				</div>
 			</div>
 		);
@@ -250,4 +288,40 @@ function mapStateToProps({ currentPattern, currentColorPalette, values }) {
 	return { currentPattern, currentColorPalette, values };
 }
 
-export default connect(mapStateToProps)(InstanceSnowflake);
+export default connect(mapStateToProps)(InstanceCurrentSnowflake);
+
+
+
+
+
+
+					// <div style={{ ...styles.light, ...styles.lightColor_0 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_1 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_2 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_3 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_4 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_5 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_6 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_7 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_8 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_9 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_10 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_11 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_12 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_13 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_14 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_15 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_16 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_17 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_18 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_19 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_20 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_21 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_22 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_23 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_24 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_25 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_26 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_27 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_28 }} />
+					// <div style={{ ...styles.light, ...styles.lightColor_29 }} />
