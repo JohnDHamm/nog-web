@@ -17,6 +17,10 @@ class MultiColorPalette extends Component {
 		return color === 'empty' ? true : false;
 	}
 
+	selectColor(colorNum) {
+		console.log("clicked on color:", colorNum);
+	}
+
 	renderDefaultColors() {
 		const { currentColorPalette, values } = this.props;
 		const styles = {
@@ -38,6 +42,7 @@ class MultiColorPalette extends Component {
 			if (color.colorNum === currentColorNum) {
 				return (
 					<div
+						onClick={() => this.selectColor(color.colorNum)}
 						key={color.colorNum}
 						style={{
 							width: 60,
@@ -52,6 +57,7 @@ class MultiColorPalette extends Component {
 			} else {
 				return (
 					<div
+						onClick={() => this.selectColor(color.colorNum)}
 						key={color.colorNum}
 						style={{
 							width: 40,
