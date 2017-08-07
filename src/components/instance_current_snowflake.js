@@ -9,66 +9,169 @@ class InstanceCurrentSnowflake extends Component {
 		return currentColorPalette[colNum];
 	}
 
-	renderLights() {
-		const { currentPattern, currentColorPalette, values, instanceNumber, instanceSize, instanceLocation } = this.props;
+	createNewLightsObj(thisLightArray) {
+		const newArray = [];
+		for (let i = 0; i < 30; i++) {
+			let newObj = {};
+			newObj.lightNum = i;
+			newObj.lightColor = this.getColor(thisLightArray[i]);
+			newArray.push(newObj);
+		};
+		return _.mapKeys(newArray, 'lightNum');
+	}
 
-		const instance = currentPattern.instances[instanceNumber];
-		console.log("instance", instance);
-		const thisLightArray = instance.lightsColor;
-		console.log("thisLightArray", thisLightArray);
+	renderLights() {
+		const { currentPattern, values, instanceNumber, instanceSize } = this.props;
+
+		const lightsObj = this.createNewLightsObj(currentPattern.instances[instanceNumber].lightsColor);
 
 		const containerSize = instanceSize;
 		const halfContainer = containerSize / 2;
 		const lightDia = containerSize * (20 / 420);
 		const lightOffset = lightDia / 2;
 		const lightBorderSize = containerSize < 210 ? 0 : 1;
-
-		const testLights = {
-			0: {
-				lightNum: 0,
-				lightColor: '#ff00ff',
+		const lightLocations = [
+			{ lightNum: 0,
 				top: '36%',
 				left: `calc(50% - ${lightOffset}px)`,
 			},
-			1: {
-				lightNum: 1,
-				lightColor: '#00ff00',
+			{ lightNum: 1,
 				top: '13%',
 				left: '38.2%'
 			},
-			16: {
-				lightNum: 16,
-				lightColor: '#ffff00',
+			{ lightNum: 2,
+				top: '1.7%',
+				left: `calc(50% - ${lightOffset}px)`,
+			},
+			{ lightNum: 3,
+				top: '13%',
+				right: '38%'
+			},
+			{ lightNum: 4,
+				top: '25.3%',
+				right: '34.6%'
+			},
+			{ lightNum: 5,
+				top: '41.7%',
+				right: '37.4%'
+			},
+			{ lightNum: 6,
+				top: '22.1%',
+				right: '22.6%'
+			},
+			{ lightNum: 7,
+				top: '24.55%',
+				right: '7.65%'
+			},
+			{ lightNum: 8,
+				top: '38.6%',
+				right: '13%'
+			},
+			{ lightNum: 9,
+				top: `calc(50% - ${lightOffset}px)`,
+				right: '22.05%'
+			},
+			{ lightNum: 10,
+				bottom: '41.7%',
+				right: '37.4%'
+			},
+			{ lightNum: 11,
+				bottom: '38.6%',
+				right: '13%'
+			},
+			{ lightNum: 12,
+				bottom: '24.62%',
+				right: '7.65%'
+			},
+			{ lightNum: 13,
+				bottom: '22.1%',
+				right: '22.6%'
+			},
+			{ lightNum: 14,
+				bottom: '25.3%',
+				right: '34.6%'
+			},
+			{ lightNum: 15,
+				bottom: '36%',
+				left: `calc(50% - ${lightOffset}px)`
+			},
+			{ lightNum: 16,
 				bottom: '13%',
 				right: '38%'
+			},
+			{ lightNum: 17,
+				bottom: '1.7%',
+				left: `calc(50% - ${lightOffset}px)`
+			},
+			{ lightNum: 18,
+				bottom: '13%',
+				left: '38%'
+			},
+			{ lightNum: 19,
+				bottom: '25.3%',
+				left: '34.8%'
+			},
+			{ lightNum: 20,
+				bottom: '41.7%',
+				left: '37.4%'
+			},
+			{ lightNum: 21,
+				bottom: '22.1%',
+				left: '22.6%'
+			},
+			{ lightNum: 22,
+				bottom: '24.62%',
+				left: '7.65%'
+			},
+			{ lightNum: 23,
+				bottom: '38.6%',
+				left: '13%'
+			},
+			{ lightNum: 24,
+				bottom: `calc(50% - ${lightOffset}px)`,
+				left: '22.05%'
+			},
+			{ lightNum: 25,
+				top: '41.7%',
+				left: '37.4%'
+			},
+			{ lightNum: 26,
+				top: '38.6%',
+				left: '13%'
+			},
+			{ lightNum: 27,
+				top: '24.62%',
+				left: '7.65%'
+			},
+			{ lightNum: 28,
+				top: '22.1%',
+				left: '22.6%'
+			},
+			{ lightNum: 29,
+				top: '25.3%',
+				left: '34.8%'
 			}
-		}
+		]
 
 		const styles = {
-			lightTest: {
+			lightCircle: {
 				width: lightDia,
 				height: lightDia,
 				borderRadius: '50%',
 				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
 				position: 'absolute'
-			},
-			lightColor_0: {
-				// left: `calc(50% - ${lightOffset}px)`,
-				top: '36%',
-				// backgroundColor: this.getColor(`${instance.lightsColor[0]}`)
-			},
+			}
 		}
 
-		return _.map(testLights, light => {
-			console.log("light", light);
+		return _.map(lightsObj, light => {
 			return (
 				<div key={light.lightNum}
-					style={{ ...styles.lightTest,
+					style={{ ...styles.lightCircle,
 						backgroundColor: light.lightColor,
-						left: light.left,
-						top: light.top,
-						right: light.right,
-						bottom: light.bottom
+						left: lightLocations[light.lightNum].left,
+						top: lightLocations[light.lightNum].top,
+						right: lightLocations[light.lightNum].right,
+						bottom: lightLocations[light.lightNum].bottom
 					}} />
 			);
 		})
@@ -76,14 +179,8 @@ class InstanceCurrentSnowflake extends Component {
 	}
 
 	render() {
-		const { currentPattern, currentColorPalette, values, instanceNumber, instanceSize, instanceLocation } = this.props;
-		const instance = currentPattern.instances[instanceNumber];
-		// console.log("instance", instance);
+		const { values, instanceSize, instanceLocation, instanceNumber } = this.props;
 		const containerSize = instanceSize;
-		const halfContainer = containerSize / 2;
-		const lightDia = containerSize * (20 / 420);
-		const lightOffset = lightDia / 2;
-		const lightBorderSize = containerSize < 210 ? 0 : 1;
 		const styles = {
 			root: {
 				position: 'absolute',
@@ -99,173 +196,16 @@ class InstanceCurrentSnowflake extends Component {
 			},
 			labelDiv: {
 				position: 'absolute',
-				width: this.props.instanceSize / 8,
+				width: instanceSize / 8,
 				// border: '1px dotted green',
-				top: `calc(50% - ${this.props.instanceSize / 15}px)`,
-				left: `calc(50% - ${this.props.instanceSize / 16}px)`,
+				top: `calc(50% - ${instanceSize / 15}px)`,
+				left: `calc(50% - ${instanceSize / 16}px)`,
 			},
 			labelText: {
 				textAlign: 'center',
-				fontSize: this.props.instanceSize / 11,
+				fontSize: instanceSize / 11,
 				color: `${values.nogGreen}`
-			},
-			light: {
-				width: lightDia,
-				height: lightDia,
-				borderRadius: '50%',
-				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
-				position: 'absolute'
-			},
-			lightColor_0: {
-				left: `calc(50% - ${lightOffset}px)`,
-				top: '36%',
-				backgroundColor: this.getColor(`${instance.lightsColor[0]}`)
-			},
-			lightColor_1: {
-				top: '13%',
-				left: '38.2%',
-				backgroundColor: this.getColor(`${instance.lightsColor[1]}`)
-			},
-			lightColor_2: {
-				top: '1.7%',
-				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[2]}`)
-			},
-			lightColor_3: {
-				top: '13%',
-				right: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[3]}`)
-			},
-			lightColor_4: {
-				top: '25.3%',
-				right: '34.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[4]}`)
-			},
-			lightColor_5: {
-				top: '41.7%',
-				right: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[5]}`)
-			},
-			lightColor_6: {
-				top: '22.1%',
-				right: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[6]}`)
-			},
-			lightColor_7: {
-				top: '24.55%',
-				right: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[7]}`)
-			},
-			lightColor_8: {
-				top: '38.6%',
-				right: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[8]}`)
-			},
-			lightColor_9: {
-				top: `calc(50% - ${lightOffset}px)`,
-				right: '22.05%',
-				backgroundColor: this.getColor(`${instance.lightsColor[9]}`)
-			},
-			lightColor_10: {
-				bottom: '41.7%',
-				right: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[10]}`)
-			},
-			lightColor_11: {
-				bottom: '38.6%',
-				right: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[11]}`)
-			},
-			lightColor_12: {
-				bottom: '24.62%',
-				right: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[12]}`)
-			},
-			lightColor_13: {
-				bottom: '22.1%',
-				right: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[13]}`)
-			},
-			lightColor_14: {
-				bottom: '25.3%',
-				right: '34.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[14]}`)
-			},
-			lightColor_15: {
-				bottom: '36%',
-				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[15]}`)
-			},
-			lightColor_16: {
-				bottom: '13%',
-				right: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[16]}`)
-			},
-			lightColor_17: {
-				bottom: '1.7%',
-				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[17]}`)
-			},
-			lightColor_18: {
-				bottom: '13%',
-				left: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[18]}`)
-			},
-			lightColor_19: {
-				bottom: '25.3%',
-				left: '34.8%',
-				backgroundColor: this.getColor(`${instance.lightsColor[19]}`)
-			},
-			lightColor_20: {
-				bottom: '41.7%',
-				left: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[20]}`)
-			},
-			lightColor_21: {
-				bottom: '22.1%',
-				left: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[21]}`)
-			},
-			lightColor_22: {
-				bottom: '24.62%',
-				left: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[22]}`)
-			},
-			lightColor_23: {
-				bottom: '38.6%',
-				left: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[23]}`)
-			},
-			lightColor_24: {
-				bottom: `calc(50% - ${lightOffset}px)`,
-				left: '22.05%',
-				backgroundColor: this.getColor(`${instance.lightsColor[24]}`)
-			},
-			lightColor_25: {
-				top: '41.7%',
-				left: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[25]}`)
-			},
-			lightColor_26: {
-				top: '38.6%',
-				left: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[26]}`)
-			},
-			lightColor_27: {
-				top: '24.62%',
-				left: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[27]}`)
-			},
-			lightColor_28: {
-				top: '22.1%',
-				left: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[28]}`)
-			},
-			lightColor_29: {
-				top: '25.3%',
-				left: '34.8%',
-				backgroundColor: this.getColor(`${instance.lightsColor[29]}`)
-			},
+			}
 		};
 
 
@@ -289,39 +229,3 @@ function mapStateToProps({ currentPattern, currentColorPalette, values }) {
 }
 
 export default connect(mapStateToProps)(InstanceCurrentSnowflake);
-
-
-
-
-
-
-					// <div style={{ ...styles.light, ...styles.lightColor_0 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_1 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_2 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_3 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_4 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_5 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_6 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_7 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_8 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_9 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_10 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_11 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_12 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_13 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_14 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_15 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_16 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_17 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_18 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_19 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_20 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_21 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_22 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_23 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_24 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_25 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_26 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_27 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_28 }} />
-					// <div style={{ ...styles.light, ...styles.lightColor_29 }} />
