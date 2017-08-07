@@ -10,6 +10,7 @@ class NavigateNextBtn extends Component {
 				position: 'absolute',
 				top: btnLocation.top,
 				left: btnLocation.left,
+				cursor: 'pointer'
 			},
 			arrow: {
 				height: btnHeight,
@@ -19,14 +20,10 @@ class NavigateNextBtn extends Component {
 			}
 		};
 
-
 		return(
 			<div style={styles.root}>
 				<div style={styles.arrow} />
 			</div>
-
-
-
 		);
 	}
 }
