@@ -31,7 +31,7 @@ class PatternSnowflake extends Component {
 	}
 
 	navNext() {
-		const nextInstance = this.state.displayArray[6] + 1;
+		const nextInstance = !this.state.displayArray[6] ? null : this.state.displayArray[6] === this.state.numInstances - 1 ? null : this.state.displayArray[6] + 1;
 		const newArray = this.state.displayArray;
 		newArray.push(nextInstance);
 		newArray.shift();
@@ -47,6 +47,7 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
+		console.log("this.state.numInstances", this.state.numInstances);
 		const pattern = this.props.currentPattern;
 		const { values } = this.props;
 		const styles = {
@@ -88,28 +89,34 @@ class PatternSnowflake extends Component {
 						top: currentInstanceTopMargin + (currentInstanceSize / 4),
 						left: `calc(50% - ${currentInstanceSize}px - 40px`}} />}
 
-				<div onClick={this.navPrev}>
-					<NavigatePrevBtn
-						btnHeight={currentInstanceSize / 6}
-						btnLocation={{
-							top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
-							left: `calc(50% - ${currentInstanceSize / 2}px - ${currentInstanceSize / 6 * 100 / 175}px - 2px)`
-						}} />
-				</div>
+				{instanceDisplayArray[2] !== null &&
+					<div onClick={this.navPrev}>
+						<NavigatePrevBtn
+							btnHeight={currentInstanceSize / 6}
+							btnLocation={{
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
+								left: `calc(50% - ${currentInstanceSize / 2}px - ${currentInstanceSize / 6 * 100 / 175}px - 2px)`
+							}} />
+					</div>
+				}
+
 				{instanceDisplayArray[3] !== null && <InstanceSnowflake
 					instanceNumber={instanceDisplayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{
 						top: currentInstanceTopMargin,
 						left: `calc(50% - ${currentInstanceSize / 2}px`}} />}
-				<div onClick={this.navNext}>
-					<NavigateNextBtn
-						btnHeight={currentInstanceSize / 6}
-						btnLocation={{
-							top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
-							left: `calc(50% + ${currentInstanceSize / 2 + 2}px)`
-						}} />
-				</div>
+
+				{instanceDisplayArray[4] !== null &&
+					<div onClick={this.navNext}>
+						<NavigateNextBtn
+							btnHeight={currentInstanceSize / 6}
+							btnLocation={{
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
+								left: `calc(50% + ${currentInstanceSize / 2 + 2}px)`
+							}} />
+					</div>
+				}
 
 				{instanceDisplayArray[4] !== null && <InstanceSnowflake
 					instanceNumber={instanceDisplayArray[4]}
