@@ -20,16 +20,18 @@ class InstanceCurrentSnowflake extends Component {
 		return _.mapKeys(newArray, 'lightNum');
 	}
 
+	clickLight(num) {
+		console.log("clicked on light:", num);
+	}
+
 	renderLights() {
 		const { currentPattern, values, instanceNumber, instanceSize } = this.props;
-
 		const lightsObj = this.createNewLightsObj(currentPattern.instances[instanceNumber].lightsColor);
-
-		const containerSize = instanceSize;
-		const halfContainer = containerSize / 2;
-		const lightDia = containerSize * (20 / 420);
-		const lightOffset = lightDia / 2;
-		const lightBorderSize = containerSize < 210 ? 0 : 1;
+		const containerSize = instanceSize,
+			halfContainer = containerSize / 2,
+			lightDia = containerSize * (20 / 420),
+			lightOffset = lightDia / 2,
+			lightBorderSize = containerSize < 210 ? 0 : 1;
 		const lightLocations = [
 			{ lightNum: 0,
 				top: '36%',
@@ -165,7 +167,9 @@ class InstanceCurrentSnowflake extends Component {
 
 		return _.map(lightsObj, light => {
 			return (
-				<div key={light.lightNum}
+				<div
+					onClick={() => this.clickLight(light.lightNum)}
+					key={light.lightNum}
 					style={{ ...styles.lightCircle,
 						backgroundColor: light.lightColor,
 						left: lightLocations[light.lightNum].left,
