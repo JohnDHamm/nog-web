@@ -30,6 +30,18 @@ class InstanceSnowflake extends Component {
 				backgroundImage: 'url(../src/img/snowflake_currentInstance_bgImage.png',
 				backgroundSize: '100% 100%'
 			},
+			labelDiv: {
+				position: 'absolute',
+				width: this.props.instanceSize / 8,
+				// border: '1px dotted green',
+				top: `calc(50% - ${this.props.instanceSize / 15}px)`,
+				left: `calc(50% - ${this.props.instanceSize / 16}px)`,
+			},
+			labelText: {
+				textAlign: 'center',
+				fontSize: this.props.instanceSize / 11,
+				color: `${values.nogGreen}`
+			},
 			light: {
 				width: lightDia,
 				height: lightDia,
@@ -192,6 +204,11 @@ class InstanceSnowflake extends Component {
 		return (
 			<div style={styles.root}>
 				<div style={styles.container}>
+					<div style={styles.labelDiv}>
+						<div style={styles.labelText}>
+							{instanceNumber + 1}
+						</div>
+					</div>
 					<div style={{ ...styles.light, ...styles.lightColor_0 }} />
 					<div style={{ ...styles.light, ...styles.lightColor_1 }} />
 					<div style={{ ...styles.light, ...styles.lightColor_2 }} />

@@ -38,6 +38,14 @@ class MultiColorPalette extends Component {
 				marginLeft: 5,
 				border: '1px solid #333',
 			},
+			selectedColorCircle: {
+				width: 60,
+				height: 60,
+				borderRadius: '50%',
+				marginLeft: 5,
+				border: `3px solid ${values.nogBackground}`,
+				boxShadow: '0px 0px 0px 1px white'
+			},
 			default_1: {
 				backgroundColor: `${currentColorPalette[0]}`
 			},
@@ -110,7 +118,7 @@ class MultiColorPalette extends Component {
 					{ this.checkEmptyColor(currentColorPalette[11]) ? (<EmptyColor />) : (
 						<div style={{ ...styles.circle, ...styles.custom_4 }} />) }
 					{ this.checkEmptyColor(currentColorPalette[12]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_5 }} />) }
+						<div style={{ ...styles.selectedColorCircle, ...styles.custom_5 }} />) }
 					{ this.checkEmptyColor(currentColorPalette[13]) ? (<EmptyColor />) : (
 						<div style={{ ...styles.circle, ...styles.custom_6 }} />) }
 					{ this.checkEmptyColor(currentColorPalette[14]) ? (<EmptyColor />) : (
