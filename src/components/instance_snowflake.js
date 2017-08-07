@@ -27,7 +27,7 @@ class InstanceSnowflake extends Component {
 				position: 'relative',
 				width: containerSize,
 				height: containerSize,
-				backgroundImage: 'url(../src/img/snowflake_currentInstance_bgImage.png',
+				backgroundImage: 'url(../src/img/snowflake_otherInstance_bgImage.png',
 				backgroundSize: '100% 100%'
 			},
 			labelDiv: {
@@ -200,6 +200,7 @@ class InstanceSnowflake extends Component {
 				backgroundColor: this.getColor(`${instance.lightsColor[29]}`)
 			},
 		};
+
 
 		return (
 			<div style={styles.root}>
