@@ -8,7 +8,7 @@ class InstanceCurrentSnowflake extends Component {
 
 	getColor(colNum) {
 		const { currentColorPalette } = this.props;
-		return currentColorPalette[colNum];
+		return currentColorPalette[colNum].colorVal;
 	}
 
 	createNewLightsObj(thisLightArray) {
