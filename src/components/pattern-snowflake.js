@@ -18,7 +18,7 @@ class PatternSnowflake extends Component {
     super(props);
     this.state = {
     	numInstances: 4,
-    	displayArray: [ null, null, null, 0 , 1, 2, 3 ]
+    	displayArray: [ null, null, null, 0, 1, 2, 3 ]
     };
     this.navNext = this.navNext.bind(this);
     this.navPrev = this.navPrev.bind(this);
