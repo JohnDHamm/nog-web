@@ -35,7 +35,7 @@ class InstanceCurrentSnowflake extends Component {
 
 	renderLights() {
 		const { currentPattern, values, instanceNumber, instanceSize } = this.props;
-		console.log("currentPattern", currentPattern);
+		// console.log("currentPattern", currentPattern);
 		const lightsObj = this.createNewLightsObj(currentPattern.instances[instanceNumber].lightsColor);
 		const containerSize = instanceSize,
 			halfContainer = containerSize / 2,

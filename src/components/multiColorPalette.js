@@ -16,7 +16,7 @@ class MultiColorPalette extends Component {
 
 	selectColor(colorNum) {
 		this.props.setSelectedColor(colorNum);
-		console.log("selected color #", colorNum);
+		// console.log("selected color #", colorNum);
 	}
 
 	pickColor(colorNum) {
@@ -25,8 +25,13 @@ class MultiColorPalette extends Component {
 	}
 
 	renderDefaultColors() {
-		const { defaultColorPalette, selectedColor, values } = this.props;
+		const { currentColorPalette, selectedColor, values } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
+
+		let defaultColorPalette = currentColorPalette;
+		for ( let i = 8; i < 16; i++) {
+			defaultColorPalette = _.omit(defaultColorPalette, i);
+		}
 
 		return _.map(defaultColorPalette, color => {
 			if (color.colorNum === currentColorNum) {
@@ -63,28 +68,13 @@ class MultiColorPalette extends Component {
 	}
 
 	renderCustomColors() {
-		const { customColorPalette, selectedColor, values } = this.props;
-		// const customPaletteColors = {
-		// 	8: {colorNum: 8, colorVal: '#FF0000'},
-		// 	9: {colorNum: 9, colorVal: '#FFFF00'},
-		// 	10: {colorNum: 10, colorVal: '#00FF00'},
-		// 	11: {colorNum: 11, colorVal: '#00FFFF'},
-		// 	12: {colorNum: 12, colorVal: '#0000FF'},
-		// 	13: {colorNum: 13, colorVal: '#FF00FF'},
-		// 	14: {colorNum: 14, colorVal: 'empty'},
-		// 	15: {colorNum: 15, colorVal: 'empty'}
-		// };
-
-		// const customColorsArray = currentColorPalette.slice(8, 16);
-		// const newArray = [];
-		// customColorsArray.forEach((color, index) => {
-		// 	let newObj = {};
-		// 	newObj.colorNum = index + 8;
-		// 	newObj.color = color;
-		// 	newArray.push(newObj);
-		// })
-		// const customColorsObj = _.mapKeys(newArray, 'colorNum');
+		const { currentColorPalette, selectedColor, values } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
+
+		let customColorPalette = currentColorPalette;
+		for ( let i = 0; i < 8; i++) {
+			customColorPalette = _.omit(customColorPalette, i);
+		}
 
 		return _.map(customColorPalette, color => {
 			if (color.colorVal === 'empty') {
@@ -158,8 +148,8 @@ class MultiColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, defaultColorPalette, customColorPalette, selectedColor, values }) {
-	return { currentPattern, defaultColorPalette, customColorPalette, selectedColor, values };
+function mapStateToProps({ currentPattern, currentColorPalette, customColorPalette, selectedColor, values }) {
+	return { currentPattern, currentColorPalette, customColorPalette, selectedColor, values };
 }
 
 export default connect(mapStateToProps, { setCurrentColorPalette, setSelectedColor })(MultiColorPalette);
