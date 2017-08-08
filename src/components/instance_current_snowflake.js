@@ -11,12 +11,12 @@ class InstanceCurrentSnowflake extends Component {
 		return currentColorPalette[colNum].colorVal;
 	}
 
-	createNewLightsObj(thisLightArray) {
+	createNewLightsObj(currentLights, instanceNumber) {
 		const newArray = [];
 		for (let i = 0; i < 30; i++) {
 			let newObj = {};
 			newObj.lightNum = i;
-			newObj.lightColor = this.getColor(thisLightArray[i]);
+			newObj.lightColor = this.getColor(currentLights[i][instanceNumber].colorNum);
 			newArray.push(newObj);
 		};
 		return _.mapKeys(newArray, 'lightNum');
@@ -34,9 +34,9 @@ class InstanceCurrentSnowflake extends Component {
 	}
 
 	renderLights() {
-		const { currentPattern, values, instanceNumber, instanceSize } = this.props;
+		const { currentPattern, currentLights, values, instanceNumber, instanceSize } = this.props;
 		// console.log("currentPattern", currentPattern);
-		const lightsObj = this.createNewLightsObj(currentPattern.instances[instanceNumber].lightsColor);
+		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
 		const containerSize = instanceSize,
 			halfContainer = containerSize / 2,
 			lightDia = containerSize * (20 / 420),
@@ -237,8 +237,8 @@ class InstanceCurrentSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, values }) {
-	return { currentPattern, currentColorPalette, selectedColor, values };
+function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, currentLights, values }) {
+	return { currentPattern, currentColorPalette, selectedColor,currentLights, values };
 }
 
 export default connect(mapStateToProps, { updatePattern })(InstanceCurrentSnowflake);

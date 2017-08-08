@@ -66,7 +66,7 @@ export function setCurrentLights(currentPattern) {
 		for (let i = 0; i < currentPattern.instances.length; i++) {
 			let thisInstanceObj = {};
 			thisInstanceObj.instanceNum = i;
-			thisInstanceObj.colorVal = currentPattern.instances[i].lightsColor[lightNum];
+			thisInstanceObj.colorNum = currentPattern.instances[i].lightsColor[lightNum];
 			instanceArray.push(thisInstanceObj);
 		}
 		currentLights[lightNum] = _.mapKeys(instanceArray, 'instanceNum');
