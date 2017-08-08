@@ -16,6 +16,7 @@ class MultiColorPalette extends Component {
 
 	selectColor(colorNum) {
 		this.props.setSelectedColor(colorNum);
+		console.log("selected color #", colorNum);
 	}
 
 	pickColor(colorNum) {
@@ -24,19 +25,10 @@ class MultiColorPalette extends Component {
 	}
 
 	renderDefaultColors() {
-		const { currentColorPalette, selectedColor, values } = this.props;
-		const defaultColorsArray = currentColorPalette.slice(0, 8);
-		const newArray = [];
-		defaultColorsArray.forEach((color, index) => {
-			let newObj = {};
-			newObj.colorNum = index;
-			newObj.color = color;
-			newArray.push(newObj);
-		})
-		const defaultColorsObj = _.mapKeys(newArray, 'colorNum');
+		const { defaultColorPalette, selectedColor, values } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
 
-		return _.map(defaultColorsObj, color => {
+		return _.map(defaultColorPalette, color => {
 			if (color.colorNum === currentColorNum) {
 				return (
 					<div
@@ -49,7 +41,7 @@ class MultiColorPalette extends Component {
 							marginLeft: 5,
 							border: `3px solid ${values.nogBackground}`,
 							boxShadow: '0px 0px 0px 1px white',
-							backgroundColor: color.color
+							backgroundColor: color.colorVal
 						}} />
 				)
 			} else {
@@ -63,7 +55,7 @@ class MultiColorPalette extends Component {
 							borderRadius: '50%',
 							marginLeft: 5,
 							border: '1px solid #333',
-							backgroundColor: color.color
+							backgroundColor: color.colorVal
 						}} />
 				)
 			}
@@ -71,20 +63,31 @@ class MultiColorPalette extends Component {
 	}
 
 	renderCustomColors() {
-		const { currentColorPalette, selectedColor, values } = this.props;
-		const customColorsArray = currentColorPalette.slice(8, 16);
-		const newArray = [];
-		customColorsArray.forEach((color, index) => {
-			let newObj = {};
-			newObj.colorNum = index + 8;
-			newObj.color = color;
-			newArray.push(newObj);
-		})
-		const customColorsObj = _.mapKeys(newArray, 'colorNum');
+		const { customColorPalette, selectedColor, values } = this.props;
+		// const customPaletteColors = {
+		// 	8: {colorNum: 8, colorVal: '#FF0000'},
+		// 	9: {colorNum: 9, colorVal: '#FFFF00'},
+		// 	10: {colorNum: 10, colorVal: '#00FF00'},
+		// 	11: {colorNum: 11, colorVal: '#00FFFF'},
+		// 	12: {colorNum: 12, colorVal: '#0000FF'},
+		// 	13: {colorNum: 13, colorVal: '#FF00FF'},
+		// 	14: {colorNum: 14, colorVal: 'empty'},
+		// 	15: {colorNum: 15, colorVal: 'empty'}
+		// };
+
+		// const customColorsArray = currentColorPalette.slice(8, 16);
+		// const newArray = [];
+		// customColorsArray.forEach((color, index) => {
+		// 	let newObj = {};
+		// 	newObj.colorNum = index + 8;
+		// 	newObj.color = color;
+		// 	newArray.push(newObj);
+		// })
+		// const customColorsObj = _.mapKeys(newArray, 'colorNum');
 		const currentColorNum = this.props.selectedColor.selectedColor;
 
-		return _.map(customColorsObj, color => {
-			if (color.color === 'empty') {
+		return _.map(customColorPalette, color => {
+			if (color.colorVal === 'empty') {
 				return(
 					<div
 						onClick={() => this.pickColor(color.colorNum)}
@@ -105,7 +108,7 @@ class MultiColorPalette extends Component {
 							marginLeft: 5,
 							border: `3px solid ${values.nogBackground}`,
 							boxShadow: '0px 0px 0px 1px white',
-							backgroundColor: color.color
+							backgroundColor: color.colorVal
 						}} />
 				)
 			} else {
@@ -119,7 +122,7 @@ class MultiColorPalette extends Component {
 							borderRadius: '50%',
 							marginLeft: 5,
 							border: '1px solid #333',
-							backgroundColor: color.color
+							backgroundColor: color.colorVal
 						}} />
 				)
 			}
@@ -155,8 +158,8 @@ class MultiColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, values }) {
-	return { currentPattern, currentColorPalette, selectedColor, values };
+function mapStateToProps({ currentPattern, defaultColorPalette, customColorPalette, selectedColor, values }) {
+	return { currentPattern, defaultColorPalette, customColorPalette, selectedColor, values };
 }
 
 export default connect(mapStateToProps, { setCurrentColorPalette, setSelectedColor })(MultiColorPalette);

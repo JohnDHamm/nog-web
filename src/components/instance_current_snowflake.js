@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { updatePattern } from '../actions';
+
 class InstanceCurrentSnowflake extends Component {
 
 	getColor(colNum) {
@@ -20,12 +22,20 @@ class InstanceCurrentSnowflake extends Component {
 		return _.mapKeys(newArray, 'lightNum');
 	}
 
-	clickLight(num) {
-		console.log("clicked on light:", num);
+	clickLight(lightNum) {
+		const { selectedColor } = this.props.selectedColor;
+		console.log("current color num:", selectedColor);
+		console.log("clicked on light:", lightNum);
+		const obj = {};
+		obj[lightNum] = selectedColor;
+		this.props.updatePattern(obj)
+		//action setLightColor
+			//state: currentPattern.instances[state.instanceNum].lightsColor[lightNum] = state.selectedColor
 	}
 
 	renderLights() {
 		const { currentPattern, values, instanceNumber, instanceSize } = this.props;
+		console.log("currentPattern", currentPattern);
 		const lightsObj = this.createNewLightsObj(currentPattern.instances[instanceNumber].lightsColor);
 		const containerSize = instanceSize,
 			halfContainer = containerSize / 2,
@@ -212,7 +222,6 @@ class InstanceCurrentSnowflake extends Component {
 			}
 		};
 
-
 		return (
 			<div style={styles.root}>
 				<div style={styles.container}>
@@ -228,8 +237,8 @@ class InstanceCurrentSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, values }) {
-	return { currentPattern, currentColorPalette, values };
+function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, values }) {
+	return { currentPattern, currentColorPalette, selectedColor, values };
 }
 
-export default connect(mapStateToProps)(InstanceCurrentSnowflake);
+export default connect(mapStateToProps, { updatePattern })(InstanceCurrentSnowflake);
