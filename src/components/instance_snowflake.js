@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentLights } from '../actions';
-
 class InstanceSnowflake extends Component {
-
-	// componentWillMount() {
-
-	// }
 
 	getColor(colNum) {
 		const { currentColorPalette } = this.props;
@@ -15,9 +9,8 @@ class InstanceSnowflake extends Component {
 	}
 
 	render() {
-		const { currentPattern, currentColorPalette, values, instanceNumber, instanceSize, instanceLocation } = this.props;
-		const instance = currentPattern.instances[instanceNumber];
-		// console.log("instance", instance);
+		const { currentPattern, currentColorPalette, currentLights, values, instanceNumber, instanceSize, instanceLocation } = this.props;
+		// const instance = currentPattern.instances[instanceNumber];
 		const containerSize = instanceSize;
 		const halfContainer = containerSize / 2;
 		const lightDia = containerSize * (20 / 420);
@@ -58,152 +51,152 @@ class InstanceSnowflake extends Component {
 			lightColor_0: {
 				left: `calc(50% - ${lightOffset}px)`,
 				top: '36%',
-				backgroundColor: this.getColor(`${instance.lightsColor[0]}`)
+				backgroundColor: this.getColor(currentLights[0][instanceNumber].colorVal)
 			},
 			lightColor_1: {
 				top: '13%',
 				left: '38.2%',
-				backgroundColor: this.getColor(`${instance.lightsColor[1]}`)
+				backgroundColor: this.getColor(currentLights[1][instanceNumber].colorVal)
 			},
 			lightColor_2: {
 				top: '1.7%',
 				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[2]}`)
+				backgroundColor: this.getColor(currentLights[2][instanceNumber].colorVal)
 			},
 			lightColor_3: {
 				top: '13%',
 				right: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[3]}`)
+				backgroundColor: this.getColor(currentLights[3][instanceNumber].colorVal)
 			},
 			lightColor_4: {
 				top: '25.3%',
 				right: '34.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[4]}`)
+				backgroundColor: this.getColor(currentLights[4][instanceNumber].colorVal)
 			},
 			lightColor_5: {
 				top: '41.7%',
 				right: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[5]}`)
+				backgroundColor: this.getColor(currentLights[5][instanceNumber].colorVal)
 			},
 			lightColor_6: {
 				top: '22.1%',
 				right: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[6]}`)
+				backgroundColor: this.getColor(currentLights[6][instanceNumber].colorVal)
 			},
 			lightColor_7: {
 				top: '24.55%',
 				right: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[7]}`)
+				backgroundColor: this.getColor(currentLights[7][instanceNumber].colorVal)
 			},
 			lightColor_8: {
 				top: '38.6%',
 				right: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[8]}`)
+				backgroundColor: this.getColor(currentLights[8][instanceNumber].colorVal)
 			},
 			lightColor_9: {
 				top: `calc(50% - ${lightOffset}px)`,
 				right: '22.05%',
-				backgroundColor: this.getColor(`${instance.lightsColor[9]}`)
+				backgroundColor: this.getColor(currentLights[9][instanceNumber].colorVal)
 			},
 			lightColor_10: {
 				bottom: '41.7%',
 				right: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[10]}`)
+				backgroundColor: this.getColor(currentLights[10][instanceNumber].colorVal)
 			},
 			lightColor_11: {
 				bottom: '38.6%',
 				right: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[11]}`)
+				backgroundColor: this.getColor(currentLights[11][instanceNumber].colorVal)
 			},
 			lightColor_12: {
 				bottom: '24.62%',
 				right: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[12]}`)
+				backgroundColor: this.getColor(currentLights[12][instanceNumber].colorVal)
 			},
 			lightColor_13: {
 				bottom: '22.1%',
 				right: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[13]}`)
+				backgroundColor: this.getColor(currentLights[13][instanceNumber].colorVal)
 			},
 			lightColor_14: {
 				bottom: '25.3%',
 				right: '34.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[14]}`)
+				backgroundColor: this.getColor(currentLights[14][instanceNumber].colorVal)
 			},
 			lightColor_15: {
 				bottom: '36%',
 				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[15]}`)
+				backgroundColor: this.getColor(currentLights[15][instanceNumber].colorVal)
 			},
 			lightColor_16: {
 				bottom: '13%',
 				right: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[16]}`)
+				backgroundColor: this.getColor(currentLights[16][instanceNumber].colorVal)
 			},
 			lightColor_17: {
 				bottom: '1.7%',
 				left: `calc(50% - ${lightOffset}px)`,
-				backgroundColor: this.getColor(`${instance.lightsColor[17]}`)
+				backgroundColor: this.getColor(currentLights[17][instanceNumber].colorVal)
 			},
 			lightColor_18: {
 				bottom: '13%',
 				left: '38%',
-				backgroundColor: this.getColor(`${instance.lightsColor[18]}`)
+				backgroundColor: this.getColor(currentLights[18][instanceNumber].colorVal)
 			},
 			lightColor_19: {
 				bottom: '25.3%',
 				left: '34.8%',
-				backgroundColor: this.getColor(`${instance.lightsColor[19]}`)
+				backgroundColor: this.getColor(currentLights[19][instanceNumber].colorVal)
 			},
 			lightColor_20: {
 				bottom: '41.7%',
 				left: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[20]}`)
+				backgroundColor: this.getColor(currentLights[20][instanceNumber].colorVal)
 			},
 			lightColor_21: {
 				bottom: '22.1%',
 				left: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[21]}`)
+				backgroundColor: this.getColor(currentLights[21][instanceNumber].colorVal)
 			},
 			lightColor_22: {
 				bottom: '24.62%',
 				left: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[22]}`)
+				backgroundColor: this.getColor(currentLights[22][instanceNumber].colorVal)
 			},
 			lightColor_23: {
 				bottom: '38.6%',
 				left: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[23]}`)
+				backgroundColor: this.getColor(currentLights[23][instanceNumber].colorVal)
 			},
 			lightColor_24: {
 				bottom: `calc(50% - ${lightOffset}px)`,
 				left: '22.05%',
-				backgroundColor: this.getColor(`${instance.lightsColor[24]}`)
+				backgroundColor: this.getColor(currentLights[24][instanceNumber].colorVal)
 			},
 			lightColor_25: {
 				top: '41.7%',
 				left: '37.4%',
-				backgroundColor: this.getColor(`${instance.lightsColor[25]}`)
+				backgroundColor: this.getColor(currentLights[25][instanceNumber].colorVal)
 			},
 			lightColor_26: {
 				top: '38.6%',
 				left: '13%',
-				backgroundColor: this.getColor(`${instance.lightsColor[26]}`)
+				backgroundColor: this.getColor(currentLights[26][instanceNumber].colorVal)
 			},
 			lightColor_27: {
 				top: '24.62%',
 				left: '7.65%',
-				backgroundColor: this.getColor(`${instance.lightsColor[27]}`)
+				backgroundColor: this.getColor(currentLights[27][instanceNumber].colorVal)
 			},
 			lightColor_28: {
 				top: '22.1%',
 				left: '22.6%',
-				backgroundColor: this.getColor(`${instance.lightsColor[28]}`)
+				backgroundColor: this.getColor(currentLights[28][instanceNumber].colorVal)
 			},
 			lightColor_29: {
 				top: '25.3%',
 				left: '34.8%',
-				backgroundColor: this.getColor(`${instance.lightsColor[29]}`)
+				backgroundColor: this.getColor(currentLights[29][instanceNumber].colorVal)
 			},
 		};
 
@@ -252,8 +245,8 @@ class InstanceSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, values }) {
-	return { currentPattern, currentColorPalette, values };
+function mapStateToProps({ currentPattern, currentColorPalette, currentLights, values }) {
+	return { currentPattern, currentColorPalette, currentLights, values };
 }
 
-export default connect(mapStateToProps, { setCurrentLights })(InstanceSnowflake);
+export default connect(mapStateToProps)(InstanceSnowflake);

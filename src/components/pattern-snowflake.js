@@ -50,7 +50,7 @@ class PatternSnowflake extends Component {
 
 	render() {
 		const pattern = this.props.currentPattern;
-		console.log("this.props.currentPattern", this.props.currentPattern);
+		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
 		const styles = {
 			root: {

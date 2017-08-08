@@ -71,7 +71,6 @@ export function setCurrentLights(currentPattern) {
 		}
 		currentLights[lightNum] = _.mapKeys(instanceArray, 'instanceNum');
 	}
-	console.log("currentLights", currentLights);
 	return {
 		type: SET_LIGHTS,
 		payload: currentLights
