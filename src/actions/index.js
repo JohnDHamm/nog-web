@@ -2,6 +2,7 @@ export const GET_USER_PATTERNS = 'get_user_patterns';
 export const GET_NOG_TYPES = 'get_nog_types';
 export const SET_CURRENT_PATTERN = 'set_current_pattern';
 export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
+export const SET_SELECTED_COLOR = 'set_selected_color';
 
 import axios from 'axios';
 
@@ -37,5 +38,13 @@ export function setCurrentColorPalette(customColorsArray) {
 	return {
 		type: SET_CURRENT_COLOR_PALETTE,
 		payload: currentColorPalette
+	}
+}
+
+export function setSelectedColor(colorNum) {
+	const selColObj = { selectedColor: colorNum }
+	return {
+		type: SET_SELECTED_COLOR,
+		payload: selColObj
 	}
 }

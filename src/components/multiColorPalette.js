@@ -3,27 +3,19 @@ import { connect } from 'react-redux';
 
 import EmptyColor from './emptyColor';
 
-import { setCurrentColorPalette } from '../actions';
+import { setCurrentColorPalette, setSelectedColor } from '../actions';
 
 class MultiColorPalette extends Component {
 
-	constructor(props) {
-    super(props);
-    this.state = {
-    	selectedColor: 0
-    }
-  }
-
 	componentWillMount() {
-		const { currentPattern } = this.props;
+		const { currentPattern, setSelectedColor } = this.props;
 		const customColors = currentPattern.customColors;
 		this.props.setCurrentColorPalette(customColors);
+		this.props.setSelectedColor(0);
 	}
 
 	selectColor(colorNum) {
-		if (colorNum !== this.state.selectedColor) {
-			this.setState({selectedColor: colorNum});
-		}
+		this.props.setSelectedColor(colorNum);
 	}
 
 	pickColor(colorNum) {
@@ -32,7 +24,7 @@ class MultiColorPalette extends Component {
 	}
 
 	renderDefaultColors() {
-		const { currentColorPalette, values } = this.props;
+		const { currentColorPalette, selectedColor, values } = this.props;
 		const defaultColorsArray = currentColorPalette.slice(0, 8);
 		const newArray = [];
 		defaultColorsArray.forEach((color, index) => {
@@ -42,11 +34,9 @@ class MultiColorPalette extends Component {
 			newArray.push(newObj);
 		})
 		const defaultColorsObj = _.mapKeys(newArray, 'colorNum');
-
-		const currentColorNum = this.state.selectedColor;
+		const currentColorNum = this.props.selectedColor.selectedColor;
 
 		return _.map(defaultColorsObj, color => {
-
 			if (color.colorNum === currentColorNum) {
 				return (
 					<div
@@ -81,7 +71,7 @@ class MultiColorPalette extends Component {
 	}
 
 	renderCustomColors() {
-		const { currentColorPalette, values } = this.props;
+		const { currentColorPalette, selectedColor, values } = this.props;
 		const customColorsArray = currentColorPalette.slice(8, 16);
 		const newArray = [];
 		customColorsArray.forEach((color, index) => {
@@ -91,10 +81,9 @@ class MultiColorPalette extends Component {
 			newArray.push(newObj);
 		})
 		const customColorsObj = _.mapKeys(newArray, 'colorNum');
-		const currentColorNum = this.state.selectedColor;
+		const currentColorNum = this.props.selectedColor.selectedColor;
 
 		return _.map(customColorsObj, color => {
-
 			if (color.color === 'empty') {
 				return(
 					<div
@@ -138,7 +127,7 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
-		const { currentPattern, currentColorPalette, values } = this.props;
+		const { values } = this.props;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -166,8 +155,8 @@ class MultiColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, values }) {
-	return { currentPattern, currentColorPalette, values };
+function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, values }) {
+	return { currentPattern, currentColorPalette, selectedColor, values };
 }
 
-export default connect(mapStateToProps, { setCurrentColorPalette })(MultiColorPalette);
+export default connect(mapStateToProps, { setCurrentColorPalette, setSelectedColor })(MultiColorPalette);
