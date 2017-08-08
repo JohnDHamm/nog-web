@@ -60,21 +60,18 @@ export function setCurrentColorPalette(customColorsArray) {
 }
 
 export function setCurrentLights(currentPattern) {
-
-	const thisLightNum = 0;
-	// const thisLightObj = {};
-	let instanceArray = [];
-	for (let i = 0; i < currentPattern.instances.length; i++) {
-		let thisInstanceObj = {};
-		thisInstanceObj.instanceNum = i;
-		thisInstanceObj.colorVal = currentPattern.instances[i].lightsColor[thisLightNum];
-		console.log("thisInstanceObj", thisInstanceObj);
-		instanceArray.push(thisInstanceObj);
+	let currentLights = {};
+	for (let lightNum = 0; lightNum < 30; lightNum++) {
+		let instanceArray = [];
+		for (let i = 0; i < currentPattern.instances.length; i++) {
+			let thisInstanceObj = {};
+			thisInstanceObj.instanceNum = i;
+			thisInstanceObj.colorVal = currentPattern.instances[i].lightsColor[lightNum];
+			instanceArray.push(thisInstanceObj);
+		}
+		currentLights[lightNum] = _.mapKeys(instanceArray, 'instanceNum');
 	}
-	console.log("instanceArray", instanceArray);
-
-	const currentLights = {};
-
+	console.log("currentLights", currentLights);
 	return {
 		type: SET_LIGHTS,
 		payload: currentLights
