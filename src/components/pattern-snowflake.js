@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentPattern } from '../actions';
+import { setCurrentPattern, setCurrentLights } from '../actions';
 
 import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
@@ -26,9 +26,10 @@ class PatternSnowflake extends Component {
 
 	componentWillMount() {
 		const { id } = this.props.match.params;
-		console.log("selected pattern:", this.props.userPatterns[id]);
+		// console.log("selected pattern:", this.props.userPatterns[id]);
 		this.props.setCurrentPattern(this.props.userPatterns[id]);
 		this.setState({numInstances: this.props.userPatterns[id].instances.length});
+		this.props.setCurrentLights(this.props.userPatterns[id]);
 	}
 
 	navNext() {
@@ -49,6 +50,7 @@ class PatternSnowflake extends Component {
 
 	render() {
 		const pattern = this.props.currentPattern;
+		console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
 		const styles = {
 			root: {
@@ -146,4 +148,4 @@ function mapStateToProps({ userPatterns, currentPattern, values }) {
 	return { userPatterns, currentPattern, values };
 }
 
-export default connect(mapStateToProps, { setCurrentPattern })(PatternSnowflake);
+export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights })(PatternSnowflake);

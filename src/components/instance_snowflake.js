@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { setCurrentLights } from '../actions';
+
 class InstanceSnowflake extends Component {
+
+	// componentWillMount() {
+
+	// }
 
 	getColor(colNum) {
 		const { currentColorPalette } = this.props;
@@ -250,4 +256,4 @@ function mapStateToProps({ currentPattern, currentColorPalette, values }) {
 	return { currentPattern, currentColorPalette, values };
 }
 
-export default connect(mapStateToProps)(InstanceSnowflake);
+export default connect(mapStateToProps, { setCurrentLights })(InstanceSnowflake);

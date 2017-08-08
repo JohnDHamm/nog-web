@@ -4,6 +4,7 @@ export const SET_CURRENT_PATTERN = 'set_current_pattern';
 export const UPDATE_PATTERN = 'update_pattern';
 export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
 export const SET_SELECTED_COLOR = 'set_selected_color';
+export const SET_LIGHTS = 'set_lights';
 
 import axios from 'axios';
 
@@ -55,6 +56,28 @@ export function setCurrentColorPalette(customColorsArray) {
 	return {
 		type: SET_CURRENT_COLOR_PALETTE,
 		payload: currentColorPalette
+	}
+}
+
+export function setCurrentLights(currentPattern) {
+
+	const thisLightNum = 0;
+	// const thisLightObj = {};
+	let instanceArray = [];
+	for (let i = 0; i < currentPattern.instances.length; i++) {
+		let thisInstanceObj = {};
+		thisInstanceObj.instanceNum = i;
+		thisInstanceObj.colorVal = currentPattern.instances[i].lightsColor[thisLightNum];
+		console.log("thisInstanceObj", thisInstanceObj);
+		instanceArray.push(thisInstanceObj);
+	}
+	console.log("instanceArray", instanceArray);
+
+	const currentLights = {};
+
+	return {
+		type: SET_LIGHTS,
+		payload: currentLights
 	}
 }
 
