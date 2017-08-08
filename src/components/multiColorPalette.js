@@ -7,26 +7,33 @@ import { setCurrentColorPalette } from '../actions';
 
 class MultiColorPalette extends Component {
 
+	constructor(props) {
+    super(props);
+    this.state = {
+    	selectedColor: 0
+    }
+  }
+
 	componentWillMount() {
 		const { currentPattern } = this.props;
 		const customColors = currentPattern.customColors;
 		this.props.setCurrentColorPalette(customColors);
 	}
 
-	checkEmptyColor(color) {
-		return color === 'empty' ? true : false;
+	selectColor(colorNum) {
+		if (colorNum !== this.state.selectedColor) {
+			this.setState({selectedColor: colorNum});
+		}
 	}
 
-	selectColor(colorNum) {
-		console.log("clicked on color:", colorNum);
+	pickColor(colorNum) {
+		console.log("select a color for #", colorNum);
+		//color picker component?
 	}
 
 	renderDefaultColors() {
 		const { currentColorPalette, values } = this.props;
-		const styles = {
-
-		}
-		const defaultColorsArray = currentColorPalette.slice(0,8);
+		const defaultColorsArray = currentColorPalette.slice(0, 8);
 		const newArray = [];
 		defaultColorsArray.forEach((color, index) => {
 			let newObj = {};
@@ -35,11 +42,69 @@ class MultiColorPalette extends Component {
 			newArray.push(newObj);
 		})
 		const defaultColorsObj = _.mapKeys(newArray, 'colorNum');
-		const currentColorNum = 2;
+
+		const currentColorNum = this.state.selectedColor;
 
 		return _.map(defaultColorsObj, color => {
 
 			if (color.colorNum === currentColorNum) {
+				return (
+					<div
+						onClick={() => this.selectColor(color.colorNum)}
+						key={color.colorNum}
+						style={{
+							width: 60,
+							height: 60,
+							borderRadius: '50%',
+							marginLeft: 5,
+							border: `3px solid ${values.nogBackground}`,
+							boxShadow: '0px 0px 0px 1px white',
+							backgroundColor: color.color
+						}} />
+				)
+			} else {
+				return (
+					<div
+						onClick={() => this.selectColor(color.colorNum)}
+						key={color.colorNum}
+						style={{
+							width: 40,
+							height: 40,
+							borderRadius: '50%',
+							marginLeft: 5,
+							border: '1px solid #333',
+							backgroundColor: color.color
+						}} />
+				)
+			}
+		})
+	}
+
+	renderCustomColors() {
+		const { currentColorPalette, values } = this.props;
+		const customColorsArray = currentColorPalette.slice(8, 16);
+		const newArray = [];
+		customColorsArray.forEach((color, index) => {
+			let newObj = {};
+			newObj.colorNum = index + 8;
+			newObj.color = color;
+			newArray.push(newObj);
+		})
+		const customColorsObj = _.mapKeys(newArray, 'colorNum');
+		const currentColorNum = this.state.selectedColor;
+
+		return _.map(customColorsObj, color => {
+
+			if (color.color === 'empty') {
+				return(
+					<div
+						onClick={() => this.pickColor(color.colorNum)}
+						key={color.colorNum}
+					>
+						<EmptyColor />
+					</div>
+				)
+			} else if (color.colorNum === currentColorNum) {
 				return (
 					<div
 						onClick={() => this.selectColor(color.colorNum)}
@@ -85,70 +150,7 @@ class MultiColorPalette extends Component {
 			paletteRow: {
 				marginBottom: 7,
 				display: 'flex'
-			},
-			circle: {
-				width: 40,
-				height: 40,
-				borderRadius: '50%',
-				marginLeft: 5,
-				border: '1px solid #333',
-			},
-			selectedColorCircle: {
-				width: 60,
-				height: 60,
-				borderRadius: '50%',
-				marginLeft: 5,
-				border: `3px solid ${values.nogBackground}`,
-				boxShadow: '0px 0px 0px 1px white'
-			},
-			default_1: {
-				backgroundColor: `${currentColorPalette[0]}`
-			},
-			default_2: {
-				backgroundColor: `${currentColorPalette[1]}`
-			},
-			default_3: {
-				backgroundColor: `${currentColorPalette[2]}`
-			},
-			default_4: {
-				backgroundColor: `${currentColorPalette[3]}`
-			},
-			default_5: {
-				backgroundColor: `${currentColorPalette[4]}`
-			},
-			default_6: {
-				backgroundColor: `${currentColorPalette[5]}`
-			},
-			default_7: {
-				backgroundColor: `${currentColorPalette[6]}`
-			},
-			default_8: {
-				backgroundColor: `${currentColorPalette[7]}`
-			},
-			custom_1: {
-				backgroundColor: `${currentColorPalette[8]}`
-			},
-			custom_2: {
-				backgroundColor: `${currentColorPalette[9]}`
-			},
-			custom_3: {
-				backgroundColor: `${currentColorPalette[10]}`
-			},
-			custom_4: {
-				backgroundColor: `${currentColorPalette[11]}`
-			},
-			custom_5: {
-				backgroundColor: `${currentColorPalette[12]}`
-			},
-			custom_6: {
-				backgroundColor: `${currentColorPalette[13]}`
-			},
-			custom_7: {
-				backgroundColor: `${currentColorPalette[14]}`
-			},
-			custom_8: {
-				backgroundColor: `${currentColorPalette[15]}`
-			},
+			}
 		};
 
 		return (
@@ -157,22 +159,7 @@ class MultiColorPalette extends Component {
 					{this.renderDefaultColors()}
 				</div>
 				<div style={styles.paletteRow}>
-					{ this.checkEmptyColor(currentColorPalette[8]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_1 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[9]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_2 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[10]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_3 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[11]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_4 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[12]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_5 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[13]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_6 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[14]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_7 }} />) }
-					{ this.checkEmptyColor(currentColorPalette[15]) ? (<EmptyColor />) : (
-						<div style={{ ...styles.circle, ...styles.custom_8 }} />) }
+					{this.renderCustomColors()}
 				</div>
 			</div>
 		);
@@ -184,17 +171,3 @@ function mapStateToProps({ currentPattern, currentColorPalette, values }) {
 }
 
 export default connect(mapStateToProps, { setCurrentColorPalette })(MultiColorPalette);
-
-
-
-
-
-					// <div style={{ ...styles.selectedColorCircle,
-					// 	backgroundColor: `${currentColorPalette[0]}` }} />
-					// <div style={{ ...styles.circle, ...styles.default_2 }} />
-					// <div style={{ ...styles.circle, ...styles.default_3 }} />
-					// <div style={{ ...styles.circle, ...styles.default_4 }} />
-					// <div style={{ ...styles.circle, ...styles.default_5 }} />
-					// <div style={{ ...styles.circle, ...styles.default_6 }} />
-					// <div style={{ ...styles.circle, ...styles.default_7 }} />
-					// <div style={{ ...styles.circle, ...styles.default_8 }} />

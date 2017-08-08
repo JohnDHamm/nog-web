@@ -26,7 +26,7 @@ class PatternSnowflake extends Component {
 
 	componentWillMount() {
 		const { id } = this.props.match.params;
-		console.log("selected pattern:", this.props.userPatterns[id]);
+		// console.log("selected pattern:", this.props.userPatterns[id]);
 		this.props.setCurrentPattern(this.props.userPatterns[id]);
 		this.setState({numInstances: this.props.userPatterns[id].instances.length});
 	}
