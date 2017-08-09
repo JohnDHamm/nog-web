@@ -32,10 +32,9 @@ class InstanceCurrentSnowflake extends Component {
 	}
 
 	renderLights() {
-		const { currentPattern, currentLights, values, instanceNumber, instanceSize } = this.props;
+		const { currentLights, values, instanceNumber, instanceSize } = this.props;
 		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
 		const containerSize = instanceSize,
-			halfContainer = containerSize / 2,
 			lightDia = containerSize * (20 / 420),
 			lightOffset = lightDia / 2,
 			lightBorderSize = containerSize < 210 ? 0 : 1;
@@ -234,8 +233,8 @@ class InstanceCurrentSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, selectedColor, currentLights, values }) {
-	return { currentPattern, currentColorPalette, selectedColor,currentLights, values };
+function mapStateToProps({ currentColorPalette, selectedColor, currentLights, values }) {
+	return { currentColorPalette, selectedColor,currentLights, values };
 }
 
 export default connect(mapStateToProps, { updateLight })(InstanceCurrentSnowflake);
