@@ -23,8 +23,9 @@ class Userhome extends Component {
 				<Link to={`/pattern-${nogTypeName}/${pattern._id}`} key={pattern._id}>
 					<div style={{border: '1px solid #ddd'}}>
 						<p>name: {pattern.name}</p>
-						<p>singleColor: {pattern.singleColor}</p>
 						<p>nog style: {nogTypeName}</p>
+						{ pattern.singleColor ?
+							( <p>single-color pattern</p> ) : ( <p>multi-color pattern</p> ) }
 					</div>
 				</Link>
 			)
