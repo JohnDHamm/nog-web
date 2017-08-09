@@ -1,7 +1,7 @@
 export const GET_USER_PATTERNS = 'get_user_patterns';
 export const GET_NOG_TYPES = 'get_nog_types';
 export const SET_CURRENT_PATTERN = 'set_current_pattern';
-export const UPDATE_PATTERN = 'update_pattern';
+export const UPDATE_LIGHT = 'update_light';
 export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
 export const SET_SELECTED_COLOR = 'set_selected_color';
 export const SET_LIGHTS = 'set_lights';
@@ -85,9 +85,9 @@ export function setSelectedColor(colorNum) {
 	}
 }
 
-export function updatePattern(obj) {
+export function updateLight(obj) {
 	return {
-		type: UPDATE_PATTERN,
+		type: UPDATE_LIGHT,
 		payload: obj
 	}
 }
