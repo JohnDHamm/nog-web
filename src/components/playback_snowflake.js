@@ -15,21 +15,14 @@ class PlaybackSnowflake extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	displayInstance: 0,
-    	sliderStart: 17
+    	displayInstance: 0
     };
   }
 
   componentWillMount() {
-  	console.log("hello");
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
-  	console.log("defaultSpeed", defaultSpeed);
   	this.setState({ sliderStart: defaultSpeed });
-  	console.log("this.state.sliderStart", this.state.sliderStart);
-  	const speed = this.setSpeed(defaultSpeed);
-  	console.log("speed", speed);
-		// this.setState({displaySpeed: speed})
-  	const intervalId = setInterval(this.timer.bind(this), speed);
+  	const intervalId = setInterval(this.timer.bind(this), this.calcSpeed(defaultSpeed));
   	this.setState({intervalId: intervalId});
   }
 
@@ -37,17 +30,14 @@ class PlaybackSnowflake extends Component {
   	clearInterval(this.state.intervalId);
   }
 
-  setSpeed(speed) {
-  	if ( speed > 50 ) {
-  		return ( 101 - speed ) * 10.1;
-  	}
-  	return (51 - speed) * 30.3 + 505;
+  calcSpeed(speed) {
+  	return speed > 50 ? ( 101 - speed ) * 10.1 : (51 - speed) * 30.3 + 505;
   }
 
   handleSlider(event, value) {
-  	console.log("value", value);
-  	// this.setState({slider: value});
-  	// console.log("this.state.slider", this.state.slider);
+  	clearInterval(this.state.intervalId);
+  	const intervalId = setInterval(this.timer.bind(this), this.calcSpeed(value));
+  	this.setState({intervalId: intervalId});
   }
 
   timer() {
@@ -93,7 +83,7 @@ class PlaybackSnowflake extends Component {
 							min={1}
 		          max={100}
 		          step={1}
-		          onChange={this.handleSlider} />
+		          onChange={this.handleSlider.bind(this)} />
 					</div>
 				</div>
 			</MuiThemeProvider>
