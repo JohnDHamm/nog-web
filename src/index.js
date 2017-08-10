@@ -25,7 +25,7 @@ ReactDOM.render(
 					<Route path="/userhome/:id" component={Userhome} />
 					<Route path="/pattern-snowflake/:id" component={PatternSnowflake} />
 					<Route path="/pattern-tree/:id" component={PatternTree} />
-					<Route path="/playback-snowflake/:id" component={PlaybackSnowflake} />
+					<Route path="/playback-snowflake" component={PlaybackSnowflake} />
 					<Route path="/" component={Home} />
 				</Switch>
 			</div>
