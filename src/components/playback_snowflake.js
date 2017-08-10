@@ -1,11 +1,9 @@
-// import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentPattern } from '../actions';
-
 import PatternInfo from './patternInfo';
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
+import ButtonText from './button_text';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Slider from 'material-ui/Slider';
@@ -15,7 +13,8 @@ class PlaybackSnowflake extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	displayInstance: 0
+    	displayInstance: 0,
+    	speedChanged: false
     };
   }
 
@@ -36,6 +35,8 @@ class PlaybackSnowflake extends Component {
   }
 
   handleSlider(event, value) {
+  	value !== this.state.sliderStart ?
+  		this.setState({speedChanged: true}) : this.setState({speedChanged: false});
   	this.setState({ sliderLabel: value });
   	clearInterval(this.state.intervalId);
   	const intervalId = setInterval(this.timer.bind(this), this.calcSpeed(value));
@@ -72,6 +73,11 @@ class PlaybackSnowflake extends Component {
 				width: '100%',
 				position: 'absolute',
 				bottom: 0
+			},
+			saveSpeedBtn: {
+				position: 'absolute',
+				bottom: 25,
+				left: 'calc(50% + 210px)'
 			}
 		};
 		const currentInstanceSize = 540;
@@ -106,14 +112,24 @@ class PlaybackSnowflake extends Component {
 			          sliderStyle={{marginBottom: 10, marginTop: 10}} />
 						</div>
 					</div>
+
+					{this.state.speedChanged &&
+						<div style={styles.saveSpeedBtn}>
+							<ButtonText
+								label={'Save New Default Speed'}
+								color={`${values.nogGrayText}`}
+								bgColor={`${values.nogBackground}`} />
+						</div>
+					}
+
 				</div>
 			</MuiThemeProvider>
 		)
 	}
 }
 
-function mapStateToProps({ userPatterns, currentPattern, values }) {
-	return { userPatterns, currentPattern, values };
+function mapStateToProps({ currentPattern, values }) {
+	return { currentPattern, values };
 }
 
-export default connect(mapStateToProps, { setCurrentPattern })(PlaybackSnowflake);
+export default connect(mapStateToProps)(PlaybackSnowflake);

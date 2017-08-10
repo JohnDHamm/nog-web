@@ -4,7 +4,6 @@ class ButtonPlayback extends Component {
 	render() {
 		const styles = {
 			root: {
-				// border: '2px solid green',
 				position: 'absolute',
 				height: 70,
 				width: 70,
@@ -19,8 +18,6 @@ class ButtonPlayback extends Component {
 			}
 		};
 
-
-
 		return (
 			<div style={styles.root}>
 				<div style={styles.button}>
@@ -28,7 +25,6 @@ class ButtonPlayback extends Component {
 			</div>
 		);
 	}
-
 }
 
 export default ButtonPlayback;
