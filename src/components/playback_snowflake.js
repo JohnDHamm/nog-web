@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setCurrentPattern } from '../actions';
 
 import PatternInfo from './patternInfo';
-import InstanceSnowflake from './instance_snowflake';
+import InstancePlaybackSnowflake from './instance_playback_snowflake';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Slider from 'material-ui/Slider';
@@ -70,7 +70,7 @@ class PlaybackSnowflake extends Component {
 						name={pattern.name}
 						description={pattern.description}
 						defaultSpeed={pattern.defaultSpeed} />
-					<InstanceSnowflake
+					<InstancePlaybackSnowflake
 						instanceNumber={this.state.displayInstance}
 						instanceSize={currentInstanceSize}
 						instanceLocation={{
