@@ -1,6 +1,7 @@
 // import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { setCurrentPattern, setCurrentLights } from '../actions';
 
@@ -11,6 +12,8 @@ import InstanceSnowflake from './instance_snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
+
+import ButtonPlayback from './button_playback';
 
 class PatternSnowflake extends Component {
 
@@ -49,6 +52,7 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
+		// console.log("this.props", this.props);
 		const pattern = this.props.currentPattern;
 		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
@@ -138,6 +142,9 @@ class PatternSnowflake extends Component {
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
+				<Link to={'/playback-snowflake/598b5104172824a3e8d0dcc1'}>
+					<ButtonPlayback />
+				</Link>
 			</div>
 		);
 	}
