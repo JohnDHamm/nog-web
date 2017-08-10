@@ -22,6 +22,7 @@ class PlaybackSnowflake extends Component {
   componentWillMount() {
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
   	this.setState({ sliderStart: defaultSpeed });
+  	this.setState({ sliderLabel: defaultSpeed });
   	const intervalId = setInterval(this.timer.bind(this), this.calcSpeed(defaultSpeed));
   	this.setState({intervalId: intervalId});
   }
@@ -35,6 +36,7 @@ class PlaybackSnowflake extends Component {
   }
 
   handleSlider(event, value) {
+  	this.setState({ sliderLabel: value });
   	clearInterval(this.state.intervalId);
   	const intervalId = setInterval(this.timer.bind(this), this.calcSpeed(value));
   	this.setState({intervalId: intervalId});
@@ -53,14 +55,26 @@ class PlaybackSnowflake extends Component {
 				height: 'calc(100vh - 56px)',
 				position: 'relative'
 			},
-			slider: {
-				width: 500,
+			sliderContainer: {
+				width: 400,
+				height: 70,
 				position: 'absolute',
 				bottom: 20,
-				left: 'calc(50% - 250px'
+				left: 'calc(50% - 200px)'
+			},
+			labelText: {
+				fontSize: 20,
+				color: `${values.nogGrayText}`,
+				position: 'absolute',
+				top: 10
+			},
+			slider: {
+				width: '100%',
+				position: 'absolute',
+				bottom: 0
 			}
 		};
-		const currentInstanceSize = 560;
+		const currentInstanceSize = 540;
 		const currentInstanceTopMargin = 20;
 
 		return(
@@ -76,14 +90,21 @@ class PlaybackSnowflake extends Component {
 						instanceLocation={{
 							top: currentInstanceTopMargin,
 							left: `calc(50% - ${currentInstanceSize / 2}px`}} />
-					<div style={styles.slider}>
-						<Slider
-							value={this.state.slider}
-							defaultValue={this.state.sliderStart}
-							min={1}
-		          max={100}
-		          step={1}
-		          onChange={this.handleSlider.bind(this)} />
+					<div style={styles.sliderContainer}>
+						<div style={{ ...styles.labelText,
+							left: `calc(${this.state.sliderLabel}% - 12px)`}}>
+							{this.state.sliderLabel}
+						</div>
+						<div style={styles.slider}>
+							<Slider
+								value={this.state.slider}
+								defaultValue={this.state.sliderStart}
+								min={1}
+			          max={100}
+			          step={1}
+			          onChange={this.handleSlider.bind(this)}
+			          sliderStyle={{marginBottom: 10, marginTop: 10}} />
+						</div>
 					</div>
 				</div>
 			</MuiThemeProvider>
