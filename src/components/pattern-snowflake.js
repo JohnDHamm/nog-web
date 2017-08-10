@@ -142,7 +142,7 @@ class PatternSnowflake extends Component {
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
-				<Link to={'/playback-snowflake/598b5104172824a3e8d0dcc1'}>
+				<Link to={'/playback-snowflake'}>
 					<ButtonPlayback />
 				</Link>
 			</div>
