@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class NavigateNextBtn extends Component {
 
 	render() {
-		const { values, btnHeight, btnLocation } = this.props;
+		const { btnHeight, btnLocation } = this.props;
 		const styles = {
 			root: {
 				position: 'absolute',
@@ -28,8 +27,4 @@ class NavigateNextBtn extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(NavigateNextBtn);
+export default NavigateNextBtn;

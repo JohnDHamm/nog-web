@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class ButtonText extends Component {
 	render() {
@@ -13,7 +12,6 @@ class ButtonText extends Component {
 			},
 			label: {
 				color: `${this.props.color}`,
-				// fontSize: 20,
 				paddingLeft: 5,
 				paddingRight: 5
 			}
@@ -29,8 +27,4 @@ class ButtonText extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(ButtonText)
+export default ButtonText;

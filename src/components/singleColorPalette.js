@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class SingleColorPalette extends Component {
 
 	render() {
-		const { currentPattern, values } = this.props;
+		const { currentPattern } = this.props;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -27,8 +27,8 @@ class SingleColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, values }) {
-	return { currentPattern, values };
+function mapStateToProps({ currentPattern }) {
+	return { currentPattern };
 }
 
 export default connect(mapStateToProps)(SingleColorPalette);
