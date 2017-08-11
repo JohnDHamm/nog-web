@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import InstanceSnowflake from './instance_snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
 
-import ButtonPlayback from './button_playback';
+// import ButtonPlayback from './button_playback';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -19,6 +20,17 @@ class EditPatternSnowflakeMC extends Component {
     this.navNext = this.navNext.bind(this);
     this.navPrev = this.navPrev.bind(this);
   }
+
+	componentWillMount() {
+		// const { patternId } = this.props;
+		// console.log("patternId", patternId);
+		// const { id } = this.props.match.params;
+		console.log("current pattern to edit:", this.props.currentPattern);
+		// this.props.setCurrentPattern(this.props.userPatterns[id]);
+		this.setState({numInstances: this.props.currentPattern.instances.length});
+		// this.props.setCurrentLights(this.props.userPatterns[id]);
+	}
+
 
 	navNext() {
 		const nextInstance = !this.state.displayArray[6] ? null : this.state.displayArray[6] === this.state.numInstances - 1 ? null : this.state.displayArray[6] + 1;
@@ -37,26 +49,23 @@ class EditPatternSnowflakeMC extends Component {
 	}
 
 	render() {
-
-		const { values } = this.props;
+		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const styles = {
 			root: {
-				backgroundColor: `${values.nogBackground}`,
-				height: 'calc(100vh - 56px)',
+				// backgroundColor: `${values.nogBackground}`,
+				// height: 'calc(100vh - 56px)',
 				position: 'relative'
 			}
 		};
 
+		const instanceDisplayArray = this.state.displayArray;
+		console.log("instanceDisplayArray", instanceDisplayArray);
+		// const currentInstanceSize = this.props.currentInstanceSize;
+		// const currentInstanceTopMargin = this.props.currentInstanceTopMargin;
 
 
 		return(
 			<div style={styles.root}>
-				<PatternInfo
-					name={pattern.name}
-					description={pattern.description}
-					defaultSpeed={pattern.defaultSpeed} />
-
-				{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
 
 				{instanceDisplayArray[0] !== null && <InstanceSnowflake
 					instanceNumber={instanceDisplayArray[0]}
@@ -124,21 +133,10 @@ class EditPatternSnowflakeMC extends Component {
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
-				<Link to={'/playback-snowflake'}>
-					<ButtonPlayback />
-				</Link>
 			</div>
-
-
-
-
-
-
-
-
-
-			)
+		);
 	}
+}
 
 function mapStateToProps({ userPatterns, currentPattern, values }) {
 	return { userPatterns, currentPattern, values };

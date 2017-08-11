@@ -20,7 +20,7 @@ class PlaybackSnowflake extends Component {
   }
 
   componentWillMount() {
-  	console.log("this.props.currentPattern", this.props.currentPattern);
+  	// console.log("this.props.currentPattern", this.props.currentPattern);
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
   	this.setState({ sliderStart: defaultSpeed });
   	this.setState({ sliderLabel: defaultSpeed });
