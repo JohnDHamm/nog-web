@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import PatternInfo from './patternInfo';
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
@@ -19,6 +20,7 @@ class PlaybackSnowflake extends Component {
   }
 
   componentWillMount() {
+  	console.log("this.props.currentPattern", this.props.currentPattern);
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
   	this.setState({ sliderStart: defaultSpeed });
   	this.setState({ sliderLabel: defaultSpeed });
@@ -74,6 +76,11 @@ class PlaybackSnowflake extends Component {
 				position: 'absolute',
 				bottom: 0
 			},
+			stopBtn: {
+				position: 'absolute',
+				bottom: 25,
+				left: 'calc(50% - 330px)'
+			},
 			saveSpeedBtn: {
 				position: 'absolute',
 				bottom: 25,
@@ -121,7 +128,14 @@ class PlaybackSnowflake extends Component {
 								bgColor={`${values.nogBackground}`} />
 						</div>
 					}
-
+					<div style={styles.stopBtn}>
+						<Link to={`/pattern-snowflake/${this.props.currentPattern._id}`} >
+							<ButtonText
+								label={'Stop Playback'}
+								color={`${values.nogGrayText}`}
+								bgColor={`${values.nogBackground}`} />
+						</Link>
+					</div>
 				</div>
 			</MuiThemeProvider>
 		)
