@@ -25,7 +25,7 @@ class EditPatternSnowflakeMC extends Component {
 		// const { patternId } = this.props;
 		// console.log("patternId", patternId);
 		// const { id } = this.props.match.params;
-		console.log("current pattern to edit:", this.props.currentPattern);
+		// console.log("current pattern to edit:", this.props.currentPattern);
 		// this.props.setCurrentPattern(this.props.userPatterns[id]);
 		this.setState({numInstances: this.props.currentPattern.instances.length});
 		// this.props.setCurrentLights(this.props.userPatterns[id]);
@@ -59,7 +59,7 @@ class EditPatternSnowflakeMC extends Component {
 		};
 
 		const instanceDisplayArray = this.state.displayArray;
-		console.log("instanceDisplayArray", instanceDisplayArray);
+		// console.log("instanceDisplayArray", instanceDisplayArray);
 		// const currentInstanceSize = this.props.currentInstanceSize;
 		// const currentInstanceTopMargin = this.props.currentInstanceTopMargin;
 

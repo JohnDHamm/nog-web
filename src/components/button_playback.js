@@ -8,7 +8,8 @@ class ButtonPlayback extends Component {
 				height: 70,
 				width: 70,
 				left: 'calc(50% - 35px)',
-				bottom: 30
+				bottom: 30,
+				cursor: 'pointer'
 			},
 			button: {
 				width: '100%',
