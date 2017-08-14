@@ -9,6 +9,7 @@ import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
 import MultiColorPalette from './multiColorPalette';
 import EditPatternSnowflakeMC from './editPattern_snowflake_mc';
+import PlaybackSnowflake from './playback_snowflake';
 
 import ButtonPlayback from './button_playback';
 
@@ -65,6 +66,8 @@ class PatternSnowflake extends Component {
 						</div>
 					</div>
 				}
+
+				{this.state.showPlayer && <PlaybackSnowflake />}
 			</div>
 		);
 	}

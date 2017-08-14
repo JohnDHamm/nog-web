@@ -93,16 +93,15 @@ class PlaybackSnowflake extends Component {
 		return(
 			<MuiThemeProvider>
 				<div style={styles.root}>
-					<PatternInfo
-						name={pattern.name}
-						description={pattern.description}
-						defaultSpeed={pattern.defaultSpeed} />
+
 					<InstancePlaybackSnowflake
 						instanceNumber={this.state.displayInstance}
 						instanceSize={currentInstanceSize}
 						instanceLocation={{
 							top: currentInstanceTopMargin,
-							left: `calc(50% - ${currentInstanceSize / 2}px`}} />
+							left: `calc(50% - ${currentInstanceSize / 2}px`}}
+					/>
+
 					<div style={styles.sliderContainer}>
 						<div style={{ ...styles.labelText,
 							left: `calc(${this.state.sliderLabel}% - 12px)`}}>
