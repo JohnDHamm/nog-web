@@ -12,6 +12,7 @@ import EditPatternSnowflakeMC from './editPattern_snowflake_mc';
 import PlaybackSnowflake from './playback_snowflake';
 
 import ButtonPlayback from './button_playback';
+import ButtonText from './button_text';
 
 class PatternSnowflake extends Component {
 
@@ -29,10 +30,9 @@ class PatternSnowflake extends Component {
 		this.props.setCurrentLights(this.props.userPatterns[id]);
 	}
 
-	handlePlayBtn() {
-		console.log("clicked play btn");
-		this.setState({showPlayer: true});
-	}
+	// handlePlayBtn() {
+	// 	this.setState({showPlayer: true});
+	// }
 
 	render() {
 		// console.log("this.props", this.props);
@@ -44,6 +44,11 @@ class PatternSnowflake extends Component {
 				backgroundColor: `${values.nogBackground}`,
 				height: 'calc(100vh - 56px)',
 				position: 'relative'
+			},
+			stopBtn: {
+				position: 'absolute',
+				bottom: 25,
+				left: 'calc(50% - 330px)'
 			}
 		};
 
@@ -61,13 +66,30 @@ class PatternSnowflake extends Component {
 						<EditPatternSnowflakeMC
 							currentInstanceSize={400}
 							currentInstanceTopMargin={120} />
-						<div onClick={() => this.handlePlayBtn()}>
+
+						<div onClick={() => this.setState({showPlayer: true})}>
 							<ButtonPlayback />
 						</div>
 					</div>
 				}
 
-				{this.state.showPlayer && <PlaybackSnowflake />}
+				{this.state.showPlayer &&
+					<div >
+						<PlaybackSnowflake
+							playbackInstanceSize={540}
+							playbackInstanceTopMargin={20}
+						/>
+
+						<div
+							style={styles.stopBtn}
+							onClick={() => this.setState({showPlayer: false})} >
+							<ButtonText
+								label={'Stop Playback'}
+								color={`${values.nogGrayText}`}
+								bgColor={`${values.nogBackground}`} />
+						</div>
+					</div>
+				}
 			</div>
 		);
 	}

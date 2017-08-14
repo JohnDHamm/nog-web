@@ -36,6 +36,10 @@ class PlaybackSnowflake extends Component {
   	return speed > 50 ? ( 101 - speed ) * 10.1 : (51 - speed) * 30.3 + 505;
   }
 
+  saveSpeed() {
+  	console.log("saving new speed:", this.state.sliderLabel);
+  }
+
   handleSlider(event, value) {
   	value !== this.state.sliderStart ?
   		this.setState({speedChanged: true}) : this.setState({speedChanged: false});
@@ -51,7 +55,7 @@ class PlaybackSnowflake extends Component {
 
 	render() {
 		const pattern = this.props.currentPattern;
-		const { values } = this.props;
+		const { values, playbackInstanceSize, playbackInstanceTopMargin } = this.props;
 		const styles = {
 			root: {
 				backgroundColor: `${values.nogBackground}`,
@@ -76,19 +80,12 @@ class PlaybackSnowflake extends Component {
 				position: 'absolute',
 				bottom: 0
 			},
-			stopBtn: {
-				position: 'absolute',
-				bottom: 25,
-				left: 'calc(50% - 330px)'
-			},
 			saveSpeedBtn: {
 				position: 'absolute',
 				bottom: 25,
 				left: 'calc(50% + 210px)'
 			}
 		};
-		const currentInstanceSize = 540;
-		const currentInstanceTopMargin = 20;
 
 		return(
 			<MuiThemeProvider>
@@ -96,10 +93,10 @@ class PlaybackSnowflake extends Component {
 
 					<InstancePlaybackSnowflake
 						instanceNumber={this.state.displayInstance}
-						instanceSize={currentInstanceSize}
+						instanceSize={this.props.playbackInstanceSize}
 						instanceLocation={{
-							top: currentInstanceTopMargin,
-							left: `calc(50% - ${currentInstanceSize / 2}px`}}
+							top: this.props.playbackInstanceTopMargin,
+							left: `calc(50% - ${this.props.playbackInstanceSize / 2}px`}}
 					/>
 
 					<div style={styles.sliderContainer}>
@@ -120,21 +117,14 @@ class PlaybackSnowflake extends Component {
 					</div>
 
 					{this.state.speedChanged &&
-						<div style={styles.saveSpeedBtn}>
+						<div style={styles.saveSpeedBtn}
+							onClick={() => this.saveSpeed()} >
 							<ButtonText
 								label={'Save New Default Speed'}
 								color={`${values.nogGrayText}`}
 								bgColor={`${values.nogBackground}`} />
 						</div>
 					}
-					<div style={styles.stopBtn}>
-						<Link to={`/pattern-snowflake/${this.props.currentPattern._id}`} >
-							<ButtonText
-								label={'Stop Playback'}
-								color={`${values.nogGrayText}`}
-								bgColor={`${values.nogBackground}`} />
-						</Link>
-					</div>
 				</div>
 			</MuiThemeProvider>
 		)
