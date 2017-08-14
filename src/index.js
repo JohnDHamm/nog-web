@@ -7,8 +7,8 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 
 import Navbar from './components/navbar'
-import Home from './components/home';
-import Userhome from './components/userhome';
+import Home from './containers/home';
+import Userhome from './containers/userhome';
 import PatternSnowflake from './components/pattern-snowflake';
 import PatternTree from './components/pattern-tree';
 import PlaybackSnowflake from './components/playback_snowflake';
