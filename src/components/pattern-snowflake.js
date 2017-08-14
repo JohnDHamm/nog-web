@@ -30,10 +30,6 @@ class PatternSnowflake extends Component {
 		this.props.setCurrentLights(this.props.userPatterns[id]);
 	}
 
-	// handlePlayBtn() {
-	// 	this.setState({showPlayer: true});
-	// }
-
 	render() {
 		// console.log("this.props", this.props);
 		const pattern = this.props.currentPattern;
@@ -44,6 +40,11 @@ class PatternSnowflake extends Component {
 				backgroundColor: `${values.nogBackground}`,
 				height: 'calc(100vh - 56px)',
 				position: 'relative'
+			},
+			playbackBtn: {
+				position: 'absolute',
+				left: 'calc(50% - 35px)',
+				bottom: 30
 			},
 			stopBtn: {
 				position: 'absolute',
@@ -67,8 +68,12 @@ class PatternSnowflake extends Component {
 							currentInstanceSize={400}
 							currentInstanceTopMargin={120} />
 
-						<div onClick={() => this.setState({showPlayer: true})}>
-							<ButtonPlayback />
+						<div
+							style={styles.playbackBtn}
+							onClick={() => this.setState({showPlayer: true})}>
+							<ButtonPlayback
+								btnSize={70}
+							/>
 						</div>
 					</div>
 				}
