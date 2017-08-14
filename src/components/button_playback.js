@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 
 class ButtonPlayback extends Component {
 	render() {
+		const { btnSize } = this.props;
 		const styles = {
 			root: {
-				position: 'absolute',
-				height: 70,
-				width: 70,
-				left: 'calc(50% - 35px)',
-				bottom: 30,
+				height: btnSize,
+				width: btnSize,
 				cursor: 'pointer'
 			},
 			button: {

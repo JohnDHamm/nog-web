@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { updateDefaultSpeed } from '../actions';
+
 import PatternInfo from './patternInfo';
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
 import ButtonText from './button_text';
@@ -20,7 +22,7 @@ class PlaybackSnowflake extends Component {
   }
 
   componentWillMount() {
-  	// console.log("this.props.currentPattern", this.props.currentPattern);
+  	console.log("this.props.currentPattern", this.props.currentPattern);
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
   	this.setState({ sliderStart: defaultSpeed });
   	this.setState({ sliderLabel: defaultSpeed });
@@ -37,7 +39,11 @@ class PlaybackSnowflake extends Component {
   }
 
   saveSpeed() {
-  	console.log("saving new speed:", this.state.sliderLabel);
+  	this.props.updateDefaultSpeed({ defaultSpeed: this.state.sliderLabel });
+  	this.setState({
+  		sliderStart: this.state.sliderLabel,
+  		speedChanged: false
+  	});
   }
 
   handleSlider(event, value) {
@@ -135,4 +141,4 @@ function mapStateToProps({ currentPattern, values }) {
 	return { currentPattern, values };
 }
 
-export default connect(mapStateToProps)(PlaybackSnowflake);
+export default connect(mapStateToProps, { updateDefaultSpeed })(PlaybackSnowflake);

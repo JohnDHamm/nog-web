@@ -7,7 +7,6 @@ import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
 
-// import ButtonPlayback from './button_playback';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -22,13 +21,7 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		// const { patternId } = this.props;
-		// console.log("patternId", patternId);
-		// const { id } = this.props.match.params;
-		// console.log("current pattern to edit:", this.props.currentPattern);
-		// this.props.setCurrentPattern(this.props.userPatterns[id]);
 		this.setState({numInstances: this.props.currentPattern.instances.length});
-		// this.props.setCurrentLights(this.props.userPatterns[id]);
 	}
 
 
@@ -52,17 +45,11 @@ class EditPatternSnowflakeMC extends Component {
 		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const styles = {
 			root: {
-				// backgroundColor: `${values.nogBackground}`,
-				// height: 'calc(100vh - 56px)',
 				position: 'relative'
 			}
 		};
 
 		const instanceDisplayArray = this.state.displayArray;
-		// console.log("instanceDisplayArray", instanceDisplayArray);
-		// const currentInstanceSize = this.props.currentInstanceSize;
-		// const currentInstanceTopMargin = this.props.currentInstanceTopMargin;
-
 
 		return(
 			<div style={styles.root}>
@@ -138,8 +125,8 @@ class EditPatternSnowflakeMC extends Component {
 	}
 }
 
-function mapStateToProps({ userPatterns, currentPattern, values }) {
-	return { userPatterns, currentPattern, values };
+function mapStateToProps({ currentPattern, values }) {
+	return { currentPattern, values };
 }
 
 export default connect(mapStateToProps)(EditPatternSnowflakeMC);
