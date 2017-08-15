@@ -9,7 +9,8 @@ export const UPDATE_DEFAULT_SPEED = 'update_default_speed';
 
 import axios from 'axios';
 
-export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
+// export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
+export const ROOT_URL = 'http://localhost:3000/api';
 
 export function getUserPatterns(id) {
 	const request = axios.get(`${ROOT_URL}/userpatterns/${id}`);
@@ -93,9 +94,11 @@ export function updateLight(obj) {
 	}
 }
 
-export function updateDefaultSpeed(obj) {
+export function updateDefaultSpeed(obj, callback) {
+	const request = axios.patch(`${ROOT_URL}/userpattern`, obj)
+		.then(() => callback());
 	return {
 		type: UPDATE_DEFAULT_SPEED,
-		payload: obj
+		payload: obj.defaultSpeed
 	}
 }

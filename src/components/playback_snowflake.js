@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { updateDefaultSpeed } from '../actions';
+import { updateDefaultSpeed,  } from '../actions';
 
 import PatternInfo from './patternInfo';
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
@@ -10,6 +10,12 @@ import ButtonText from './button_text';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Slider from 'material-ui/Slider';
+
+import axios from 'axios';
+
+// export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
+export const ROOT_URL = 'http://localhost:3000/api';
+
 
 class PlaybackSnowflake extends Component {
 
@@ -22,7 +28,7 @@ class PlaybackSnowflake extends Component {
   }
 
   componentWillMount() {
-  	console.log("this.props.currentPattern", this.props.currentPattern);
+  	// console.log("this.props.currentPattern", this.props.currentPattern);
   	const defaultSpeed = this.props.currentPattern.defaultSpeed;
   	this.setState({ sliderStart: defaultSpeed });
   	this.setState({ sliderLabel: defaultSpeed });
@@ -39,10 +45,15 @@ class PlaybackSnowflake extends Component {
   }
 
   saveSpeed() {
-  	this.props.updateDefaultSpeed({ defaultSpeed: this.state.sliderLabel });
-  	this.setState({
-  		sliderStart: this.state.sliderLabel,
-  		speedChanged: false
+  	const updatedSpeedObj = {
+  		_id: this.props.currentPattern._id,
+  		defaultSpeed: this.state.sliderLabel
+  	}
+  	this.props.updateDefaultSpeed(updatedSpeedObj, () => {
+	  	this.setState({
+	  		sliderStart: this.state.sliderLabel,
+	  		speedChanged: false
+	  	});
   	});
   }
 
