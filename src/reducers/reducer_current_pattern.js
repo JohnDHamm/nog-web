@@ -5,7 +5,7 @@ export default function (state={}, action) {
 		case SET_CURRENT_PATTERN:
 			return action.payload;
 		case UPDATE_DEFAULT_SPEED:
-			return { ...state, defaultSpeed: action.payload.defaultSpeed };
+			return { ...state, defaultSpeed: action.payload };
 		default:
 			return state;
 	}

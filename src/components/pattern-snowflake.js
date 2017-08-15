@@ -41,6 +41,11 @@ class PatternSnowflake extends Component {
 				height: 'calc(100vh - 56px)',
 				position: 'relative'
 			},
+			info: {
+				position: 'absolute',
+				top: 20,
+				left: 20
+			},
 			playbackBtn: {
 				position: 'absolute',
 				left: 'calc(50% - 35px)',
@@ -57,10 +62,12 @@ class PatternSnowflake extends Component {
 			<div style={styles.root}>
 				{!this.state.showPlayer &&
 					<div>
-						<PatternInfo
-							name={pattern.name}
-							description={pattern.description}
-							defaultSpeed={pattern.defaultSpeed} />
+						<div style={styles.info}>
+							<PatternInfo
+								name={pattern.name}
+								description={pattern.description}
+								defaultSpeed={pattern.defaultSpeed} />
+						</div>
 
 						{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
 

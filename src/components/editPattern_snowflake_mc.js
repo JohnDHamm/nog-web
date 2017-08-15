@@ -22,6 +22,7 @@ class EditPatternSnowflakeMC extends Component {
 
 	componentWillMount() {
 		this.setState({numInstances: this.props.currentPattern.instances.length});
+		// console.log("editing...");
 	}
 
 
