@@ -6,6 +6,7 @@ export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
 export const SET_SELECTED_COLOR = 'set_selected_color';
 export const SET_LIGHTS = 'set_lights';
 export const UPDATE_DEFAULT_SPEED = 'update_default_speed';
+export const UPDATE_INSTANCES = 'update_instances';
 
 import axios from 'axios';
 
@@ -100,5 +101,14 @@ export function updateDefaultSpeed(obj, callback) {
 	return {
 		type: UPDATE_DEFAULT_SPEED,
 		payload: obj.defaultSpeed
+	}
+}
+
+export function saveLights(obj, callback) {
+	const request = axios.patch(`${ROOT_URL}/userpattern`, obj)
+		.then((res) => callback(res));
+	return {
+		type: UPDATE_INSTANCES,
+		payload: obj
 	}
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentPattern, setCurrentLights } from '../actions';
+import { setCurrentPattern, setCurrentLights, saveLights } from '../actions';
 
 import PatternInfo from './patternInfo';
 import SingleColorPalette from './singleColorPalette';
@@ -30,11 +30,38 @@ class PatternSnowflake extends Component {
 		this.props.setCurrentLights(this.props.userPatterns[id]);
 	}
 
+	savePattern() {
+		// console.log("saving:", this.props.currentPattern);
+		// console.log("this.props.currentLights", this.props.currentLights);
+		const numInstances = this.props.currentPattern.instances.length;
+		const newArrayToSave = [];
+		for( let instNum = 0; instNum < numInstances; instNum++ ) {
+			const newObj = {};
+			newObj.instanceNum = instNum;
+			newObj.lightsColor = [];
+			for ( let lightNum = 0; lightNum < 30; lightNum++) {
+				// console.log("this.props", this.props);
+				newObj.lightsColor.push(this.props.currentLights[lightNum][instNum].colorNum);
+			}
+			newArrayToSave.push(newObj);
+		}
+		// console.log("newArrayToSave", newArrayToSave);
+		const updateObj = {
+			_id: this.props.currentPattern._id,
+			instances: newArrayToSave
+		}
+		this.props.saveLights(updateObj, (res) => {
+			// console.log("res", res);
+		})
+	}
+
 	render() {
 		// console.log("this.props", this.props);
 		const pattern = this.props.currentPattern;
 		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
+		const currentInstanceTopMargin = 120;
+		const currentInstanceSize = 400;
 		const styles = {
 			root: {
 				backgroundColor: `${values.nogBackground}`,
@@ -55,6 +82,13 @@ class PatternSnowflake extends Component {
 				position: 'absolute',
 				bottom: 25,
 				left: 'calc(50% - 330px)'
+			},
+			saveBtn: {
+				position: 'absolute',
+				// top: '75%',
+				// left: '65%',
+				top: currentInstanceTopMargin + currentInstanceSize,
+				left: `calc(50% + 40px)`
 			}
 		};
 
@@ -72,8 +106,8 @@ class PatternSnowflake extends Component {
 						{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
 
 						<EditPatternSnowflakeMC
-							currentInstanceSize={400}
-							currentInstanceTopMargin={120} />
+							currentInstanceSize={currentInstanceSize}
+							currentInstanceTopMargin={currentInstanceTopMargin} />
 
 						<div
 							style={styles.playbackBtn}
@@ -81,6 +115,14 @@ class PatternSnowflake extends Component {
 							<ButtonPlayback
 								btnSize={70}
 							/>
+						</div>
+						<div
+							style={styles.saveBtn}
+							onClick={this.savePattern.bind(this)}>
+							<ButtonText
+								label={'Save Changes'}
+								color={`${values.nogRed}`}
+								bgColor={`${values.nogBackground}`} />
 						</div>
 					</div>
 				}
@@ -108,8 +150,8 @@ class PatternSnowflake extends Component {
 }
 
 
-function mapStateToProps({ userPatterns, currentPattern, values }) {
-	return { userPatterns, currentPattern, values };
+function mapStateToProps({ userPatterns, currentPattern, currentLights, values }) {
+	return { userPatterns, currentPattern, currentLights, values };
 }
 
-export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights })(PatternSnowflake);
+export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, saveLights })(PatternSnowflake);

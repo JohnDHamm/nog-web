@@ -7,7 +7,6 @@ import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
 
-
 class EditPatternSnowflakeMC extends Component {
 
 	constructor(props) {
@@ -41,6 +40,8 @@ class EditPatternSnowflakeMC extends Component {
 		newArray.pop();
 		this.setState({displayArray: newArray})
 	}
+
+
 
 	render() {
 		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
