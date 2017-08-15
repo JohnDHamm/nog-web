@@ -6,13 +6,6 @@ class PatternInfo extends Component {
 	render() {
 		const { name, description, defaultSpeed, values } = this.props;
 		const styles = {
-			root: {
-				paddingTop: 20,
-				paddingLeft: 20,
-				position: 'absolute',
-				top: 0,
-				left: 0
-			},
 			label: {
 				color: `${values.nogGrayText}`
 			},
@@ -22,7 +15,7 @@ class PatternInfo extends Component {
 		};
 
 		return (
-			<div style={styles.root}>
+			<div>
 				<div>
 					<span style={styles.label}>pattern: </span><span style={styles.text}>{name}</span>
 				</div>
