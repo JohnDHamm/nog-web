@@ -2,6 +2,7 @@ export const GET_USER_PATTERNS = 'get_user_patterns';
 export const GET_NOG_TYPES = 'get_nog_types';
 export const SET_CURRENT_PATTERN = 'set_current_pattern';
 export const UPDATE_LIGHT = 'update_light';
+// export const UPDATE_CURRENT_LIGHTS = 'update_current_lights';
 export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
 export const SET_SELECTED_COLOR = 'set_selected_color';
 export const SET_LIGHTS = 'set_lights';
@@ -118,6 +119,13 @@ export function saveLights(obj, callback) {
 		.then((res) => callback(res));
 	return {
 		type: UPDATE_INSTANCES,
+		payload: obj
+	}
+}
+
+export function updateCurrentLights (obj) {
+	return {
+		type: SET_LIGHTS,
 		payload: obj
 	}
 }
