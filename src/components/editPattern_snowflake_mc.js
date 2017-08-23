@@ -19,12 +19,13 @@ class EditPatternSnowflakeMC extends Component {
     };
     this.navNext = this.navNext.bind(this);
     this.navPrev = this.navPrev.bind(this);
+    this.addInstance = this.addInstance.bind(this);
   }
 
 	componentWillMount() {
 		this.setState({numInstances: this.props.currentPattern.numInstances});
 		// console.log("editing...");
-		console.log("this.props.currentLights", this.props.currentLights);
+		// console.log("this.props.currentLights", this.props.currentLights);
 	}
 
 
@@ -45,7 +46,7 @@ class EditPatternSnowflakeMC extends Component {
 	}
 
 	addInstance() {
-		console.log("adding after ", this.state.displayArray[3]);
+		// console.log("adding after ", this.state.displayArray[3]);
 		const currentInstNum = this.state.displayArray[3];
 		const changedLights = Object.assign({}, this.props.currentLights);
 		const newNumInstances = this.props.currentPattern.numInstances + 1;
@@ -60,7 +61,7 @@ class EditPatternSnowflakeMC extends Component {
 					colorNum: changedLights[lightNum][i - 1].colorNum
 				}
 			}
-		console.log("changedLights", changedLights);
+		// console.log("changedLights", changedLights);
 		}
 		//set new instance to "blank" color
 		for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
@@ -69,7 +70,7 @@ class EditPatternSnowflakeMC extends Component {
 
 		//action to update store currentLights
 		updateCurrentLights(changedLights);
-
+		this.navNext();
 	}
 
 
@@ -160,7 +161,7 @@ class EditPatternSnowflakeMC extends Component {
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
 				<div
 					style={styles.addBtn}
-					onClick={this.addInstance.bind(this)} >
+					onClick={this.addInstance} >
 					<ButtonText
 						label={'Add Instance'}
 						color={values.nogGrayText} />
