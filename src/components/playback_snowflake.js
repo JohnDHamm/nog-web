@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { updateDefaultSpeed,  } from '../actions';
 
-import PatternInfo from './patternInfo';
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
 import ButtonText from './button_text';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Slider from 'material-ui/Slider';
-
-import axios from 'axios';
-
-// export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
-export const ROOT_URL = 'http://localhost:3000/api';
 
 
 class PlaybackSnowflake extends Component {
