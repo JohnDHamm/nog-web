@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateDefaultSpeed,  } from '../actions';
+import { updateDefaultSpeed } from '../actions';
 
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
 import ButtonText from './button_text';
@@ -60,7 +60,7 @@ class PlaybackSnowflake extends Component {
   }
 
   timer() {
-  	this.state.displayInstance < this.props.currentPattern.instances.length - 1 ? this.setState({displayInstance: this.state.displayInstance + 1}) : this.setState({displayInstance: 0})
+  	this.state.displayInstance < this.props.currentPattern.numInstances - 1 ? this.setState({displayInstance: this.state.displayInstance + 1}) : this.setState({displayInstance: 0})
   }
 
 	render() {

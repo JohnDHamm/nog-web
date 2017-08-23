@@ -30,9 +30,18 @@ export function getNogTypes() {
 }
 
 export function setCurrentPattern(pattern) {
+	const newPattern = {};
+	newPattern._id = pattern._id;
+	newPattern.name = pattern.name;
+	newPattern.description = pattern.description;
+	newPattern.defaultSpeed = pattern.defaultSpeed;
+	newPattern.defaultColor = pattern.defaultColor;
+	newPattern.customColors = pattern.customColors;
+	newPattern.singleColor = pattern.singleColor;
+	newPattern.numInstances = pattern.instances.length;
 	return {
 		type: SET_CURRENT_PATTERN,
-		payload: pattern
+		payload: newPattern
 	}
 }
 

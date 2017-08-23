@@ -33,7 +33,7 @@ class PatternSnowflake extends Component {
 	savePattern() {
 		// console.log("saving:", this.props.currentPattern);
 		// console.log("this.props.currentLights", this.props.currentLights);
-		const numInstances = this.props.currentPattern.instances.length;
+		const numInstances = this.props.currentPattern.numInstances;
 		const newArrayToSave = [];
 		for( let instNum = 0; instNum < numInstances; instNum++ ) {
 			const newObj = {};

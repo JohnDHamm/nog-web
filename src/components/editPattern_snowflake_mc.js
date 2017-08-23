@@ -12,7 +12,7 @@ class EditPatternSnowflakeMC extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	numInstances: 4,
+    	// numInstances: ,
     	displayArray: [ null, null, null, 0, 1, 2, 3 ]
     };
     this.navNext = this.navNext.bind(this);
@@ -20,7 +20,7 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		this.setState({numInstances: this.props.currentPattern.instances.length});
+		this.setState({numInstances: this.props.currentPattern.numInstances});
 		// console.log("editing...");
 	}
 
