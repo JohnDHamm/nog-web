@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { updateCurrentLights } from '../actions';
+import { updateCurrentLights, updateNumInstances } from '../actions';
 
 import InstanceSnowflake from './instance_snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
@@ -23,14 +23,13 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		this.setState({numInstances: this.props.currentPattern.numInstances});
+		// this.setState({numInstances: this.props.currentPattern.numInstances});
 		// console.log("editing...");
-		// console.log("this.props.currentLights", this.props.currentLights);
 	}
 
 
 	navNext() {
-		const nextInstance = !this.state.displayArray[6] ? null : this.state.displayArray[6] === this.state.numInstances - 1 ? null : this.state.displayArray[6] + 1;
+		const nextInstance = !this.state.displayArray[6] ? null : this.state.displayArray[6] === this.props.currentPattern.numInstances - 1 ? null : this.state.displayArray[6] + 1;
 		const newArray = this.state.displayArray;
 		newArray.push(nextInstance);
 		newArray.shift();
@@ -46,12 +45,12 @@ class EditPatternSnowflakeMC extends Component {
 	}
 
 	addInstance() {
-		// console.log("adding after ", this.state.displayArray[3]);
 		const currentInstNum = this.state.displayArray[3];
 		const changedLights = Object.assign({}, this.props.currentLights);
 		const newNumInstances = this.props.currentPattern.numInstances + 1;
 		//action to update store currentPattern.numInstances
-			//this.props.updateNumInstances(newNumInstances)
+		this.props.updateNumInstances(newNumInstances);
+		console.log("this.props.currentPattern.numInstances", this.props.currentPattern.numInstances);
 		//function to create blank instance + shift after instances
 			//from end of instances going backward
 		for (let i = newNumInstances - 1; i > currentInstNum + 1; i-- ) {
@@ -61,13 +60,11 @@ class EditPatternSnowflakeMC extends Component {
 					colorNum: changedLights[lightNum][i - 1].colorNum
 				}
 			}
-		// console.log("changedLights", changedLights);
 		}
 		//set new instance to "blank" color
 		for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
 			changedLights[lightNum][currentInstNum + 1].colorNum = 7;
 		}
-
 		//action to update store currentLights
 		updateCurrentLights(changedLights);
 		this.navNext();
@@ -175,5 +172,5 @@ function mapStateToProps({ currentPattern, currentLights, values }) {
 	return { currentPattern, currentLights, values };
 }
 
-export default connect(mapStateToProps, { updateCurrentLights })(EditPatternSnowflakeMC);
+export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances })(EditPatternSnowflakeMC);
 
