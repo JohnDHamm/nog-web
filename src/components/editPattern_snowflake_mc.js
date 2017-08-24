@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,24 +26,28 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		// console.log("editing...");
+		// this.setState({ numInstances: this.props.currentPattern.numInstances});
+		// console.log("", );
+		console.log("editing...");
 	}
 
 	updateDisplayArray(newCurrentNum, numInstances) {
+		// console.log("numInstances", numInstances);
 		const newArray = [newCurrentNum];
 		for ( let i = 1; i < 4; i ++ ) {
 			newCurrentNum + i < numInstances ? newArray.push(newCurrentNum + i) : newArray.push(null);
 			newCurrentNum - i > -1 ? newArray.unshift(newCurrentNum - i) : newArray.unshift(null);
 		}
+		console.log("newArray", newArray);
 		this.setState({ displayArray: newArray });
 	}
 
 	navNext() {
-		this.updateDisplayArray(this.state.displayArray[4], this.props.currentPattern.numInstances)
+		this.updateDisplayArray(this.state.displayArray[4], this.props.currentPattern.numInstances);
 	}
 
 	navPrev() {
-		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances)
+		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances);
 	}
 
 
@@ -69,19 +75,26 @@ class EditPatternSnowflakeMC extends Component {
 
 	deleteInstance() {
 		const currInstNum = this.state.displayArray[3];
-		const prevNumInstances = this.props.currentPattern.numInstances;
+		// const prevNumInstances = this.props.currentPattern.numInstances;
+		const newNumInstances = this.props.currentPattern.numInstances - 1;
+		this.props.updateNumInstances(newNumInstances);
 		// console.log("prevNumInstances", prevNumInstances);
 		const changedLights = Object.assign({}, this.props.currentLights);
-		for ( let i = currInstNum; i < prevNumInstances - 1; i++ ) {
+		for ( let i = currInstNum; i < newNumInstances; i++ ) {
 			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
 				changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
 				}
 		}
 		console.log("changedLights", changedLights);
-		// for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+			changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
+		}
+		console.log("changedLights", changedLights);
+		//update currentLights store
+		this.props.updateCurrentLights(changedLights);
 
-
-		//update numInstances n store
+		//update displayArray
+		this.updateDisplayArray(currInstNum + 1, newNumInstances);
 
 	}
 
