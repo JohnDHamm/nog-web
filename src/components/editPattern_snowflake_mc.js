@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -20,27 +22,32 @@ class EditPatternSnowflakeMC extends Component {
     this.navNext = this.navNext.bind(this);
     this.navPrev = this.navPrev.bind(this);
     this.addInstance = this.addInstance.bind(this);
+    this.deleteInstance = this.deleteInstance.bind(this);
   }
 
 	componentWillMount() {
-		// console.log("editing...");
+		// this.setState({ numInstances: this.props.currentPattern.numInstances});
+		// console.log("", );
+		console.log("editing...");
 	}
 
 	updateDisplayArray(newCurrentNum, numInstances) {
+		// console.log("numInstances", numInstances);
 		const newArray = [newCurrentNum];
 		for ( let i = 1; i < 4; i ++ ) {
 			newCurrentNum + i < numInstances ? newArray.push(newCurrentNum + i) : newArray.push(null);
 			newCurrentNum - i > -1 ? newArray.unshift(newCurrentNum - i) : newArray.unshift(null);
 		}
+		console.log("newArray", newArray);
 		this.setState({ displayArray: newArray });
 	}
 
 	navNext() {
-		this.updateDisplayArray(this.state.displayArray[4], this.props.currentPattern.numInstances)
+		this.updateDisplayArray(this.state.displayArray[4], this.props.currentPattern.numInstances);
 	}
 
 	navPrev() {
-		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances)
+		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances);
 	}
 
 
@@ -66,18 +73,52 @@ class EditPatternSnowflakeMC extends Component {
 		this.updateDisplayArray(this.state.displayArray[4], newNumInstances);
 	}
 
+	deleteInstance() {
+		const currInstNum = this.state.displayArray[3];
+		// const prevNumInstances = this.props.currentPattern.numInstances;
+		const newNumInstances = this.props.currentPattern.numInstances - 1;
+		this.props.updateNumInstances(newNumInstances);
+		// console.log("prevNumInstances", prevNumInstances);
+		const changedLights = Object.assign({}, this.props.currentLights);
+		for ( let i = currInstNum; i < newNumInstances; i++ ) {
+			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+				changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
+				}
+		}
+		console.log("changedLights", changedLights);
+		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+			changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
+		}
+		console.log("changedLights", changedLights);
+		//update currentLights store
+		this.props.updateCurrentLights(changedLights);
+
+		//update displayArray
+		this.updateDisplayArray(currInstNum + 1, newNumInstances);
+
+	}
+
 
 
 	render() {
 		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
+		const optionBtnWidth = 150,
+			optionBtnLeft = 'calc(50% + 100px)';
 		const styles = {
 			root: {
 				position: 'relative'
 			},
 			addBtn: {
 				position: 'absolute',
+				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize -40,
-				left: 'calc(50% + 80px)'
+				left: optionBtnLeft
+			},
+			deleteBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize -10,
+				left: optionBtnLeft
 			}
 		};
 
@@ -156,7 +197,16 @@ class EditPatternSnowflakeMC extends Component {
 					onClick={this.addInstance} >
 					<ButtonText
 						label={'Add Instance'}
-						color={values.nogGrayText} />
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				<div
+					style={styles.deleteBtn}
+					onClick={this.deleteInstance} >
+					<ButtonText
+						label={'Delete Instance'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
 				</div>
 			</div>
 		);

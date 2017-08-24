@@ -8,7 +8,7 @@ class ButtonText extends Component {
 				cursor: 'pointer',
 				border: `1px solid ${this.props.color}`,
 				borderRadius: 3,
-				backGroundColor: `${this.props.bgColor}`
+				backgroundColor: `${this.props.bgColor}`
 			},
 			label: {
 				color: `${this.props.color}`,
