@@ -53,44 +53,57 @@ class EditPatternSnowflakeMC extends Component {
 		const changedLights = Object.assign({}, this.props.currentLights);
 		const newNumInstances = this.props.currentPattern.numInstances + 1;
 		this.props.updateNumInstances(newNumInstances);
-		//shift after instances from end of instances going backward
-		for (let i = newNumInstances - 1; i > currentInstNum + 1; i-- ) {
-			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
-				changedLights[lightNum][i] = {
-					instanceNum: i,
-					colorNum: changedLights[lightNum][i - 1].colorNum
+		if (currentInstNum === newNumInstances - 2) {
+			for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
+				changedLights[lightNum][currentInstNum + 1] = {
+					instanceNum: currentInstNum + 1,
+					colorNum: 7
+				};
+			}
+			this.props.updateCurrentLights(changedLights);
+			this.updateDisplayArray(currentInstNum + 1, newNumInstances);
+		} else {
+			//shift after instances from end of instances going backward
+			for (let i = newNumInstances - 1; i > currentInstNum + 1; i-- ) {
+				for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+					changedLights[lightNum][i] = {
+						instanceNum: i,
+						colorNum: changedLights[lightNum][i - 1].colorNum
+					}
 				}
 			}
+			//set new instance to "blank" color
+			for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
+				changedLights[lightNum][currentInstNum + 1].colorNum = 7;
+			}
+			this.props.updateCurrentLights(changedLights);
+			this.updateDisplayArray(this.state.displayArray[4], newNumInstances);
 		}
-		//set new instance to "blank" color
-		for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
-			changedLights[lightNum][currentInstNum + 1].colorNum = 7;
-		}
-		this.props.updateCurrentLights(changedLights);
-		this.updateDisplayArray(this.state.displayArray[4], newNumInstances);
 	}
 
 	deleteInstance() {
-		const currInstNum = this.state.displayArray[3];
-		// const prevNumInstances = this.props.currentPattern.numInstances;
+		const currentInstNum = this.state.displayArray[3];
 		const newNumInstances = this.props.currentPattern.numInstances - 1;
 		this.props.updateNumInstances(newNumInstances);
-		// console.log("prevNumInstances", prevNumInstances);
 		const changedLights = Object.assign({}, this.props.currentLights);
-		for ( let i = currInstNum; i < newNumInstances; i++ ) {
+		if (currentInstNum === newNumInstances ) {
+			console.log("deleting last instance");
+		} else {
+			for ( let i = currentInstNum; i < newNumInstances; i++ ) {
+				for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+					changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
+					}
+			}
 			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
-				changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
-				}
-		}
-		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
-			changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
+				changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
+			}
 		}
 		// console.log("changedLights", changedLights);
 		//update currentLights store
 		this.props.updateCurrentLights(changedLights);
 
 		//update displayArray
-		this.updateDisplayArray(currInstNum, newNumInstances);
+		this.updateDisplayArray(currentInstNum, newNumInstances);
 
 	}
 
