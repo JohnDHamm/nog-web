@@ -20,6 +20,7 @@ class EditPatternSnowflakeMC extends Component {
     this.navNext = this.navNext.bind(this);
     this.navPrev = this.navPrev.bind(this);
     this.addInstance = this.addInstance.bind(this);
+    this.deleteInstance = this.deleteInstance.bind(this);
   }
 
 	componentWillMount() {
@@ -66,18 +67,45 @@ class EditPatternSnowflakeMC extends Component {
 		this.updateDisplayArray(this.state.displayArray[4], newNumInstances);
 	}
 
+	deleteInstance() {
+		const currInstNum = this.state.displayArray[3];
+		const prevNumInstances = this.props.currentPattern.numInstances;
+		// console.log("prevNumInstances", prevNumInstances);
+		const changedLights = Object.assign({}, this.props.currentLights);
+		for ( let i = currInstNum; i < prevNumInstances - 1; i++ ) {
+			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+				changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
+				}
+		}
+		console.log("changedLights", changedLights);
+		// for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+
+
+		//update numInstances n store
+
+	}
+
 
 
 	render() {
 		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
+		const optionBtnWidth = 150,
+			optionBtnLeft = 'calc(50% + 100px)';
 		const styles = {
 			root: {
 				position: 'relative'
 			},
 			addBtn: {
 				position: 'absolute',
+				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize -40,
-				left: 'calc(50% + 80px)'
+				left: optionBtnLeft
+			},
+			deleteBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize -10,
+				left: optionBtnLeft
 			}
 		};
 
@@ -156,7 +184,16 @@ class EditPatternSnowflakeMC extends Component {
 					onClick={this.addInstance} >
 					<ButtonText
 						label={'Add Instance'}
-						color={values.nogGrayText} />
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				<div
+					style={styles.deleteBtn}
+					onClick={this.deleteInstance} >
+					<ButtonText
+						label={'Delete Instance'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
 				</div>
 			</div>
 		);
