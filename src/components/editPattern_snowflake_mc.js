@@ -87,7 +87,11 @@ class EditPatternSnowflakeMC extends Component {
 		this.props.updateNumInstances(newNumInstances);
 		const changedLights = Object.assign({}, this.props.currentLights);
 		if (currentInstNum === newNumInstances ) {
-			console.log("deleting last instance");
+			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+				changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
+			}
+			this.props.updateCurrentLights(changedLights);
+			this.updateDisplayArray(currentInstNum - 1, newNumInstances);
 		} else {
 			for ( let i = currentInstNum; i < newNumInstances; i++ ) {
 				for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
@@ -97,14 +101,9 @@ class EditPatternSnowflakeMC extends Component {
 			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
 				changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
 			}
+			this.props.updateCurrentLights(changedLights);
+			this.updateDisplayArray(currentInstNum, newNumInstances);
 		}
-		// console.log("changedLights", changedLights);
-		//update currentLights store
-		this.props.updateCurrentLights(changedLights);
-
-		//update displayArray
-		this.updateDisplayArray(currentInstNum, newNumInstances);
-
 	}
 
 
