@@ -7,7 +7,6 @@ export default function (state={}, action) {
 		case UPDATE_DEFAULT_SPEED:
 			return { ...state, defaultSpeed: action.payload };
 		case UPDATE_NUM_INSTANCES:
-			console.log("action.payload", action.payload);
 			return { ...state, numInstances: action.payload };
 		default:
 			return state;

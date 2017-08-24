@@ -131,7 +131,6 @@ export function updateCurrentLights(obj) {
 }
 
 export function updateNumInstances(num) {
-	console.log("num", num);
 	return {
 		type: UPDATE_NUM_INSTANCES,
 		payload: num

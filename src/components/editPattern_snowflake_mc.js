@@ -23,36 +23,33 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		// this.setState({numInstances: this.props.currentPattern.numInstances});
 		// console.log("editing...");
 	}
 
+	updateDisplayArray(newCurrentNum, numInstances) {
+		const newArray = [newCurrentNum];
+		for ( let i = 1; i < 4; i ++ ) {
+			newCurrentNum + i < numInstances ? newArray.push(newCurrentNum + i) : newArray.push(null);
+			newCurrentNum - i > -1 ? newArray.unshift(newCurrentNum - i) : newArray.unshift(null);
+		}
+		this.setState({ displayArray: newArray });
+	}
 
 	navNext() {
-		const nextInstance = !this.state.displayArray[6] ? null : this.state.displayArray[6] === this.props.currentPattern.numInstances - 1 ? null : this.state.displayArray[6] + 1;
-		const newArray = this.state.displayArray;
-		newArray.push(nextInstance);
-		newArray.shift();
-		this.setState({displayArray: newArray})
+		this.updateDisplayArray(this.state.displayArray[4], this.props.currentPattern.numInstances)
 	}
 
 	navPrev() {
-		const prevInstance = this.state.displayArray[0] ? this.state.displayArray[0] - 1 : null;
-		const newArray = this.state.displayArray;
-		newArray.unshift(prevInstance);
-		newArray.pop();
-		this.setState({displayArray: newArray})
+		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances)
 	}
+
 
 	addInstance() {
 		const currentInstNum = this.state.displayArray[3];
 		const changedLights = Object.assign({}, this.props.currentLights);
 		const newNumInstances = this.props.currentPattern.numInstances + 1;
-		//action to update store currentPattern.numInstances
 		this.props.updateNumInstances(newNumInstances);
-		console.log("this.props.currentPattern.numInstances", this.props.currentPattern.numInstances);
-		//function to create blank instance + shift after instances
-			//from end of instances going backward
+		//shift after instances from end of instances going backward
 		for (let i = newNumInstances - 1; i > currentInstNum + 1; i-- ) {
 			for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
 				changedLights[lightNum][i] = {
@@ -65,9 +62,8 @@ class EditPatternSnowflakeMC extends Component {
 		for ( let lightNum = 0; lightNum < 30; lightNum ++ ) {
 			changedLights[lightNum][currentInstNum + 1].colorNum = 7;
 		}
-		//action to update store currentLights
-		updateCurrentLights(changedLights);
-		this.navNext();
+		this.props.updateCurrentLights(changedLights);
+		this.updateDisplayArray(this.state.displayArray[4], newNumInstances);
 	}
 
 
@@ -85,31 +81,30 @@ class EditPatternSnowflakeMC extends Component {
 			}
 		};
 
-		const instanceDisplayArray = this.state.displayArray;
 
 		return(
 			<div style={styles.root}>
 
-				{instanceDisplayArray[0] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[0]}
+				{this.state.displayArray[0] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[0]}
 					instanceSize={currentInstanceSize / 8}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% - ${currentInstanceSize * 1.375}px - 40px`}} />}
-				{instanceDisplayArray[1] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[1]}
+				{this.state.displayArray[1] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[1]}
 					instanceSize={currentInstanceSize / 4}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 3 / 8),
 						left: `calc(50% - ${currentInstanceSize * 1.25}px - 40px`}} />}
-				{instanceDisplayArray[2] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[2]}
+				{this.state.displayArray[2] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[2]}
 					instanceSize={currentInstanceSize / 2}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize / 4),
 						left: `calc(50% - ${currentInstanceSize}px - 40px`}} />}
 
-				{instanceDisplayArray[2] !== null &&
+				{this.state.displayArray[2] !== null &&
 					<div onClick={this.navPrev}>
 						<NavigatePrevBtn
 							btnHeight={currentInstanceSize / 6}
@@ -120,14 +115,14 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{instanceDisplayArray[3] !== null && <InstanceCurrentSnowflake
-					instanceNumber={instanceDisplayArray[3]}
+				{this.state.displayArray[3] !== null && <InstanceCurrentSnowflake
+					instanceNumber={this.state.displayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{
 						top: currentInstanceTopMargin,
 						left: `calc(50% - ${currentInstanceSize / 2}px`}} />}
 
-				{instanceDisplayArray[4] !== null &&
+				{this.state.displayArray[4] !== null &&
 					<div onClick={this.navNext}>
 						<NavigateNextBtn
 							btnHeight={currentInstanceSize / 6}
@@ -138,20 +133,20 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{instanceDisplayArray[4] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[4]}
+				{this.state.displayArray[4] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[4]}
 					instanceSize={currentInstanceSize / 2}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize / 4),
 						left: `calc(50% + ${currentInstanceSize / 2}px + 40px`}} />}
-				{instanceDisplayArray[5] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[5]}
+				{this.state.displayArray[5] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[5]}
 					instanceSize={currentInstanceSize / 4}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 3 / 8),
 						left: `calc(50% + ${currentInstanceSize}px + 40px`}} />}
-				{instanceDisplayArray[6] !== null && <InstanceSnowflake
-					instanceNumber={instanceDisplayArray[6]}
+				{this.state.displayArray[6] !== null && <InstanceSnowflake
+					instanceNumber={this.state.displayArray[6]}
 					instanceSize={currentInstanceSize / 8}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
