@@ -26,9 +26,7 @@ class EditPatternSnowflakeMC extends Component {
   }
 
 	componentWillMount() {
-		// this.setState({ numInstances: this.props.currentPattern.numInstances});
-		// console.log("", );
-		console.log("editing...");
+		// console.log("editing...");
 	}
 
 	updateDisplayArray(newCurrentNum, numInstances) {
@@ -38,7 +36,6 @@ class EditPatternSnowflakeMC extends Component {
 			newCurrentNum + i < numInstances ? newArray.push(newCurrentNum + i) : newArray.push(null);
 			newCurrentNum - i > -1 ? newArray.unshift(newCurrentNum - i) : newArray.unshift(null);
 		}
-		console.log("newArray", newArray);
 		this.setState({ displayArray: newArray });
 	}
 
@@ -85,16 +82,15 @@ class EditPatternSnowflakeMC extends Component {
 				changedLights[lightNum][i].colorNum = changedLights[lightNum][i + 1].colorNum;
 				}
 		}
-		console.log("changedLights", changedLights);
 		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
 			changedLights[lightNum] = _.omit(changedLights[lightNum], newNumInstances);
 		}
-		console.log("changedLights", changedLights);
+		// console.log("changedLights", changedLights);
 		//update currentLights store
 		this.props.updateCurrentLights(changedLights);
 
 		//update displayArray
-		this.updateDisplayArray(currInstNum + 1, newNumInstances);
+		this.updateDisplayArray(currInstNum, newNumInstances);
 
 	}
 
