@@ -146,12 +146,12 @@ class EditPatternSnowflakeMC extends Component {
 		return(
 			<div style={styles.root}>
 
-				{this.state.displayArray[2] !== null &&
+				{this.state.displayArray[0] !== null &&
 					<div onClick={this.navStart}>
 						<NavigateStartBtn
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
-								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,
 								left: `calc(50% - ${currentInstanceSize * 1.34375}px - 40px`
 							}} />
 					</div>
@@ -224,12 +224,12 @@ class EditPatternSnowflakeMC extends Component {
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
 
-				{this.state.displayArray[4] !== null &&
+				{this.state.displayArray[6] !== null &&
 					<div onClick={this.navEnd}>
 						<NavigateEndBtn
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
-								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,
 								left: `calc(50% + ${currentInstanceSize * 1.28125}px + 40px`
 							}} />
 					</div>
