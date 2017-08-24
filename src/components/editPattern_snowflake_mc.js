@@ -11,6 +11,7 @@ import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
 import NavigateEndBtn from './navigate_endBtn';
+import NavigateStartBtn from './navigate_startBtn';
 import ButtonText from './button_text';
 
 class EditPatternSnowflakeMC extends Component {
@@ -20,8 +21,9 @@ class EditPatternSnowflakeMC extends Component {
     this.state = {
     	displayArray: [ null, null, null, 0, 1, 2, 3 ]
     };
-    this.navNext = this.navNext.bind(this);
+    this.navStart = this.navStart.bind(this);
     this.navPrev = this.navPrev.bind(this);
+    this.navNext = this.navNext.bind(this);
     this.navEnd = this.navEnd.bind(this);
     this.addInstance = this.addInstance.bind(this);
     this.deleteInstance = this.deleteInstance.bind(this);
@@ -49,8 +51,11 @@ class EditPatternSnowflakeMC extends Component {
 		this.updateDisplayArray(this.state.displayArray[2], this.props.currentPattern.numInstances);
 	}
 
+	navStart() {
+		this.updateDisplayArray(0, this.props.currentPattern.numInstances);
+	}
+
 	navEnd() {
-		console.log("go to end");
 		this.updateDisplayArray(this.props.currentPattern.numInstances - 1, this.props.currentPattern.numInstances);
 	}
 
@@ -140,6 +145,17 @@ class EditPatternSnowflakeMC extends Component {
 
 		return(
 			<div style={styles.root}>
+
+				{this.state.displayArray[2] !== null &&
+					<div onClick={this.navStart}>
+						<NavigateStartBtn
+							btnHeight={currentInstanceSize / 12}
+							btnLocation={{
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								left: `calc(50% - ${currentInstanceSize * 1.34375}px - 40px`
+							}} />
+					</div>
+				}
 
 				{this.state.displayArray[0] !== null && <InstanceSnowflake
 					instanceNumber={this.state.displayArray[0]}
