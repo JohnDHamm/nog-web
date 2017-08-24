@@ -151,7 +151,7 @@ class EditPatternSnowflakeMC extends Component {
 						<NavigateStartBtn
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
-								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,
 								left: `calc(50% - ${currentInstanceSize * 1.34375}px - 40px`
 							}} />
 					</div>
@@ -229,7 +229,7 @@ class EditPatternSnowflakeMC extends Component {
 						<NavigateEndBtn
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
-								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,
 								left: `calc(50% + ${currentInstanceSize * 1.28125}px + 40px`
 							}} />
 					</div>
