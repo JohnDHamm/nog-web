@@ -76,7 +76,7 @@ class PatternSnowflake extends Component {
 			playbackBtn: {
 				position: 'absolute',
 				left: 'calc(50% - 35px)',
-				bottom: 30
+				top: currentInstanceTopMargin + currentInstanceSize + 46
 			},
 			stopBtn: {
 				position: 'absolute',
@@ -85,9 +85,7 @@ class PatternSnowflake extends Component {
 			},
 			saveBtn: {
 				position: 'absolute',
-				// top: '75%',
-				// left: '65%',
-				top: currentInstanceTopMargin + currentInstanceSize + 15,
+				top: currentInstanceTopMargin + currentInstanceSize + 10,
 				left: `calc(50% - 60px)`
 			}
 		};
