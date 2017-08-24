@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class NavigateNextBtn extends Component {
+class NavigateEndBtn extends Component {
 
 	render() {
 		const { btnHeight, btnLocation } = this.props;
@@ -13,8 +13,8 @@ class NavigateNextBtn extends Component {
 			},
 			arrow: {
 				height: btnHeight,
-				width: btnHeight * 100 / 175,
-				backgroundImage: 'url(../src/img/nav_nextBtn.png)',
+				width: btnHeight * 154 / 175,
+				backgroundImage: 'url(../src/img/nav_endBtn.png)',
 				backgroundSize: '100% 100%'
 			}
 		};
@@ -27,4 +27,4 @@ class NavigateNextBtn extends Component {
 	}
 }
 
-export default NavigateNextBtn;
+export default NavigateEndBtn;
