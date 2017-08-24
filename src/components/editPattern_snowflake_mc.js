@@ -208,16 +208,16 @@ class EditPatternSnowflakeMC extends Component {
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% + ${currentInstanceSize * 1.25}px + 40px`}} />}
 
-
-				<div onClick={this.navEnd}>
-					<NavigateEndBtn
-						btnHeight={currentInstanceSize / 12}
-						btnLocation={{
-							top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
-							left: `calc(50% + ${currentInstanceSize * 1.28125}px + 40px`
-						}} />
-				</div>
-
+				{this.state.displayArray[4] !== null &&
+					<div onClick={this.navEnd}>
+						<NavigateEndBtn
+							btnHeight={currentInstanceSize / 12}
+							btnLocation={{
+								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 10px)`,
+								left: `calc(50% + ${currentInstanceSize * 1.28125}px + 40px`
+							}} />
+					</div>
+				}
 
 				<div
 					style={styles.addBtn}
