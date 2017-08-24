@@ -7,6 +7,7 @@ export const SET_SELECTED_COLOR = 'set_selected_color';
 export const SET_LIGHTS = 'set_lights';
 export const UPDATE_DEFAULT_SPEED = 'update_default_speed';
 export const UPDATE_INSTANCES = 'update_instances';
+export const UPDATE_NUM_INSTANCES = 'update_num_instances';
 
 import axios from 'axios';
 
@@ -30,9 +31,18 @@ export function getNogTypes() {
 }
 
 export function setCurrentPattern(pattern) {
+	const newPattern = {};
+	newPattern._id = pattern._id;
+	newPattern.name = pattern.name;
+	newPattern.description = pattern.description;
+	newPattern.defaultSpeed = pattern.defaultSpeed;
+	newPattern.defaultColor = pattern.defaultColor;
+	newPattern.customColors = pattern.customColors;
+	newPattern.singleColor = pattern.singleColor;
+	newPattern.numInstances = pattern.instances.length;
 	return {
 		type: SET_CURRENT_PATTERN,
-		payload: pattern
+		payload: newPattern
 	}
 }
 
@@ -110,5 +120,19 @@ export function saveLights(obj, callback) {
 	return {
 		type: UPDATE_INSTANCES,
 		payload: obj
+	}
+}
+
+export function updateCurrentLights(obj) {
+	return {
+		type: SET_LIGHTS,
+		payload: obj
+	}
+}
+
+export function updateNumInstances(num) {
+	return {
+		type: UPDATE_NUM_INSTANCES,
+		payload: num
 	}
 }

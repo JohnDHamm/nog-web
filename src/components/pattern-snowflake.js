@@ -33,7 +33,7 @@ class PatternSnowflake extends Component {
 	savePattern() {
 		// console.log("saving:", this.props.currentPattern);
 		// console.log("this.props.currentLights", this.props.currentLights);
-		const numInstances = this.props.currentPattern.instances.length;
+		const numInstances = this.props.currentPattern.numInstances;
 		const newArrayToSave = [];
 		for( let instNum = 0; instNum < numInstances; instNum++ ) {
 			const newObj = {};
@@ -87,8 +87,8 @@ class PatternSnowflake extends Component {
 				position: 'absolute',
 				// top: '75%',
 				// left: '65%',
-				top: currentInstanceTopMargin + currentInstanceSize,
-				left: `calc(50% + 40px)`
+				top: currentInstanceTopMargin + currentInstanceSize + 15,
+				left: `calc(50% - 60px)`
 			}
 		};
 
@@ -121,8 +121,8 @@ class PatternSnowflake extends Component {
 							onClick={this.savePattern.bind(this)}>
 							<ButtonText
 								label={'Save Changes'}
-								color={`${values.nogRed}`}
-								bgColor={`${values.nogBackground}`} />
+								color={values.nogRed}
+								bgColor={values.nogBackground} />
 						</div>
 					</div>
 				}
