@@ -14,7 +14,7 @@ class NavigateStartBtn extends Component {
 			arrow: {
 				height: btnHeight,
 				width: btnHeight * 154 / 175,
-				backgroundImage: 'url(../src/img/nav_startBtn.png)',
+				backgroundImage: 'url(../src/img/nav/nav_startBtn.png)',
 				backgroundSize: '100% 100%'
 			}
 		};

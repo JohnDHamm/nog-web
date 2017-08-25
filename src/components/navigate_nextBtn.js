@@ -14,7 +14,7 @@ class NavigateNextBtn extends Component {
 			arrow: {
 				height: btnHeight,
 				width: btnHeight * 100 / 175,
-				backgroundImage: 'url(../src/img/nav_nextBtn.png)',
+				backgroundImage: 'url(../src/img/nav/nav_nextBtn.png)',
 				backgroundSize: '100% 100%'
 			}
 		};

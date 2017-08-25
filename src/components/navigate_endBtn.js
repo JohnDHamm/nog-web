@@ -14,7 +14,7 @@ class NavigateEndBtn extends Component {
 			arrow: {
 				height: btnHeight,
 				width: btnHeight * 156 / 175,
-				backgroundImage: 'url(../src/img/nav_endBtn.png)',
+				backgroundImage: 'url(../src/img/nav/nav_endBtn.png)',
 				backgroundSize: '100% 100%'
 			}
 		};

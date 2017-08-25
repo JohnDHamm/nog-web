@@ -5,7 +5,7 @@ class UserPatternCard extends Component {
 
 	render() {
 		const { values, name, description, nogType, singleColor } = this.props;
-		const iconUrl = `url(../src/img/patternIcon-${nogType}.png)`;
+		const iconUrl = `url(../src/img/patternIcons/patternIcon-${nogType}.png)`;
 		console.log("iconUrl", iconUrl);
 		const styles = {
 			root: {
@@ -22,23 +22,24 @@ class UserPatternCard extends Component {
 			},
 			card: {
 				height: 100,
-				borderRadius: 5,
-				border: `4px solid ${values.nogGreen}`,
-				backgroundColor: '#FFF',
 				marginTop: 30,
+				border: `4px solid ${values.nogGreen}`,
+				borderRadius: 5,
+				backgroundColor: '#FFF',
 				overflow: 'hidden',
 				boxShadow: '0 2px 2px 0 rgba(0,0,0,.5)'
 			},
 			name: {
-				paddingLeft: 25,
 				paddingTop: 5,
+				paddingLeft: 25,
 				color: `${values.nogRed}`,
 				fontSize: 25,
 				lineHeight: 1
 			},
 			description: {
-				paddingLeft: 25,
 				paddingTop: 5,
+				paddingLeft: 25,
+				paddingRight: 5,
 				color: `${values.nogGrayText}`,
 				fontSize: 15,
 				lineHeight: 1,

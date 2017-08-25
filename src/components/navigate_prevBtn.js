@@ -14,7 +14,7 @@ class NavigatePrevBtn extends Component {
 			arrow: {
 				height: btnHeight,
 				width: btnHeight * 100 / 175,
-				backgroundImage: 'url(../src/img/nav_prevBtn.png)',
+				backgroundImage: 'url(../src/img/nav/nav_prevBtn.png)',
 				backgroundSize: '100% 100%'
 			}
 		};
