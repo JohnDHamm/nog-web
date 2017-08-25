@@ -188,7 +188,7 @@ class InstancePlaybackSnowflake extends Component {
 				position: 'relative',
 				width: containerSize,
 				height: containerSize,
-				backgroundImage: 'url(../src/img/snowflake_playback_bgImage.png',
+				backgroundImage: 'url(../src/img/snowflake/snowflake_playback_bgImage.png',
 				backgroundSize: '100% 100%'
 			},
 			labelDiv: {
