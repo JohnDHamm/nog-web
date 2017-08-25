@@ -43,7 +43,8 @@ class UserPatternCard extends Component {
 				color: `${values.nogGrayText}`,
 				fontSize: 15,
 				lineHeight: 1,
-				textOverflow: 'ellipsis'
+				textOverflow: 'ellipsis',
+				fontStyle: 'italic'
 			}
 		};
 
