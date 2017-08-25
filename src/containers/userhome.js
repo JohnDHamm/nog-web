@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { getUserPatterns } from '../actions';
 
+import UserPatternCard from '../components/userPattern_card';
+
 class Userhome extends Component {
 
 	componentWillMount() {
@@ -20,14 +22,18 @@ class Userhome extends Component {
 		return _.map(this.props.userPatterns, pattern => {
 			let nogTypeName = this.getNogName(pattern.nogTypeId);
 			return (
-				<Link to={`/pattern-${nogTypeName}/${pattern._id}`} key={pattern._id}>
-					<div style={{border: '1px solid #ddd'}}>
-						<p>name: {pattern.name}</p>
-						<p>nog style: {nogTypeName}</p>
-						{ pattern.singleColor ?
-							( <p>single-color pattern</p> ) : ( <p>multi-color pattern</p> ) }
-					</div>
-				</Link>
+				<div className="col-lg-3 col-md-4 col-sm-6 col-8 offset-2 offset-sm-0" key={pattern._id} >
+					<Link
+						to={`/pattern-${nogTypeName}/${pattern._id}`}
+						style={{textDecoration: 'none'}} >
+						<UserPatternCard
+							name={pattern.name}
+							description={pattern.description}
+							nogType={nogTypeName}
+							singleColor={pattern.singleColor}
+						/>
+					</Link>
+				</div>
 			)
 		})
 	}
@@ -37,9 +43,11 @@ class Userhome extends Component {
 		const { userPatterns, nogTypes } = this.props;
 
 		return (
-			<div>
+			<div className="container">
 				<h2>{ user.name }'s patterns:</h2>
-				{this.renderPatterns()}
+				<div className="row">
+					{this.renderPatterns()}
+				</div>
 			</div>
 		);
 	}
