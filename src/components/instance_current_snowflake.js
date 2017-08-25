@@ -201,7 +201,7 @@ class InstanceCurrentSnowflake extends Component {
 				position: 'relative',
 				width: containerSize,
 				height: containerSize,
-				backgroundImage: 'url(../src/img/snowflake_currentInstance_bgImage.png',
+				backgroundImage: 'url(../src/img/snowflake/snowflake_currentInstance_bgImage.png',
 				backgroundSize: '100% 100%'
 			},
 			labelDiv: {
