@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { postNewPattern } from '../actions';
+import { postNewPattern, addUserPattern } from '../actions';
 
 import ButtonText from '../components/button_text';
 
@@ -14,7 +14,6 @@ class PatternCreate extends Component {
 			patternName: '',
 			patternDesc: '',
 			// nogTypeId: '',
-			newPatternUrl: ''
 		}
 		this.createPattern = this.createPattern.bind(this);
 	}
@@ -64,12 +63,9 @@ class PatternCreate extends Component {
 	    	]
 		}
 		this.props.postNewPattern(newPatternObj, (res) => {
-			console.log("result", res);
+			this.props.addUserPattern(res.data);
 			const nogTypeName = 'snowflake';
 			this.props.history.push(`/pattern-${nogTypeName}/${res.data._id}`);
-			// this.setState({newPatternUrl: `/pattern-${nogTypeName}/${res.data._id}`});
-			// console.log("this.state.newPatternUrl", this.state.newPatternUrl);
-			// this.props.history.push('/');
 		});
 	}
 
@@ -108,14 +104,4 @@ function mapStateToProps({ values, user, userPatterns, nogTypes }) {
 	return { values, user, userPatterns, nogTypes };
 }
 
-export default withRouter(connect(mapStateToProps, {postNewPattern})(PatternCreate));
-
-
-				// <Link
-				// 	to={this.state.newPatternUrl}
-				// 	style={{textDecoration: 'none'}} >
-				// 	<ButtonText
-				// 		label={`Go To ${this.state.patternName}`}
-				// 		color={values.nogRed}
-				// 		/>
-				// </Link>
+export default withRouter(connect(mapStateToProps, {postNewPattern, addUserPattern })(PatternCreate));
