@@ -8,6 +8,7 @@ export const SET_LIGHTS = 'set_lights';
 export const UPDATE_DEFAULT_SPEED = 'update_default_speed';
 export const UPDATE_INSTANCES = 'update_instances';
 export const UPDATE_NUM_INSTANCES = 'update_num_instances';
+export const CREATE_NEW_PATTERN = 'create_new_pattern';
 
 import axios from 'axios';
 
@@ -134,5 +135,14 @@ export function updateNumInstances(num) {
 	return {
 		type: UPDATE_NUM_INSTANCES,
 		payload: num
+	}
+}
+
+export function postNewPattern(obj, callback) {
+	const request = axios.post(`${ROOT_URL}/createpattern`, obj)
+		.then((res) => callback(res));
+	return {
+		type: CREATE_NEW_PATTERN, //need to update state.userPatterns?
+		payload: request
 	}
 }

@@ -1,4 +1,4 @@
-import { GET_USER_PATTERNS } from '../actions';
+import { GET_USER_PATTERNS, CREATE_NEW_PATTERN } from '../actions';
 import _ from 'lodash';
 
 export default function (state={}, action) {
