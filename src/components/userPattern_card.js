@@ -6,7 +6,6 @@ class UserPatternCard extends Component {
 	render() {
 		const { values, name, description, nogType, singleColor } = this.props;
 		const iconUrl = `url(../src/img/patternIcons/patternIcon-${nogType}.png)`;
-		console.log("iconUrl", iconUrl);
 		const styles = {
 			root: {
 				position: 'relative'

@@ -9,6 +9,7 @@ import reducers from './reducers';
 import Navbar from './components/navbar'
 import Home from './containers/home';
 import Userhome from './containers/userhome';
+import PatternCreate from './containers/patternCreate';
 import PatternSnowflake from './components/pattern-snowflake';
 import PatternTree from './components/pattern-tree';
 import PlaybackSnowflake from './components/playback_snowflake';
@@ -23,6 +24,7 @@ ReactDOM.render(
 				<Navbar />
 				<Switch>
 					<Route path="/userhome/:id" component={Userhome} />
+					<Route path="/pattern-create" component={PatternCreate} />
 					<Route path="/pattern-snowflake/:id" component={PatternSnowflake} />
 					<Route path="/pattern-tree/:id" component={PatternTree} />
 					<Route path="/playback-snowflake" component={PlaybackSnowflake} />
