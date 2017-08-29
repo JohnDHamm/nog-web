@@ -13,7 +13,6 @@ class NewPatternCard extends Component {
 				border: `4px dashed ${values.nogGreen}`,
 				borderRadius: 5,
 				backgroundColor: '#FFF',
-				// overflow: 'hidden',
 				boxShadow: '0 2px 2px 0 rgba(0,0,0,.5)'
 			},
 			plus: {
@@ -22,15 +21,14 @@ class NewPatternCard extends Component {
 				left: 'calc(50% - 25px)',
 				width: 50,
 				height: 50,
-				border: '1px solid gray'
-				// backgroundImage: iconUrl,
-				// backgroundSize: '100% 100%'
+				backgroundImage: 'url(../src/img/patternNewBtn.png)',
+				backgroundSize: '100% 100%'
 			}
 		};
 
 		return (
 			<div style={styles.root}>
-				<div style={styles.plus}>+
+				<div style={styles.plus}>
 				</div>
 			</div>
 		);
