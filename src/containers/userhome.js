@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getUserPatterns } from '../actions';
 
 import UserPatternCard from '../components/userPattern_card';
+import NewPatternCard from '../components/newPattern_card';
 
 class Userhome extends Component {
 
@@ -47,6 +48,13 @@ class Userhome extends Component {
 				<h2>{ user.name }'s patterns:</h2>
 				<div className="row">
 					{this.renderPatterns()}
+					<div className="col-lg-3 col-md-4 col-sm-6 col-8 offset-2 offset-sm-0">
+						<Link
+							to={'/pattern-create'}
+							style={{textDecoration: 'none'}} >
+							<NewPatternCard />
+						</Link>
+					</div>
 				</div>
 			</div>
 		);
