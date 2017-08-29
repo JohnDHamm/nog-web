@@ -30,6 +30,24 @@ class MultiColorPalette extends Component {
 		const { currentColorPalette, selectedColor, values } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
 
+		const styles = {
+			selected: {
+				width: 60,
+				height: 60,
+				borderRadius: '50%',
+				marginLeft: 5,
+				border: `3px solid ${values.nogBackground}`,
+				boxShadow: '0px 0px 0px 1px white'
+			},
+			unselected: {
+				width: 40,
+				height: 40,
+				borderRadius: '50%',
+				marginLeft: 5,
+				border: '1px solid #333'
+			}
+		}
+
 		let defaultColorPalette = currentColorPalette;
 		for ( let i = 8; i < 16; i++) {
 			defaultColorPalette = _.omit(defaultColorPalette, i);
@@ -41,29 +59,14 @@ class MultiColorPalette extends Component {
 					<div
 						onClick={() => this.selectColor(color.colorNum)}
 						key={color.colorNum}
-						style={{
-							width: 60,
-							height: 60,
-							borderRadius: '50%',
-							marginLeft: 5,
-							border: `3px solid ${values.nogBackground}`,
-							boxShadow: '0px 0px 0px 1px white',
-							backgroundColor: color.colorVal
-						}} />
+						style={ Object.assign({}, styles.selected, {backgroundColor: color.colorVal} ) } />
 				)
 			} else {
 				return (
 					<div
 						onClick={() => this.selectColor(color.colorNum)}
 						key={color.colorNum}
-						style={{
-							width: 40,
-							height: 40,
-							borderRadius: '50%',
-							marginLeft: 5,
-							border: '1px solid #333',
-							backgroundColor: color.colorVal
-						}} />
+						style={ Object.assign({}, styles.unselected, {backgroundColor: color.colorVal} ) } />
 				)
 			}
 		})
