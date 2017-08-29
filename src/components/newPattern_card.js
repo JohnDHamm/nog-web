@@ -8,7 +8,7 @@ class NewPatternCard extends Component {
 		const styles = {
 			root: {
 				position: 'relative',
-				height: 100,
+				height: 115,
 				marginTop: 30,
 				border: `4px dashed ${values.nogGreen}`,
 				borderRadius: 5,

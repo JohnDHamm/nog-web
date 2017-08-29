@@ -20,7 +20,7 @@ class UserPatternCard extends Component {
 				backgroundSize: '100% 100%'
 			},
 			card: {
-				height: 100,
+				height: 115,
 				marginTop: 30,
 				border: `4px solid ${values.nogGreen}`,
 				borderRadius: 5,
