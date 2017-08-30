@@ -5,7 +5,9 @@ import { Link, withRouter } from 'react-router-dom';
 import { postNewPattern, addUserPattern } from '../actions';
 
 import ButtonText from '../components/button_text';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class PatternCreate extends Component {
 	constructor(props) {
@@ -72,30 +74,53 @@ class PatternCreate extends Component {
 
 	render() {
 		const { values } = this.props;
+		const styles = {
+			title: {
+				marginTop: 20
+			},
+			createBtn: {
+				marginTop: 25
+			}
+		}
 
 		return (
-			<div className="container">
-				<h2>Pattern Create</h2>
-				<div>
-					<input
-						placeholder={"Name"}
-						value={this.state.patternName}
-						onChange={ event => this.checkUniqueName(event.target.value)} />
+			<MuiThemeProvider>
+				<div className="container">
+					<h2 className="text-center" style={styles.title}>Pattern Create</h2>
+					<div className="row justify-content-center">
+						<div className="col-12 col-md-6">
+							<TextField
+								id="text-field-controlled"
+								floatingLabelText="Give your pattern a unique name"
+								fullWidth={true}
+								value={this.state.patternName}
+								onChange={ event => this.checkUniqueName(event.target.value)}
+							/>
+						</div>
+					</div>
+					<div className="row justify-content-center">
+						<div className="col-12 col-md-6">
+							<TextField
+								id="text-field-controlled"
+								floatingLabelText="Give your pattern a description"
+								fullWidth={true}
+								multiLine={true}
+					      rows={2}
+								value={this.state.patternDesc}
+								onChange={ event => this.updateDesc(event.target.value)}
+							/>
+						</div>
+					</div>
+					<div className="row justify-content-center">
+						<RaisedButton
+							style={styles.createBtn}
+							label="Create Pattern"
+							labelColor={values.nogGreen}
+							onClick={this.createPattern}
+							/>
+					</div>
 				</div>
-				<div>
-					<textarea
-						placeholder={"Description"}
-						value={this.state.patternDesc}
-						onChange={ event => this.updateDesc(event.target.value)} />
-				</div>
-				<div onClick={this.createPattern}>
-					<ButtonText
-						label={"Create New Pattern"}
-						color={values.nogGreen}
-						/>
-				</div>
-
-			</div>
+			</MuiThemeProvider>
 		);
 	}
 }
@@ -105,3 +130,14 @@ function mapStateToProps({ values, user, userPatterns, nogTypes }) {
 }
 
 export default withRouter(connect(mapStateToProps, {postNewPattern, addUserPattern })(PatternCreate));
+
+
+
+// <div
+// 								onClick={this.createPattern}
+// 								style={styles.createBtn}>
+// 								<ButtonText
+// 									label={"Create New Pattern"}
+// 									color={values.nogGreen}
+// 									/>
+// 							</div>
