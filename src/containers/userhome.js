@@ -45,7 +45,7 @@ class Userhome extends Component {
 
 		return (
 			<div className="container">
-				<h2>{ user.name }'s patterns:</h2>
+				<h2 className="text-center">{ user.name }'s patterns:</h2>
 				<div className="row">
 					{this.renderPatterns()}
 					<div className="col-lg-3 col-md-4 col-sm-6 col-8 offset-2 offset-sm-0">
