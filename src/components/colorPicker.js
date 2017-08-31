@@ -12,53 +12,51 @@ class ColorPicker extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	hueSliderStart: 1,
-    	valueSliderStart: 50
     };
   }
 
   componentWillMount() {
+		const { selectedColorNum } = this.props;
+
   	// console.log("this.props.currentPattern", this.props.currentPattern);
   	// this.setState({ sliderLabel: defaultSpeed });
+  	this.setState({hueSlider: 125, valueSlider: 50})
   }
 
   componentWillUnmount() {
   }
 
   handleHueSlider(event, value) {
-  	console.log("hue ", value);
+  	this.setState({hueSlider: value})
   }
 
   handleValueSlider(event, value) {
   	console.log("value ", value);
+  	this.setState({valueSlider: value})
   }
 
 
 	render() {
 		const pattern = this.props.currentPattern;
-		const { values } = this.props;
+		const { values, selectedColorNum } = this.props;
 		const styles = {
 			root: {
-				// backgroundColor: `${values.nogBackground}`,
-				// height: 'calc(100vh - 56px)',
-				// position: 'relative'
 			},
 			sliderContainer: {
-				width: 320,
-				// height: 70,
-				// position: 'absolute',
-				// bottom: 20,
-				// left: 'calc(50% - 200px)'
+				width: 240,
+			},
+			rangeDiv: {
+				width: '100%',
+				height: 10,
 			},
 			hueRange: {
-				width: '100%',
-				height: 20,
-				background: 'linear-gradient(90deg, #F00, #0F0)'
+				background: 'linear-gradient(90deg, #F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00)'
 			},
-			hueSlider: {
+			slider: {
 				width: '100%',
-				// position: 'absolute',
-				// bottom: 0
+			},
+			valueRange:{
+				background: `linear-gradient(90deg, #000, hsl(${this.state.hueSlider}, 100%, 50%), #FFF)`
 			},
 			saveColorBtn: {
 				position: 'absolute',
@@ -70,25 +68,32 @@ class ColorPicker extends Component {
 		return(
 			<MuiThemeProvider>
 				<div style={styles.root}>
-
-
-
 					<div style={styles.sliderContainer}>
-						<div style={styles.hueRange} />
-
+						<div style={{...styles.rangeDiv, ...styles.hueRange}} />
 						<div style={styles.slider}>
 							<Slider
 								value={this.state.hueSlider}
-								defaultValue={this.state.hueSliderStart}
-								min={1}
-			          max={768}
+								defaultValue={this.state.hueSlider}
+								min={0}
+			          max={360}
 			          step={1}
 			          onChange={this.handleHueSlider.bind(this)}
+		          	sliderStyle={{marginBottom: 10, marginTop: 0}}
+			         />
+						</div>
+						<div style={{...styles.rangeDiv, ...styles.valueRange}} />
+						<div style={styles.slider}>
+							<Slider
+								value={this.state.valueSlider}
+								defaultValue={this.state.valueSlider}
+								min={0}
+			          max={100}
+			          step={1}
+			          onChange={this.handleValueSlider.bind(this)}
+		          	sliderStyle={{marginBottom: 10, marginTop: 0}}
 			         />
 						</div>
 					</div>
-
-
 				</div>
 			</MuiThemeProvider>
 		)

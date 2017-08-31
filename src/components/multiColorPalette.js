@@ -132,7 +132,8 @@ class MultiColorPalette extends Component {
 				display: 'flex'
 			},
 			colorPicker: {
-
+				display: 'flex',
+				justifyContent: 'center'
 			}
 		};
 
