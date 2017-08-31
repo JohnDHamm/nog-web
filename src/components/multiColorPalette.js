@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import EmptyColor from './emptyColor';
+import ColorPicker from './colorPicker';
 
 import { setCurrentColorPalette, setSelectedColor } from '../actions';
 
@@ -13,8 +14,8 @@ class MultiColorPalette extends Component {
 
 	componentWillMount() {
 		const { currentPattern, setSelectedColor } = this.props;
-		const customColors = currentPattern.customColors;
-		this.props.setCurrentColorPalette(customColors);
+		// const customColors = currentPattern.customColors;
+		this.props.setCurrentColorPalette(currentPattern.customColors);
 		if (checkEmptyObj(this.props.selectedColor)) this.props.setSelectedColor(0);
 	}
 
@@ -117,7 +118,7 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
-		const { values } = this.props;
+		const { values, selectedColor } = this.props;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -129,6 +130,10 @@ class MultiColorPalette extends Component {
 			paletteRow: {
 				marginBottom: 7,
 				display: 'flex'
+			},
+			colorPicker: {
+				display: 'flex',
+				justifyContent: 'center'
 			}
 		};
 
@@ -140,6 +145,12 @@ class MultiColorPalette extends Component {
 				<div style={styles.paletteRow}>
 					{this.renderCustomColors()}
 				</div>
+				{selectedColor.selectedColor > 7 &&
+					<div style={styles.colorPicker}>
+						<ColorPicker
+							selectedColorNum={selectedColor.selectedColor}/>
+					</div>
+				}
 			</div>
 		);
 	}
