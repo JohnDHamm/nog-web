@@ -7,13 +7,15 @@ import EmptyColor from './emptyColor';
 
 import { setCurrentColorPalette, setSelectedColor } from '../actions';
 
+import { checkEmptyObj } from '../helpers/checkEmptyObj';
+
 class MultiColorPalette extends Component {
 
 	componentWillMount() {
 		const { currentPattern, setSelectedColor } = this.props;
 		const customColors = currentPattern.customColors;
 		this.props.setCurrentColorPalette(customColors);
-		this.props.setSelectedColor(0);
+		if (checkEmptyObj(this.props.selectedColor)) this.props.setSelectedColor(0);
 	}
 
 	selectColor(colorNum) {
