@@ -42,10 +42,15 @@ class Userhome extends Component {
 	render() {
 		const { user } = this.props.user;
 		const { userPatterns, nogTypes } = this.props;
+		const styles = {
+			title: {
+				marginTop: 20
+			}
+		}
 
 		return (
 			<div className="container">
-				<h2 className="text-center">{ user.name }'s patterns:</h2>
+				<h2 className="text-center" style={styles.title}>{ user.name }'s patterns:</h2>
 				<div className="row">
 					{this.renderPatterns()}
 					<div className="col-lg-3 col-md-4 col-sm-6 col-8 offset-2 offset-sm-0">
