@@ -14,11 +14,17 @@ class Home extends Component {
 	render() {
 		// const userId = '59824b41172824a3e8d0d5d6'; //heroku db
 		const userId = '598246abbee2c891bd2cedc8'; //dev db
+		const styles = {
+			title: {
+				marginTop: 20
+			}
+		}
+
 		return (
-			<div>
-				<h2>Home/Login</h2>
+			<div className="container">
+				<h2 className="text-center" style={styles.title}>Welcome</h2>
 				<Link to={`/userhome/${userId}`}>
-					<p>login</p>
+					<p className="text-center">login</p>
 				</Link>
 			</div>
 		);
