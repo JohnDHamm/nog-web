@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 
 import { setCurrentPattern, setCurrentLights, saveLights } from '../actions';
 
-import PatternInfo from './patternInfo';
-import SingleColorPalette from './singleColorPalette';
-import MultiColorPalette from './multiColorPalette';
-import EditPatternSnowflakeMC from './editPattern_snowflake_mc';
-import PlaybackSnowflake from './playback_snowflake';
+import PatternInfo from '../components/patternInfo';
+import SingleColorPalette from '../components/singleColorPalette';
+import MultiColorPalette from '../components/multiColorPalette';
+import EditPatternSnowflakeMC from '../components/editPattern_snowflake_mc';
+import PlaybackSnowflake from '../components/playback_snowflake';
 
-import ButtonPlayback from './button_playback';
-import ButtonText from './button_text';
+import ButtonPlayback from '../components/button_playback';
+import ButtonText from '../components/button_text';
 
 class PatternSnowflake extends Component {
 
