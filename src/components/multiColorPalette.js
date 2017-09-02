@@ -14,9 +14,13 @@ class MultiColorPalette extends Component {
 
 	componentWillMount() {
 		const { currentPattern, setSelectedColor } = this.props;
-		// const customColors = currentPattern.customColors;
 		this.props.setCurrentColorPalette(currentPattern.customColors);
-		if (checkEmptyObj(this.props.selectedColor)) this.props.setSelectedColor(0);
+		if (checkEmptyObj(this.props.selectedColor)) setSelectedColor(0);
+	}
+
+	componentDidMount() {
+		//testing if component remounts when color picker updates a color in store
+		console.log("MC color palette mounted");
 	}
 
 	selectColor(colorNum) {
@@ -51,7 +55,7 @@ class MultiColorPalette extends Component {
 	}
 
 	renderDefaultColors() {
-		const { currentColorPalette, selectedColor, values } = this.props;
+		const { currentColorPalette, selectedColor } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 
@@ -80,7 +84,7 @@ class MultiColorPalette extends Component {
 	}
 
 	renderCustomColors() {
-		const { currentColorPalette, selectedColor, values } = this.props;
+		const { currentColorPalette, selectedColor } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 
@@ -118,7 +122,7 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
-		const { values, selectedColor } = this.props;
+		const { selectedColor } = this.props;
 		const styles = {
 			root: {
 				marginTop: 20,

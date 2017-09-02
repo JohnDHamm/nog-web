@@ -12,14 +12,17 @@ class ColorPicker extends Component {
 	constructor(props) {
     super(props);
     this.state = {
+    	// colorHasChanged: false
     };
   }
 
   componentWillMount() {
 		const { selectedColorNum } = this.props;
+		console.log("selectedColorNum", selectedColorNum);
+		//get color val (hex) from selectedColorNum
+		//convert hex to hsl
+		//setState({hueSlider: , valueSlider: })
 
-  	// console.log("this.props.currentPattern", this.props.currentPattern);
-  	// this.setState({ sliderLabel: defaultSpeed });
   	this.setState({hueSlider: 125, valueSlider: 50})
   }
 
@@ -27,12 +30,18 @@ class ColorPicker extends Component {
   }
 
   handleHueSlider(event, value) {
-  	this.setState({hueSlider: value})
+  	// this.setState({ colorHasChanged: true });
+  	this.setState({hueSlider: value});
+  	// console.log("this.state", this.state);
+  	//update store: currentColorPalette? after convert from hsl to hex
+  	//save to db?
   }
 
   handleValueSlider(event, value) {
-  	console.log("value ", value);
-  	this.setState({valueSlider: value})
+  	// this.setState({ colorHasChanged: true });
+  	this.setState({valueSlider: value});
+  	//update store: currentColorPalette? after convert from hsl to hex
+  	//save to db?
   }
 
 
