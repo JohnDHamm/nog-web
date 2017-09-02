@@ -10,8 +10,8 @@ import Navbar from './components/navbar'
 import Home from './containers/home';
 import Userhome from './containers/userhome';
 import PatternCreate from './containers/patternCreate';
-import PatternSnowflake from './components/pattern-snowflake';
-import PatternTree from './components/pattern-tree';
+import PatternSnowflake from './containers/pattern-snowflake';
+import PatternTree from './containers/pattern-tree';
 import PlaybackSnowflake from './components/playback_snowflake';
 
 
