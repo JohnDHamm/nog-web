@@ -14,7 +14,7 @@ class MultiColorPalette extends Component {
 
 	componentWillMount() {
 		const { currentPattern, setSelectedColor } = this.props;
-		this.props.setCurrentColorPalette(currentPattern.customColors);
+		// this.props.setCurrentColorPalette(currentPattern.customColors);
 		if (checkEmptyObj(this.props.selectedColor)) setSelectedColor(0);
 	}
 
@@ -56,6 +56,7 @@ class MultiColorPalette extends Component {
 
 	renderDefaultColors() {
 		const { currentColorPalette, selectedColor } = this.props;
+		console.log("currentColorPalette", currentColorPalette);
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 

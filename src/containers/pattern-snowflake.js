@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentPattern, setCurrentLights, saveLights } from '../actions';
+import { setCurrentPattern, setCurrentLights, setCurrentColorPalette, saveLights } from '../actions';
 
 import PatternInfo from '../components/patternInfo';
 import SingleColorPalette from '../components/singleColorPalette';
@@ -28,9 +28,14 @@ class PatternSnowflake extends Component {
 		// console.log("selected pattern:", this.props.userPatterns[id]);
 		this.props.setCurrentPattern(this.props.userPatterns[id]);
 		this.props.setCurrentLights(this.props.userPatterns[id]);
+		this.props.setCurrentColorPalette(this.props.userPatterns[id].customColors);
 	}
 
-	savePattern() {
+	componentDidMount() {
+		console.log("this.props", this.props);
+	}
+
+	savePattern() { //saves lights(instances) only currently
 		// console.log("saving:", this.props.currentPattern);
 		// console.log("this.props.currentLights", this.props.currentLights);
 		const numInstances = this.props.currentPattern.numInstances;
@@ -56,7 +61,7 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
-		// console.log("this.props", this.props);
+		console.log("render this.props", this.props);
 		const pattern = this.props.currentPattern;
 		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
@@ -152,4 +157,4 @@ function mapStateToProps({ userPatterns, currentPattern, currentLights, values }
 	return { userPatterns, currentPattern, currentLights, values };
 }
 
-export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, saveLights })(PatternSnowflake);
+export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, setCurrentColorPalette, saveLights })(PatternSnowflake);
