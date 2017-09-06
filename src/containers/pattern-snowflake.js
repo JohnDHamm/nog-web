@@ -61,9 +61,8 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
-		console.log("render this.props from pattern-snowflake container", this.props);
+		// console.log("render this.props from pattern-snowflake container", this.props);
 		const pattern = this.props.currentPattern;
-		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
 		const currentInstanceTopMargin = 120;
 		const currentInstanceSize = 400;
