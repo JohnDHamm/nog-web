@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import EmptyColor from './emptyColor';
 import ColorPicker from './colorPicker';
+import ButtonText from './button_text';
 
 import { setSelectedColor } from '../actions';
 
@@ -12,6 +13,13 @@ import { checkEmptyObj } from '../helpers/checkEmptyObj';
 
 class MultiColorPalette extends Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			showEditBtn: false
+		}
+		this.showColorPicker = this.showColorPicker.bind(this);
+	}
 	componentWillMount() {
 		const { setSelectedColor } = this.props;
 		// this.props.setCurrentColorPalette(currentPattern.customColors);
@@ -23,7 +31,12 @@ class MultiColorPalette extends Component {
 		// console.log("MC color palette mounted");
 	}
 
+	showColorPicker() {
+		console.log("turn on color picker" );
+	}
+
 	selectColor(colorNum) {
+		colorNum > 7 ? this.setState({showEditBtn: true}) : this.setState({showEditBtn: false});
 		this.props.setSelectedColor(colorNum);
 		// console.log("selected color #", colorNum);
 	}
@@ -150,12 +163,16 @@ class MultiColorPalette extends Component {
 				<div style={styles.paletteRow}>
 					{this.renderCustomColors()}
 				</div>
-				{selectedColor > 7 &&
-					<div style={styles.colorPicker}>
-						<ColorPicker
-							selectedColorNum={selectedColor}/>
+				{this.state.showEditBtn &&
+					<div
+						onClick={this.showColorPicker}
+						>
+						<ButtonText
+							label={'Edit Color'}
+							color={'white'} />
 					</div>
 				}
+
 			</div>
 		);
 	}
@@ -166,3 +183,11 @@ function mapStateToProps({ selectedColor, values }) {
 }
 
 export default connect(mapStateToProps, { setSelectedColor })(MultiColorPalette);
+
+
+// {selectedColor > 7 &&
+// 					<div style={styles.colorPicker}>
+// 						<ColorPicker
+// 							selectedColorNum={selectedColor}/>
+// 					</div>
+// 				}
