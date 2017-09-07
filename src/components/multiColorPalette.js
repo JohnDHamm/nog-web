@@ -6,21 +6,21 @@ import { connect } from 'react-redux';
 import EmptyColor from './emptyColor';
 import ColorPicker from './colorPicker';
 
-import { setCurrentColorPalette, setSelectedColor } from '../actions';
+import { setSelectedColor } from '../actions';
 
 import { checkEmptyObj } from '../helpers/checkEmptyObj';
 
 class MultiColorPalette extends Component {
 
 	componentWillMount() {
-		const { currentPattern, setSelectedColor } = this.props;
+		const { setSelectedColor } = this.props;
 		// this.props.setCurrentColorPalette(currentPattern.customColors);
 		if (checkEmptyObj(this.props.selectedColor)) setSelectedColor(0);
 	}
 
 	componentDidMount() {
 		//testing if component remounts when color picker updates a color in store
-		console.log("MC color palette mounted");
+		// console.log("MC color palette mounted");
 	}
 
 	selectColor(colorNum) {
@@ -55,12 +55,12 @@ class MultiColorPalette extends Component {
 	}
 
 	renderDefaultColors() {
-		const { currentColorPalette, selectedColor } = this.props;
-		console.log("currentColorPalette", currentColorPalette);
+		const { colorPalette, selectedColor } = this.props;
+		// console.log("colorPalette", colorPalette);
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 
-		let defaultColorPalette = currentColorPalette;
+		let defaultColorPalette = colorPalette;
 		for ( let i = 8; i < 16; i++) {
 			defaultColorPalette = _.omit(defaultColorPalette, i);
 		}
@@ -85,11 +85,11 @@ class MultiColorPalette extends Component {
 	}
 
 	renderCustomColors() {
-		const { currentColorPalette, selectedColor } = this.props;
+		const { colorPalette, selectedColor } = this.props;
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 
-		let customColorPalette = currentColorPalette;
+		let customColorPalette = colorPalette;
 		for ( let i = 0; i < 8; i++) {
 			customColorPalette = _.omit(customColorPalette, i);
 		}
@@ -123,7 +123,7 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
-		const { selectedColor } = this.props;
+		const { selectedColor } = this.props.selectedColor;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -150,10 +150,10 @@ class MultiColorPalette extends Component {
 				<div style={styles.paletteRow}>
 					{this.renderCustomColors()}
 				</div>
-				{selectedColor.selectedColor > 7 &&
+				{selectedColor > 7 &&
 					<div style={styles.colorPicker}>
 						<ColorPicker
-							selectedColorNum={selectedColor.selectedColor}/>
+							selectedColorNum={selectedColor}/>
 					</div>
 				}
 			</div>
@@ -161,8 +161,8 @@ class MultiColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentColorPalette, customColorPalette, selectedColor, values }) {
-	return { currentPattern, currentColorPalette, customColorPalette, selectedColor, values };
+function mapStateToProps({ selectedColor, values }) {
+	return { selectedColor, values };
 }
 
-export default connect(mapStateToProps, { setCurrentColorPalette, setSelectedColor })(MultiColorPalette);
+export default connect(mapStateToProps, { setSelectedColor })(MultiColorPalette);

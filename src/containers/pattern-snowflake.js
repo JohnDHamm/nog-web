@@ -32,7 +32,7 @@ class PatternSnowflake extends Component {
 	}
 
 	componentDidMount() {
-		console.log("this.props", this.props);
+		// console.log("this.props", this.props);
 	}
 
 	savePattern() { //saves lights(instances) only currently
@@ -61,9 +61,8 @@ class PatternSnowflake extends Component {
 	}
 
 	render() {
-		console.log("render this.props", this.props);
+		// console.log("render this.props from pattern-snowflake container", this.props);
 		const pattern = this.props.currentPattern;
-		// console.log("this.props.currentPattern", this.props.currentPattern);
 		const { values } = this.props;
 		const currentInstanceTopMargin = 120;
 		const currentInstanceSize = 400;
@@ -106,7 +105,11 @@ class PatternSnowflake extends Component {
 								defaultSpeed={pattern.defaultSpeed} />
 						</div>
 
-						{pattern.singleColor ? (<SingleColorPalette />) : (<MultiColorPalette />)}
+						{pattern.singleColor ? (
+							<SingleColorPalette />) :
+							(<MultiColorPalette
+								colorPalette={this.props.currentColorPalette} />)
+						}
 
 						<EditPatternSnowflakeMC
 							currentInstanceSize={currentInstanceSize}
@@ -153,8 +156,8 @@ class PatternSnowflake extends Component {
 }
 
 
-function mapStateToProps({ userPatterns, currentPattern, currentLights, values }) {
-	return { userPatterns, currentPattern, currentLights, values };
+function mapStateToProps({ userPatterns, currentPattern, currentLights, currentColorPalette, values }) {
+	return { userPatterns, currentPattern, currentLights, currentColorPalette, values };
 }
 
 export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, setCurrentColorPalette, saveLights })(PatternSnowflake);
