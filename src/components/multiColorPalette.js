@@ -32,10 +32,15 @@ class MultiColorPalette extends Component {
 	}
 
 	showColorPicker() {
-		console.log("turn on color picker" );
+		// console.log("turn on color picker" );
+		this.setState({
+			showEditBtn: false,
+			showColorPicker: true
+		})
 	}
 
 	selectColor(colorNum) {
+		this.setState({showColorPicker: false});
 		colorNum > 7 ? this.setState({showEditBtn: true}) : this.setState({showEditBtn: false});
 		this.props.setSelectedColor(colorNum);
 		// console.log("selected color #", colorNum);
@@ -136,7 +141,9 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
+		const { values } = this.props;
 		const { selectedColor } = this.props.selectedColor;
+		const editBtnPosition = (selectedColor - 8) * 45 - 6;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -148,6 +155,13 @@ class MultiColorPalette extends Component {
 			paletteRow: {
 				marginBottom: 7,
 				display: 'flex'
+			},
+			editBtn: {
+				// width: ,
+				position: 'absolute',
+				left: editBtnPosition
+				// display: 'flex',
+				// justifyContent: 'center'
 			},
 			colorPicker: {
 				display: 'flex',
@@ -164,12 +178,18 @@ class MultiColorPalette extends Component {
 					{this.renderCustomColors()}
 				</div>
 				{this.state.showEditBtn &&
-					<div
+					<div style={styles.editBtn}
 						onClick={this.showColorPicker}
 						>
 						<ButtonText
 							label={'Edit Color'}
-							color={'white'} />
+							color={values.nogGrayText} />
+					</div>
+				}
+				{this.state.showColorPicker &&
+					<div style={styles.colorPicker}>
+						<ColorPicker
+							selectedColorNum={selectedColor}/>
 					</div>
 				}
 
@@ -185,9 +205,3 @@ function mapStateToProps({ selectedColor, values }) {
 export default connect(mapStateToProps, { setSelectedColor })(MultiColorPalette);
 
 
-// {selectedColor > 7 &&
-// 					<div style={styles.colorPicker}>
-// 						<ColorPicker
-// 							selectedColorNum={selectedColor}/>
-// 					</div>
-// 				}
