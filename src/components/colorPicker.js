@@ -17,12 +17,12 @@ class ColorPicker extends Component {
   }
 
   componentWillMount() {
-		// const { selectedColorNum } = this.props;
-		// console.log("selectedColorNum", selectedColorNum);
+		const { selectedColorNum } = this.props;
+		console.log("selectedColorNum", selectedColorNum);
 		//get color val (hex) from selectedColorNum
 		//convert hex to hsl
 		//setState({hueSlider: , valueSlider: })
-		console.log("selectedColor", this.props.selectedColor.selectedColor);
+		// console.log("selectedColor", this.props.selectedColor.selectedColor);
   	this.setState({hueSlider: 1, valueSlider: 50})
   	// this.setSliders();
   }
@@ -30,12 +30,12 @@ class ColorPicker extends Component {
   componentWillUpdate() {
   	// console.log("CP will update");
 
-  	this.setSliders(this.props.selectedColor.selectedColor);
+  	// this.setSliders(this.props.selectedColor.selectedColor);
   }
 
   setSliders(colorNum) {
 		// const { selectedColorNum } = this.props;
-  	console.log("set sliders for #", colorNum);
+  	// console.log("set sliders for #", colorNum);
   }
 
   handleHueSlider(event, value) {
@@ -117,8 +117,8 @@ class ColorPicker extends Component {
 	}
 }
 
-function mapStateToProps({ values, selectedColor }) {
-	return { values, selectedColor };
+function mapStateToProps({ values }) {
+	return { values };
 }
 
 export default connect(mapStateToProps)(ColorPicker);
