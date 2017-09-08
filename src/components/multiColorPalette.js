@@ -21,7 +21,7 @@ class MultiColorPalette extends Component {
 		this.showColorPicker = this.showColorPicker.bind(this);
 	}
 	componentWillMount() {
-		const { setSelectedColor } = this.props;
+		// const { setSelectedColor } = this.props;
 		// this.props.setCurrentColorPalette(currentPattern.customColors);
 		if (checkEmptyObj(this.props.selectedColor)) setSelectedColor(0);
 	}
@@ -32,7 +32,6 @@ class MultiColorPalette extends Component {
 	}
 
 	showColorPicker() {
-		// console.log("turn on color picker" );
 		this.setState({
 			showEditBtn: false,
 			showColorPicker: true
@@ -43,7 +42,6 @@ class MultiColorPalette extends Component {
 		this.setState({showColorPicker: false});
 		colorNum > 7 ? this.setState({showEditBtn: true}) : this.setState({showEditBtn: false});
 		this.props.setSelectedColor(colorNum);
-		// console.log("selected color #", colorNum);
 	}
 
 	pickColor(colorNum) {
@@ -74,7 +72,6 @@ class MultiColorPalette extends Component {
 
 	renderDefaultColors() {
 		const { colorPalette, selectedColor } = this.props;
-		// console.log("colorPalette", colorPalette);
 		const currentColorNum = this.props.selectedColor.selectedColor;
 		const styles = this.getStyles();
 
@@ -157,11 +154,8 @@ class MultiColorPalette extends Component {
 				display: 'flex'
 			},
 			editBtn: {
-				// width: ,
 				position: 'absolute',
 				left: editBtnPosition
-				// display: 'flex',
-				// justifyContent: 'center'
 			},
 			colorPicker: {
 				display: 'flex',
