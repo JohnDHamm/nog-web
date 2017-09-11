@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentPattern, setCurrentLights, setCurrentColorPalette, saveLights } from '../actions';
+import { setCurrentPattern, setCurrentLights, setCurrentColorPalette, savePattern } from '../actions';
 
 import PatternInfo from '../components/patternInfo';
 import SingleColorPalette from '../components/singleColorPalette';
@@ -35,27 +35,30 @@ class PatternSnowflake extends Component {
 		// console.log("this.props", this.props);
 	}
 
-	savePattern() { //saves lights(instances) only currently
+	saveChanges() {
 		// console.log("saving:", this.props.currentPattern);
 		// console.log("this.props.currentLights", this.props.currentLights);
 		const numInstances = this.props.currentPattern.numInstances;
-		const newArrayToSave = [];
+		const newInstancesArray = [];
 		for( let instNum = 0; instNum < numInstances; instNum++ ) {
 			const newObj = {};
 			newObj.instanceNum = instNum;
 			newObj.lightsColor = [];
 			for ( let lightNum = 0; lightNum < 30; lightNum++) {
-				// console.log("this.props", this.props);
 				newObj.lightsColor.push(this.props.currentLights[lightNum][instNum].colorNum);
 			}
-			newArrayToSave.push(newObj);
+			newInstancesArray.push(newObj);
 		}
-		// console.log("newArrayToSave", newArrayToSave);
+		const newColorsArray =[];
+		for (let i = 8; i < 16; i++) {
+			newColorsArray.push(this.props.currentColorPalette[i].colorVal);
+		}
 		const updateObj = {
 			_id: this.props.currentPattern._id,
-			instances: newArrayToSave
+			instances: newInstancesArray,
+			customColors: newColorsArray
 		}
-		this.props.saveLights(updateObj, (res) => {
+		this.props.savePattern(updateObj, (res) => {
 			// console.log("res", res);
 		})
 	}
@@ -124,7 +127,7 @@ class PatternSnowflake extends Component {
 						</div>
 						<div
 							style={styles.saveBtn}
-							onClick={this.savePattern.bind(this)}>
+							onClick={this.saveChanges.bind(this)}>
 							<ButtonText
 								label={'Save Changes'}
 								color={values.nogRed}
@@ -160,4 +163,4 @@ function mapStateToProps({ userPatterns, currentPattern, currentLights, currentC
 	return { userPatterns, currentPattern, currentLights, currentColorPalette, values };
 }
 
-export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, setCurrentColorPalette, saveLights })(PatternSnowflake);
+export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, setCurrentColorPalette, savePattern })(PatternSnowflake);

@@ -131,7 +131,7 @@ export function updateDefaultSpeed(obj, callback) {
 	}
 }
 
-export function saveLights(obj, callback) {
+export function savePattern(obj, callback) {
 	const request = axios.patch(`${ROOT_URL}/userpattern`, obj)
 		.then((res) => callback(res));
 	return {
