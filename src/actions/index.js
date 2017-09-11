@@ -3,6 +3,7 @@ export const GET_NOG_TYPES = 'get_nog_types';
 export const SET_CURRENT_PATTERN = 'set_current_pattern';
 export const UPDATE_LIGHT = 'update_light';
 export const SET_CURRENT_COLOR_PALETTE = 'set_current_color_palette';
+export const UPDATE_CURRENT_COLOR_PALETTE = 'update_current_color_palette';
 export const SET_SELECTED_COLOR = 'set_selected_color';
 export const SET_LIGHTS = 'set_lights';
 export const UPDATE_DEFAULT_SPEED = 'update_default_speed';
@@ -81,6 +82,13 @@ export function setCurrentColorPalette(customColorsArray) {
 	}
 }
 
+export function updateCurrentColorPalette(obj) {
+	return {
+		type: UPDATE_CURRENT_COLOR_PALETTE,
+		payload: obj
+	}
+}
+
 export function setCurrentLights(currentPattern) {
 	let currentLights = {};
 	for (let lightNum = 0; lightNum < 30; lightNum++) {
@@ -154,3 +162,4 @@ export function postNewPattern(obj, callback) {
 		payload: request
 	}
 }
+
