@@ -7,7 +7,7 @@ import EmptyColor from './emptyColor';
 import ColorPicker from './colorPicker';
 import ButtonText from './button_text';
 
-import { setSelectedColor } from '../actions';
+import { setSelectedColor, updateCurrentColorPalette } from '../actions';
 
 import { checkEmptyObj } from '../helpers/checkEmptyObj';
 
@@ -45,8 +45,18 @@ class MultiColorPalette extends Component {
 	}
 
 	pickColor(colorNum) {
-		console.log("select a color for #", colorNum);
-		//color picker component?
+		this.setState({showColorPicker: false});
+		Promise.resolve()
+			.then(() => this.props.setSelectedColor(colorNum) )
+			.then(() => {
+				const defColorObj = {
+					colorNum: colorNum,
+					colorVal: '#00FFFF'
+				};
+				this.props.updateCurrentColorPalette(defColorObj);
+			})
+			.then(() => this.showColorPicker())
+			.catch(console.error)
 	}
 
 	getStyles() {
@@ -196,6 +206,6 @@ function mapStateToProps({ selectedColor, values }) {
 	return { selectedColor, values };
 }
 
-export default connect(mapStateToProps, { setSelectedColor })(MultiColorPalette);
+export default connect(mapStateToProps, { setSelectedColor, updateCurrentColorPalette })(MultiColorPalette);
 
 
