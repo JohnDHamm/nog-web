@@ -1,5 +1,9 @@
+import hexToHsl from 'hex-to-hsl';
+import hslToHex from '@davidmarkclements/hsl-to-hex';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import { updateCurrentColorPalette } from '../actions';
 
 import ButtonText from './button_text';
 
@@ -23,30 +27,33 @@ class ColorPicker extends Component {
 
   componentWillMount() {
 		const { selectedColorNum } = this.props;
-		console.log("selectedColorNum", selectedColorNum);
 		//get color val (hex) from selectedColorNum
 		const colorHex = this.getColor(selectedColorNum);
-		console.log("colorHex", colorHex);
 		//convert hex to hsl
-
-		//setState({hueSlider: , valueSlider: })
-  	this.setState({hueSlider: 1, valueSlider: 50})
+		const colorHsl = hexToHsl(colorHex);
+		this.setState({hueSlider: colorHsl[0], valueSlider: colorHsl[2]})
   }
 
+  updatePalette() {
+  	const newHex = hslToHex(this.state.hueSlider, 100, this.state.valueSlider);
+  	const newObj = {
+  		colorNum: this.props.selectedColorNum,
+  		colorVal: newHex
+  	}
+  	this.props.updateCurrentColorPalette(newObj);
+  	//save to db?
+  }
 
   handleHueSlider(event, value) {
   	// this.setState({ colorHasChanged: true });
   	this.setState({hueSlider: value});
-  	// console.log("this.state", this.state);
-  	//update store: currentColorPalette? after convert from hsl to hex
-  	//save to db?
+  	this.updatePalette();
   }
 
   handleValueSlider(event, value) {
   	// this.setState({ colorHasChanged: true });
   	this.setState({valueSlider: value});
-  	//update store: currentColorPalette? after convert from hsl to hex
-  	//save to db?
+  	this.updatePalette();
   }
 
 
@@ -116,4 +123,4 @@ function mapStateToProps({ values, currentColorPalette }) {
 	return { values, currentColorPalette };
 }
 
-export default connect(mapStateToProps)(ColorPicker);
+export default connect(mapStateToProps, { updateCurrentColorPalette })(ColorPicker);
