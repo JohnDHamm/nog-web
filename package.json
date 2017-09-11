@@ -29,6 +29,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-1": "^6.1.18",
     "express": "^4.15.3",
+    "hex-to-hsl": "^1.0.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.7",
     "react": "^15.5.4",

@@ -1,3 +1,4 @@
+import hexToHsl from 'hex-to-hsl';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -23,14 +24,11 @@ class ColorPicker extends Component {
 
   componentWillMount() {
 		const { selectedColorNum } = this.props;
-		console.log("selectedColorNum", selectedColorNum);
 		//get color val (hex) from selectedColorNum
 		const colorHex = this.getColor(selectedColorNum);
-		console.log("colorHex", colorHex);
 		//convert hex to hsl
-
-		//setState({hueSlider: , valueSlider: })
-  	this.setState({hueSlider: 1, valueSlider: 50})
+		const colorHsl = hexToHsl(colorHex);
+		this.setState({hueSlider: colorHsl[0], valueSlider: colorHsl[2]})
   }
 
 
