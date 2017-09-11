@@ -150,7 +150,7 @@ class MultiColorPalette extends Component {
 	render() {
 		const { values } = this.props;
 		const { selectedColor } = this.props.selectedColor;
-		const editBtnPosition = (selectedColor - 8) * 45 - 6;
+		const editBtnPosition = (selectedColor - 8) * 45 + 14;
 		const styles = {
 			root: {
 				marginTop: 20,
@@ -186,7 +186,7 @@ class MultiColorPalette extends Component {
 						onClick={this.showColorPicker}
 						>
 						<ButtonText
-							label={'Edit Color'}
+							label={'edit'}
 							color={values.nogGrayText} />
 					</div>
 				}
