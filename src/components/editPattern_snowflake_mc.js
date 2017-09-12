@@ -18,12 +18,16 @@ class EditPatternSnowflakeMC extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	displayArray: [ null, null, null, 0, 1, 2, 3 ]
+    	displayArray: [ null, null, null, 0, 1, 2, 3 ],
+    	copiedInstance: [],
+    	showPasteOption: false
     };
     this.navStart = this.navStart.bind(this);
     this.navPrev = this.navPrev.bind(this);
     this.navNext = this.navNext.bind(this);
     this.navEnd = this.navEnd.bind(this);
+    this.copyInstance = this.copyInstance.bind(this);
+    this.pasteInstance = this.pasteInstance.bind(this);
     this.addInstance = this.addInstance.bind(this);
     this.deleteInstance = this.deleteInstance.bind(this);
     this.fillAll = this.fillAll.bind(this);
@@ -143,6 +147,22 @@ class EditPatternSnowflakeMC extends Component {
 		this.updateAllLights(7);
 	}
 
+	copyInstance() {
+		const instNum = this.state.displayArray[3];
+		const copiedLightsArray = [];
+		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+			copiedLightsArray.push(this.props.currentLights[lightNum][instNum].colorNum)
+		}
+		this.setState({
+			copiedInstance: copiedLightsArray,
+			showPasteOption: true
+		})
+	}
+
+	pasteInstance() {
+		console.log("paste instance", this.state.copiedInstance );
+	}
+
 
 	render() {
 		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
@@ -152,28 +172,40 @@ class EditPatternSnowflakeMC extends Component {
 			root: {
 				position: 'relative'
 			},
-			addBtn: {
+			fillAllBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize -40,
 				left: optionBtnLeft
 			},
-			deleteBtn: {
+			clearAllBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize -10,
 				left: optionBtnLeft
 			},
-			fillAllBtn: {
+			copyBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize + 20,
 				left: optionBtnLeft
 			},
-			clearAllBtn: {
+			pasteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize + 50,
+				left: optionBtnLeft
+			},
+			addBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize + 80,
+				left: optionBtnLeft
+			},
+			deleteBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize + 110,
 				left: optionBtnLeft
 			}
 		};
@@ -272,22 +304,6 @@ class EditPatternSnowflakeMC extends Component {
 				}
 
 				<div
-					style={styles.addBtn}
-					onClick={this.addInstance} >
-					<ButtonText
-						label={'Add Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
-				</div>
-				<div
-					style={styles.deleteBtn}
-					onClick={this.deleteInstance} >
-					<ButtonText
-						label={'Delete Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
-				</div>
-				<div
 					style={styles.fillAllBtn}
 					onClick={this.fillAll} >
 					<ButtonText
@@ -300,6 +316,40 @@ class EditPatternSnowflakeMC extends Component {
 					onClick={this.clearAll} >
 					<ButtonText
 						label={'Clear All Lights'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				<div
+					style={styles.copyBtn}
+					onClick={this.copyInstance} >
+					<ButtonText
+						label={'Copy Instance'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				{this.state.showPasteOption &&
+					<div
+						style={styles.pasteBtn}
+						onClick={this.pasteInstance} >
+						<ButtonText
+							label={'Paste Instance'}
+							color={values.nogGrayText}
+							bgColor={'#000'} />
+					</div>
+				}
+				<div
+					style={styles.addBtn}
+					onClick={this.addInstance} >
+					<ButtonText
+						label={'Add Instance'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				<div
+					style={styles.deleteBtn}
+					onClick={this.deleteInstance} >
+					<ButtonText
+						label={'Delete Instance'}
 						color={values.nogGrayText}
 						bgColor={'#000'} />
 				</div>
