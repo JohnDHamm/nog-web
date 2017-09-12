@@ -160,7 +160,16 @@ class EditPatternSnowflakeMC extends Component {
 	}
 
 	pasteInstance() {
-		console.log("paste instance", this.state.copiedInstance );
+		const instNum = this.state.displayArray[3];
+		for (let lightNum = 0; lightNum < 30; lightNum ++ ) {
+			const obj = Object.assign({}, this.props.currentLights[lightNum]);
+			obj.lightNum = lightNum;
+			obj[instNum] = {
+				'instanceNum': instNum,
+				'colorNum': this.state.copiedInstance[lightNum]
+			};
+			this.props.updateLight(obj);
+		}
 	}
 
 
@@ -328,21 +337,21 @@ class EditPatternSnowflakeMC extends Component {
 						bgColor={'#000'} />
 				</div>
 				{this.state.showPasteOption ? (
-					<div
-						style={styles.pasteBtn}
-						onClick={this.pasteInstance} >
-						<ButtonText
-							label={'Paste Instance'}
-							color={values.nogGrayText}
-							bgColor={'#000'} />
-					</div>
+						<div
+							style={styles.pasteBtn}
+							onClick={this.pasteInstance} >
+							<ButtonText
+								label={'Paste Instance'}
+								color={values.nogGrayText}
+								bgColor={'#000'} />
+						</div>
 					) : (
-					<div style={styles.pasteBtn}>
-						<ButtonText
-							label={'Paste Instance'}
-							color={'#222'}
-							bgColor={'#000'} />
-					</div>
+						<div style={styles.pasteBtn}>
+							<ButtonText
+								label={'Paste Instance'}
+								color={'#222'}
+								bgColor={'#000'} />
+						</div>
 					)
 				}
 				<div
