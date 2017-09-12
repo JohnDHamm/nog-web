@@ -327,7 +327,7 @@ class EditPatternSnowflakeMC extends Component {
 						color={values.nogGrayText}
 						bgColor={'#000'} />
 				</div>
-				{this.state.showPasteOption &&
+				{this.state.showPasteOption ? (
 					<div
 						style={styles.pasteBtn}
 						onClick={this.pasteInstance} >
@@ -336,6 +336,14 @@ class EditPatternSnowflakeMC extends Component {
 							color={values.nogGrayText}
 							bgColor={'#000'} />
 					</div>
+					) : (
+					<div style={styles.pasteBtn}>
+						<ButtonText
+							label={'Paste Instance'}
+							color={'#222'}
+							bgColor={'#000'} />
+					</div>
+					)
 				}
 				<div
 					style={styles.addBtn}
