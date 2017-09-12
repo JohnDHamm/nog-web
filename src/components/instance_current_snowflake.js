@@ -167,7 +167,8 @@ class InstanceCurrentSnowflake extends Component {
 				height: lightDia,
 				borderRadius: '50%',
 				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
-				position: 'absolute'
+				position: 'absolute',
+				cursor: 'pointer'
 			}
 		}
 

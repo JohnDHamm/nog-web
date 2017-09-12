@@ -23,7 +23,7 @@ class MultiColorPalette extends Component {
 	componentWillMount() {
 		// const { setSelectedColor } = this.props;
 		// this.props.setCurrentColorPalette(currentPattern.customColors);
-		if (checkEmptyObj(this.props.selectedColor)) setSelectedColor(0);
+		if (checkEmptyObj(this.props.selectedColor)) this.props.setSelectedColor(0);
 	}
 
 	componentDidMount() {
@@ -68,14 +68,16 @@ class MultiColorPalette extends Component {
 				borderRadius: '50%',
 				marginLeft: 5,
 				border: `3px solid ${values.nogBackground}`,
-				boxShadow: '0px 0px 0px 1px white'
+				boxShadow: '0px 0px 0px 1px white',
+				cursor: 'pointer'
 			},
 			unselected: {
 				width: 40,
 				height: 40,
 				borderRadius: '50%',
 				marginLeft: 5,
-				border: '1px solid #333'
+				border: '1px solid #333',
+				cursor: 'pointer'
 			}
 		}
 	}
