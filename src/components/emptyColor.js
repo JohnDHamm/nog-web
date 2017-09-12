@@ -13,6 +13,7 @@ class EmptyColor extends Component {
 				marginLeft: 5,
 				border: `1px dotted ${values.nogGrayText}`,
 				backgroundColor: `${values.nogBackground}`,
+				cursor: 'pointer'
 			},
 			plus: {
 				color: `${values.nogGrayText}`,
