@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateCurrentLights, updateNumInstances } from '../actions';
+import { updateCurrentLights, updateNumInstances, updateLight } from '../actions';
 
 import InstanceSnowflake from './instance_snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
@@ -26,6 +26,9 @@ class EditPatternSnowflakeMC extends Component {
     this.navEnd = this.navEnd.bind(this);
     this.addInstance = this.addInstance.bind(this);
     this.deleteInstance = this.deleteInstance.bind(this);
+    this.fillAll = this.fillAll.bind(this);
+    this.clearAll = this.clearAll.bind(this);
+
   }
 
 	componentWillMount() {
@@ -117,6 +120,28 @@ class EditPatternSnowflakeMC extends Component {
 		}
 	}
 
+	updateAllLights(colorNum) {
+		const instNum = this.state.displayArray[3];
+		for (let lightNum = 0; lightNum < 30; lightNum ++) {
+			const obj = Object.assign({}, this.props.currentLights[lightNum]);
+			obj.lightNum = lightNum;
+			obj[instNum] = {
+				'instanceNum': instNum,
+				'colorNum': colorNum
+			}
+			this.props.updateLight(obj);
+		}
+	}
+
+	fillAll() {
+		const fillColorNum = this.props.selectedColor.selectedColor;
+		this.updateAllLights(fillColorNum);
+	}
+
+	clearAll() {
+		//colorNum 7 is black/'off'
+		this.updateAllLights(7);
+	}
 
 
 	render() {
@@ -137,6 +162,18 @@ class EditPatternSnowflakeMC extends Component {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize -10,
+				left: optionBtnLeft
+			},
+			fillAllBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize + 20,
+				left: optionBtnLeft
+			},
+			clearAllBtn: {
+				position: 'absolute',
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize + 50,
 				left: optionBtnLeft
 			}
 		};
@@ -250,14 +287,30 @@ class EditPatternSnowflakeMC extends Component {
 						color={values.nogGrayText}
 						bgColor={'#000'} />
 				</div>
+				<div
+					style={styles.fillAllBtn}
+					onClick={this.fillAll} >
+					<ButtonText
+						label={'Fill All Lights'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
+				<div
+					style={styles.clearAllBtn}
+					onClick={this.clearAll} >
+					<ButtonText
+						label={'Clear All Lights'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
+				</div>
 			</div>
 		);
 	}
 }
 
-function mapStateToProps({ currentPattern, currentLights, values }) {
-	return { currentPattern, currentLights, values };
+function mapStateToProps({ currentPattern, currentLights, values, selectedColor }) {
+	return { currentPattern, currentLights, values, selectedColor };
 }
 
-export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances })(EditPatternSnowflakeMC);
+export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances, updateLight })(EditPatternSnowflakeMC);
 
