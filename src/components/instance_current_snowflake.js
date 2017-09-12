@@ -26,8 +26,10 @@ class InstanceCurrentSnowflake extends Component {
 		const { selectedColor } = this.props.selectedColor;
 		const obj = Object.assign({}, this.props.currentLights[lightNum]);
 		obj.lightNum = lightNum;
-		obj[this.props.instanceNumber] = { 'instanceNum': this.props.instanceNumber, 'colorNum': selectedColor};
-
+		obj[this.props.instanceNumber] = {
+			'instanceNum': this.props.instanceNumber,
+			'colorNum': selectedColor
+		};
 		this.props.updateLight(obj)
 	}
 
