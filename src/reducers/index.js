@@ -7,8 +7,6 @@ import CurrentPattern from './reducer_current_pattern';
 import CurrentLights from './reducer_lights';
 import CurrentColorPalette from './reducer_current_color_palette';
 import SelectedColor from './reducer_selected_color';
-import Values from './reducer_values';
-
 
 const rootReducer = combineReducers({
 	user: UserReducer,
@@ -17,8 +15,7 @@ const rootReducer = combineReducers({
 	currentPattern: CurrentPattern,
 	currentLights: CurrentLights,
 	currentColorPalette: CurrentColorPalette,
-	selectedColor: SelectedColor,
-	values: Values
+	selectedColor: SelectedColor
 });
 
 export default rootReducer;
