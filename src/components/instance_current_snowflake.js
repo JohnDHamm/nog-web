@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateLight } from '../actions';
+import values from '../styles/values';
 
 class InstanceCurrentSnowflake extends Component {
 
@@ -34,7 +35,7 @@ class InstanceCurrentSnowflake extends Component {
 	}
 
 	renderLights() {
-		const { currentLights, values, instanceNumber, instanceSize } = this.props;
+		const { currentLights, instanceNumber, instanceSize } = this.props;
 		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
 		const containerSize = instanceSize,
 			lightDia = containerSize * (20 / 420),
@@ -192,7 +193,7 @@ class InstanceCurrentSnowflake extends Component {
 	}
 
 	render() {
-		const { values, instanceSize, instanceLocation, instanceNumber } = this.props;
+		const { instanceSize, instanceLocation, instanceNumber } = this.props;
 		const containerSize = instanceSize;
 		const styles = {
 			root: {
@@ -236,8 +237,8 @@ class InstanceCurrentSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentColorPalette, selectedColor, currentLights, values }) {
-	return { currentColorPalette, selectedColor,currentLights, values };
+function mapStateToProps({ currentColorPalette, selectedColor, currentLights }) {
+	return { currentColorPalette, selectedColor,currentLights };
 }
 
 export default connect(mapStateToProps, { updateLight })(InstanceCurrentSnowflake);

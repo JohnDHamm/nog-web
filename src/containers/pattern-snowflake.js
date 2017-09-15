@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { setCurrentPattern, setCurrentLights, setCurrentColorPalette, savePattern } from '../actions';
 
+import values from '../styles/values';
+
 import PatternInfo from '../components/patternInfo';
 import SingleColorPalette from '../components/singleColorPalette';
 import MultiColorPalette from '../components/multiColorPalette';
@@ -66,7 +68,6 @@ class PatternSnowflake extends Component {
 	render() {
 		// console.log("render this.props from pattern-snowflake container", this.props);
 		const pattern = this.props.currentPattern;
-		const { values } = this.props;
 		const currentInstanceTopMargin = 120;
 		const currentInstanceSize = 400;
 		const styles = {
@@ -159,8 +160,8 @@ class PatternSnowflake extends Component {
 }
 
 
-function mapStateToProps({ userPatterns, currentPattern, currentLights, currentColorPalette, values }) {
-	return { userPatterns, currentPattern, currentLights, currentColorPalette, values };
+function mapStateToProps({ userPatterns, currentPattern, currentLights, currentColorPalette }) {
+	return { userPatterns, currentPattern, currentLights, currentColorPalette };
 }
 
 export default connect(mapStateToProps, { setCurrentPattern, setCurrentLights, setCurrentColorPalette, savePattern })(PatternSnowflake);

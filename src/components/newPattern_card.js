@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import values from '../styles/values';
+
 class NewPatternCard extends Component {
 
 	render() {
-		const { values } = this.props;
 		const styles = {
 			root: {
 				position: 'relative',
@@ -35,8 +36,4 @@ class NewPatternCard extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(NewPatternCard);
+export default NewPatternCard;

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { updateCurrentColorPalette } from '../actions';
 
+// import values from '../styles/values';
 import ButtonText from './button_text';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -119,8 +120,8 @@ class ColorPicker extends Component {
 	}
 }
 
-function mapStateToProps({ values, currentColorPalette }) {
-	return { values, currentColorPalette };
+function mapStateToProps({ currentColorPalette }) {
+	return { currentColorPalette };
 }
 
 export default connect(mapStateToProps, { updateCurrentColorPalette })(ColorPicker);

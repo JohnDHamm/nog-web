@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { postNewPattern, addUserPattern } from '../actions';
 
+import values from '../styles/values';
+
 import ButtonText from '../components/button_text';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -73,7 +75,6 @@ class PatternCreate extends Component {
 
 
 	render() {
-		const { values } = this.props;
 		const styles = {
 			title: {
 				marginTop: 20
@@ -125,19 +126,8 @@ class PatternCreate extends Component {
 	}
 }
 
-function mapStateToProps({ values, user, userPatterns, nogTypes }) {
-	return { values, user, userPatterns, nogTypes };
+function mapStateToProps({ user, userPatterns, nogTypes }) {
+	return { user, userPatterns, nogTypes };
 }
 
 export default withRouter(connect(mapStateToProps, {postNewPattern, addUserPattern })(PatternCreate));
-
-
-
-// <div
-// 								onClick={this.createPattern}
-// 								style={styles.createBtn}>
-// 								<ButtonText
-// 									label={"Create New Pattern"}
-// 									color={values.nogGreen}
-// 									/>
-// 							</div>

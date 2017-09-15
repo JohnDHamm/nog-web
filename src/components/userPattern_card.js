@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import values from '../styles/values';
+
 class UserPatternCard extends Component {
 
 	render() {
-		const { values, name, description, nogType, singleColor } = this.props;
+		const { name, description, nogType, singleColor } = this.props;
 		const iconUrl = `url(../src/img/patternIcons/patternIcon-${nogType}.png)`;
 		const styles = {
 			root: {
@@ -64,8 +66,4 @@ class UserPatternCard extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(UserPatternCard);
+export default UserPatternCard;

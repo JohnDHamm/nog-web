@@ -3,6 +3,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import values from '../styles/values';
+
 import EmptyColor from './emptyColor';
 import ColorPicker from './colorPicker';
 import ButtonText from './button_text';
@@ -21,14 +23,7 @@ class MultiColorPalette extends Component {
 		this.showColorPicker = this.showColorPicker.bind(this);
 	}
 	componentWillMount() {
-		// const { setSelectedColor } = this.props;
-		// this.props.setCurrentColorPalette(currentPattern.customColors);
 		if (checkEmptyObj(this.props.selectedColor)) this.props.setSelectedColor(0);
-	}
-
-	componentDidMount() {
-		//testing if component remounts when color picker updates a color in store
-		// console.log("MC color palette mounted");
 	}
 
 	showColorPicker() {
@@ -60,7 +55,6 @@ class MultiColorPalette extends Component {
 	}
 
 	getStyles() {
-		const { values } = this.props;
 		return {
 			selected: {
 				width: 60,
@@ -150,7 +144,6 @@ class MultiColorPalette extends Component {
 	}
 
 	render() {
-		const { values } = this.props;
 		const { selectedColor } = this.props.selectedColor;
 		const editBtnPosition = (selectedColor - 8) * 45 + 14;
 		const styles = {
@@ -204,10 +197,8 @@ class MultiColorPalette extends Component {
 	}
 }
 
-function mapStateToProps({ selectedColor, values }) {
-	return { selectedColor, values };
+function mapStateToProps({ selectedColor }) {
+	return { selectedColor };
 }
 
 export default connect(mapStateToProps, { setSelectedColor, updateCurrentColorPalette })(MultiColorPalette);
-
-
