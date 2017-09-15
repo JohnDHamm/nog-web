@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import values from '../styles/values';
+
 class InstancePlaybackSnowflake extends Component {
 
 	getColor(colNum) {
@@ -20,7 +22,7 @@ class InstancePlaybackSnowflake extends Component {
 	}
 
 	renderLights() {
-		const { currentLights, values, instanceNumber, instanceSize } = this.props;
+		const { currentLights, instanceNumber, instanceSize } = this.props;
 		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
 
 		const containerSize = instanceSize,
@@ -176,7 +178,7 @@ class InstancePlaybackSnowflake extends Component {
 	}
 
 	render() {
-		const { values, instanceNumber, instanceSize, instanceLocation } = this.props;
+		const { instanceNumber, instanceSize, instanceLocation } = this.props;
 		const containerSize = instanceSize;
 		const styles = {
 			root: {
@@ -220,8 +222,8 @@ class InstancePlaybackSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentColorPalette, currentLights, values }) {
-	return { currentColorPalette, currentLights, values };
+function mapStateToProps({ currentColorPalette, currentLights }) {
+	return { currentColorPalette, currentLights };
 }
 
 export default connect(mapStateToProps)(InstancePlaybackSnowflake);

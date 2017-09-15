@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+
+import values from '../styles/values';
 
 class EmptyColor extends Component {
 
 	render() {
-		const { values } = this.props;
 		const styles = {
 			root: {
 				width: 40,
@@ -31,8 +31,4 @@ class EmptyColor extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(EmptyColor);
+export default EmptyColor;

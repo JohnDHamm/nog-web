@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+import values from '../styles/values';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
@@ -19,7 +21,6 @@ import Avatar from 'material-ui/Avatar';
 class Navbar extends Component {
 
 	render() {
-		const { values } = this.props;
 		const { user } = this.props.user;
 
 		const styles = {
@@ -65,8 +66,8 @@ class Navbar extends Component {
 	}
 }
 
-function mapStateToProps({ user, values }) {
-	return { user, values };
+function mapStateToProps({ user }) {
+	return { user };
 }
 
 export default connect(mapStateToProps)(Navbar);

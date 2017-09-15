@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { updateCurrentLights, updateNumInstances, updateLight } from '../actions';
 
+import values from '../styles/values';
 import InstanceSnowflake from './instance_snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
@@ -174,7 +175,7 @@ class EditPatternSnowflakeMC extends Component {
 
 
 	render() {
-		const { values, currentInstanceSize, currentInstanceTopMargin } = this.props;
+		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const optionBtnWidth = 150,
 			optionBtnLeft = 'calc(50% + 100px)';
 		const styles = {
@@ -375,8 +376,8 @@ class EditPatternSnowflakeMC extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentLights, values, selectedColor }) {
-	return { currentPattern, currentLights, values, selectedColor };
+function mapStateToProps({ currentPattern, currentLights, selectedColor }) {
+	return { currentPattern, currentLights, selectedColor };
 }
 
 export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances, updateLight })(EditPatternSnowflakeMC);

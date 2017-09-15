@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { updateDefaultSpeed } from '../actions';
 
+import values from '../styles/values';
+
 import InstancePlaybackSnowflake from './instance_playback_snowflake';
 import ButtonText from './button_text';
 
@@ -65,7 +67,7 @@ class PlaybackSnowflake extends Component {
 
 	render() {
 		const pattern = this.props.currentPattern;
-		const { values, playbackInstanceSize, playbackInstanceTopMargin } = this.props;
+		const { playbackInstanceSize, playbackInstanceTopMargin } = this.props;
 		const styles = {
 			root: {
 				backgroundColor: `${values.nogBackground}`,
@@ -141,8 +143,8 @@ class PlaybackSnowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, values }) {
-	return { currentPattern, values };
+function mapStateToProps({ currentPattern }) {
+	return { currentPattern };
 }
 
 export default connect(mapStateToProps, { updateDefaultSpeed })(PlaybackSnowflake);

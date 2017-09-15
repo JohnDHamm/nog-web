@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+
+import values from '../styles/values';
 
 class PatternInfo extends Component {
 
 	render() {
-		const { name, description, defaultSpeed, values } = this.props;
+		const { name, description, defaultSpeed } = this.props;
 		const styles = {
 			label: {
 				color: `${values.nogGrayText}`
@@ -30,8 +31,4 @@ class PatternInfo extends Component {
 	}
 }
 
-function mapStateToProps({ values }) {
-	return { values };
-}
-
-export default connect(mapStateToProps)(PatternInfo);
+export default PatternInfo;
