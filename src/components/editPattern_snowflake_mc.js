@@ -265,12 +265,12 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{this.state.displayArray[3] !== null && <InstanceCurrentSnowflake
+				<InstanceCurrentSnowflake
 					instanceNumber={this.state.displayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{
 						top: currentInstanceTopMargin,
-						left: `calc(50% - ${currentInstanceSize / 2}px`}} />}
+						left: `calc(50% - ${currentInstanceSize / 2}px`}} />
 
 				{this.state.displayArray[4] !== null &&
 					<div onClick={this.navNext}>
