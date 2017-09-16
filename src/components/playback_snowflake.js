@@ -5,7 +5,7 @@ import { updateDefaultSpeed } from '../actions';
 
 import values from '../styles/values';
 
-import InstancePlaybackSnowflake from './instance_playback_snowflake';
+import Snowflake from './snowflake';
 import ButtonText from './button_text';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -103,7 +103,8 @@ class PlaybackSnowflake extends Component {
 			<MuiThemeProvider>
 				<div style={styles.root}>
 
-					<InstancePlaybackSnowflake
+					<Snowflake
+						instanceType={'playback'}
 						instanceNumber={this.state.displayInstance}
 						instanceSize={this.props.playbackInstanceSize}
 						instanceLocation={{

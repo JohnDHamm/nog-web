@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { updateCurrentLights, updateNumInstances, updateLight } from '../actions';
 
 import values from '../styles/values';
-import InstanceSnowflake from './instance_snowflake';
+import Snowflake from './snowflake';
 import InstanceCurrentSnowflake from './instance_current_snowflake';
 import NavigateNextBtn from './navigate_nextBtn';
 import NavigatePrevBtn from './navigate_prevBtn';
@@ -235,19 +235,25 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{this.state.displayArray[0] !== null && <InstanceSnowflake
+				{this.state.displayArray[0] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[0]}
 					instanceSize={currentInstanceSize / 8}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 7 / 16),
 						left: `calc(50% - ${currentInstanceSize * 1.375}px - 40px`}} />}
-				{this.state.displayArray[1] !== null && <InstanceSnowflake
+				{this.state.displayArray[1] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[1]}
 					instanceSize={currentInstanceSize / 4}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 3 / 8),
 						left: `calc(50% - ${currentInstanceSize * 1.25}px - 40px`}} />}
-				{this.state.displayArray[2] !== null && <InstanceSnowflake
+				{this.state.displayArray[2] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[2]}
 					instanceSize={currentInstanceSize / 2}
 					instanceLocation={{
@@ -265,12 +271,12 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{this.state.displayArray[3] !== null && <InstanceCurrentSnowflake
+				<InstanceCurrentSnowflake
 					instanceNumber={this.state.displayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{
 						top: currentInstanceTopMargin,
-						left: `calc(50% - ${currentInstanceSize / 2}px`}} />}
+						left: `calc(50% - ${currentInstanceSize / 2}px`}} />
 
 				{this.state.displayArray[4] !== null &&
 					<div onClick={this.navNext}>
@@ -283,19 +289,25 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				{this.state.displayArray[4] !== null && <InstanceSnowflake
+				{this.state.displayArray[4] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[4]}
 					instanceSize={currentInstanceSize / 2}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize / 4),
 						left: `calc(50% + ${currentInstanceSize / 2}px + 40px`}} />}
-				{this.state.displayArray[5] !== null && <InstanceSnowflake
+				{this.state.displayArray[5] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[5]}
 					instanceSize={currentInstanceSize / 4}
 					instanceLocation={{
 						top: currentInstanceTopMargin + (currentInstanceSize * 3 / 8),
 						left: `calc(50% + ${currentInstanceSize}px + 40px`}} />}
-				{this.state.displayArray[6] !== null && <InstanceSnowflake
+				{this.state.displayArray[6] !== null &&
+				<Snowflake
+					instanceType={'other'}
 					instanceNumber={this.state.displayArray[6]}
 					instanceSize={currentInstanceSize / 8}
 					instanceLocation={{

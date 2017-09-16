@@ -5,7 +5,7 @@ import values from '../styles/values';
 
 import { snowflakeLightLocations } from '../helpers/snowflakeLightLocations';
 
-class InstanceSnowflake extends Component {
+class Snowflake extends Component {
 
 	getColor(colNum) {
 		const { currentColorPalette } = this.props;
@@ -59,7 +59,7 @@ class InstanceSnowflake extends Component {
 	}
 
 	render() {
-		const { instanceNumber, instanceSize, instanceLocation } = this.props;
+		const { instanceNumber, instanceSize, instanceLocation, instanceType } = this.props;
 		const containerSize = instanceSize;
 		const styles = {
 			root: {
@@ -71,7 +71,7 @@ class InstanceSnowflake extends Component {
 				position: 'relative',
 				width: containerSize,
 				height: containerSize,
-				backgroundImage: 'url(../src/img/snowflake/snowflake_otherInstance_bgImage.png',
+				backgroundImage: `url(../src/img/snowflake/snowflake_${instanceType}_bgImage.png`,
 				backgroundSize: '100% 100%'
 			},
 			labelDiv: {
@@ -106,4 +106,4 @@ function mapStateToProps({ currentColorPalette, currentLights }) {
 	return { currentColorPalette, currentLights };
 }
 
-export default connect(mapStateToProps)(InstanceSnowflake);
+export default connect(mapStateToProps)(Snowflake);
