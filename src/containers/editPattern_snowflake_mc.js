@@ -6,13 +6,9 @@ import { connect } from 'react-redux';
 import { updateCurrentLights, updateNumInstances, updateLight } from '../actions';
 
 import values from '../styles/values';
-import Snowflake from './snowflake';
-import InstanceCurrentSnowflake from './instance_current_snowflake';
-import NavigateNextBtn from './navigate_nextBtn';
-import NavigatePrevBtn from './navigate_prevBtn';
-import NavigateEndBtn from './navigate_endBtn';
-import NavigateStartBtn from './navigate_startBtn';
-import ButtonText from './button_text';
+import Snowflake from '../components/snowflake';
+import NavBtn from '../components/navBtn';
+import ButtonText from '../components/button_text';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -36,12 +32,7 @@ class EditPatternSnowflakeMC extends Component {
 
   }
 
-	componentWillMount() {
-		// console.log("editing...");
-	}
-
 	updateDisplayArray(newCurrentNum, numInstances) {
-		// console.log("numInstances", numInstances);
 		const newArray = [newCurrentNum];
 		for ( let i = 1; i < 4; i ++ ) {
 			newCurrentNum + i < numInstances ? newArray.push(newCurrentNum + i) : newArray.push(null);
@@ -226,7 +217,8 @@ class EditPatternSnowflakeMC extends Component {
 
 				{this.state.displayArray[0] !== null &&
 					<div onClick={this.navStart}>
-						<NavigateStartBtn
+						<NavBtn
+							btnType={'startBtn'}
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
 								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,
@@ -262,7 +254,8 @@ class EditPatternSnowflakeMC extends Component {
 
 				{this.state.displayArray[2] !== null &&
 					<div onClick={this.navPrev}>
-						<NavigatePrevBtn
+						<NavBtn
+							btnType={'prevBtn'}
 							btnHeight={currentInstanceSize / 6}
 							btnLocation={{
 								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
@@ -281,7 +274,8 @@ class EditPatternSnowflakeMC extends Component {
 
 				{this.state.displayArray[4] !== null &&
 					<div onClick={this.navNext}>
-						<NavigateNextBtn
+						<NavBtn
+							btnType={'nextBtn'}
 							btnHeight={currentInstanceSize / 6}
 							btnLocation={{
 								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 2.5 / 6}px)`,
@@ -317,7 +311,8 @@ class EditPatternSnowflakeMC extends Component {
 
 				{this.state.displayArray[6] !== null &&
 					<div onClick={this.navEnd}>
-						<NavigateEndBtn
+						<NavBtn
+							btnType={'endBtn'}
 							btnHeight={currentInstanceSize / 12}
 							btnLocation={{
 								top: `calc(${currentInstanceTopMargin}px + ${currentInstanceSize * 9 / 16}px + 20px)`,

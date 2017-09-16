@@ -10,7 +10,7 @@ import values from '../styles/values';
 import PatternInfo from '../components/patternInfo';
 import SingleColorPalette from '../components/singleColorPalette';
 import MultiColorPalette from '../components/multiColorPalette';
-import EditPatternSnowflakeMC from '../components/editPattern_snowflake_mc';
+import EditPatternSnowflakeMC from './editPattern_snowflake_mc';
 import PlaybackSnowflake from '../components/playback_snowflake';
 
 import ButtonPlayback from '../components/button_playback';
