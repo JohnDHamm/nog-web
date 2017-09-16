@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import values from '../styles/values';
-
+import { updateLight } from '../actions';
 import { snowflakeLightLocations } from '../helpers/snowflakeLightLocations';
+
+import values from '../styles/values';
 
 class Snowflake extends Component {
 
@@ -23,29 +24,41 @@ class Snowflake extends Component {
 		return _.mapKeys(newArray, 'lightNum');
 	}
 
-	renderLights() {
-		const { currentLights, instanceNumber, instanceSize } = this.props;
-		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
+	clickLight(lightNum) {
+		const { selectedColor } = this.props.selectedColor;
+		const obj = Object.assign({}, this.props.currentLights[lightNum]);
+		obj.lightNum = lightNum;
+		obj[this.props.instanceNumber] = {
+			'instanceNum': this.props.instanceNumber,
+			'colorNum': selectedColor
+		};
+		this.props.updateLight(obj)
+	}
 
+	renderLights() {
+		const { currentLights, instanceNumber, instanceSize, instanceType } = this.props;
+		const lightsObj = this.createNewLightsObj(currentLights, instanceNumber);
 		const containerSize = instanceSize,
 			lightDia = containerSize * (20 / 420),
 			lightOffset = lightDia / 2,
 			lightBorderSize = containerSize < 210 ? 0 : 1;
 		const lightLocations = snowflakeLightLocations(lightOffset);
-
+		const cursorStyle = ( instanceType === 'current' ) ? 'pointer' : null;
 		const styles = {
 			lightCircle: {
 				width: lightDia,
 				height: lightDia,
 				borderRadius: '50%',
 				border: `${lightBorderSize}px solid ${values.nogGrayText}`,
-				position: 'absolute'
+				position: 'absolute',
+				cursor: cursorStyle
 			}
 		}
 
 		return _.map(lightsObj, light => {
 			return (
 				<div
+					onClick={ (instanceType === 'current') ? () => this.clickLight(light.lightNum) : null }
 					key={light.lightNum}
 					style={{ ...styles.lightCircle,
 						backgroundColor: light.lightColor,
@@ -102,8 +115,8 @@ class Snowflake extends Component {
 	}
 }
 
-function mapStateToProps({ currentColorPalette, currentLights }) {
-	return { currentColorPalette, currentLights };
+function mapStateToProps({ currentColorPalette, currentLights, selectedColor }) {
+	return { currentColorPalette, currentLights, selectedColor };
 }
 
-export default connect(mapStateToProps)(Snowflake);
+export default connect(mapStateToProps, { updateLight })(Snowflake);

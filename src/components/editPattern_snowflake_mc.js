@@ -271,7 +271,8 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				<InstanceCurrentSnowflake
+				<Snowflake
+					instanceType={'current'}
 					instanceNumber={this.state.displayArray[3]}
 					instanceSize={currentInstanceSize}
 					instanceLocation={{
