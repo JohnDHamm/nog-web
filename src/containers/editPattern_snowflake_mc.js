@@ -9,6 +9,7 @@ import values from '../styles/values';
 import Snowflake from '../components/snowflake';
 import NavBtn from '../components/navBtn';
 import ButtonText from '../components/button_text';
+import ButtonFillLights from '../components/button_fillLights';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -167,46 +168,45 @@ class EditPatternSnowflakeMC extends Component {
 
 	render() {
 		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
+		const currentColor = this.props.currentColorPalette[this.props.selectedColor.selectedColor].colorVal;
 		const optionBtnWidth = 150,
-			optionBtnLeft = 'calc(50% + 100px)';
+			optionBtnLeft = 'calc(50% + 120px)';
 		const styles = {
 			root: {
 				position: 'relative'
 			},
 			fillAllBtn: {
 				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize -40,
-				left: optionBtnLeft
+				top: 50,
+				left: '50%'
 			},
 			clearAllBtn: {
 				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize -10,
-				left: optionBtnLeft
+				top: 50,
+				left: 'calc(50% + 50px)'
 			},
 			copyBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 20,
+				top: currentInstanceTopMargin + currentInstanceSize - 40,
 				left: optionBtnLeft
 			},
 			pasteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 50,
+				top: currentInstanceTopMargin + currentInstanceSize - 10,
 				left: optionBtnLeft
 			},
 			addBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 80,
+				top: currentInstanceTopMargin + currentInstanceSize + 20,
 				left: optionBtnLeft
 			},
 			deleteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 110,
+				top: currentInstanceTopMargin + currentInstanceSize + 50,
 				left: optionBtnLeft
 			}
 		};
@@ -323,19 +323,18 @@ class EditPatternSnowflakeMC extends Component {
 
 				<div
 					style={styles.fillAllBtn}
-					onClick={this.fillAll} >
-					<ButtonText
-						label={'Fill All Lights'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
+					onClick={this.fillAll}
+					>
+					<ButtonFillLights
+						btnSize={35}
+						fillColor={currentColor} />
 				</div>
 				<div
 					style={styles.clearAllBtn}
 					onClick={this.clearAll} >
-					<ButtonText
-						label={'Clear All Lights'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
+					<ButtonFillLights
+						btnSize={35}
+						fillColor={'#000'} />
 				</div>
 				<div
 					style={styles.copyBtn}
@@ -384,8 +383,8 @@ class EditPatternSnowflakeMC extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentLights, selectedColor }) {
-	return { currentPattern, currentLights, selectedColor };
+function mapStateToProps({ currentPattern, currentLights, selectedColor, currentColorPalette }) {
+	return { currentPattern, currentLights, selectedColor, currentColorPalette };
 }
 
 export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances, updateLight })(EditPatternSnowflakeMC);
