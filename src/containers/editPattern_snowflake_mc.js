@@ -170,7 +170,7 @@ class EditPatternSnowflakeMC extends Component {
 		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const currentColor = this.props.currentColorPalette[this.props.selectedColor.selectedColor].colorVal;
 		const optionBtnWidth = 150,
-			optionBtnLeft = 'calc(50% + 100px)';
+			optionBtnLeft = 'calc(50% + 120px)';
 		const styles = {
 			root: {
 				position: 'relative'
@@ -182,32 +182,31 @@ class EditPatternSnowflakeMC extends Component {
 			},
 			clearAllBtn: {
 				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize -10,
-				left: optionBtnLeft
+				top: 50,
+				left: 'calc(50% + 50px)'
 			},
 			copyBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 20,
+				top: currentInstanceTopMargin + currentInstanceSize - 40,
 				left: optionBtnLeft
 			},
 			pasteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 50,
+				top: currentInstanceTopMargin + currentInstanceSize - 10,
 				left: optionBtnLeft
 			},
 			addBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 80,
+				top: currentInstanceTopMargin + currentInstanceSize + 20,
 				left: optionBtnLeft
 			},
 			deleteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 110,
+				top: currentInstanceTopMargin + currentInstanceSize + 50,
 				left: optionBtnLeft
 			}
 		};
@@ -330,14 +329,12 @@ class EditPatternSnowflakeMC extends Component {
 						btnSize={35}
 						fillColor={currentColor} />
 				</div>
-
 				<div
 					style={styles.clearAllBtn}
 					onClick={this.clearAll} >
-					<ButtonText
-						label={'Clear All Lights'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
+					<ButtonFillLights
+						btnSize={35}
+						fillColor={'#000'} />
 				</div>
 				<div
 					style={styles.copyBtn}
