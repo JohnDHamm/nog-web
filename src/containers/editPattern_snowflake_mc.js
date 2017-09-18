@@ -9,6 +9,7 @@ import values from '../styles/values';
 import Snowflake from '../components/snowflake';
 import NavBtn from '../components/navBtn';
 import ButtonText from '../components/button_text';
+import ButtonFillLights from '../components/button_fillLights';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -173,6 +174,11 @@ class EditPatternSnowflakeMC extends Component {
 			root: {
 				position: 'relative'
 			},
+			fillBtn: {
+				position: 'absolute',
+				top: 50,
+				left: '50%'
+			},
 			fillAllBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
@@ -320,6 +326,12 @@ class EditPatternSnowflakeMC extends Component {
 							}} />
 					</div>
 				}
+
+				<div style={styles.fillBtn}>
+					<ButtonFillLights
+						btnSize={35}
+						fillColor={'#000'} />
+				</div>
 
 				<div
 					style={styles.fillAllBtn}
