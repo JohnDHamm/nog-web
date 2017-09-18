@@ -168,22 +168,17 @@ class EditPatternSnowflakeMC extends Component {
 
 	render() {
 		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
+		const currentColor = this.props.currentColorPalette[this.props.selectedColor.selectedColor].colorVal;
 		const optionBtnWidth = 150,
 			optionBtnLeft = 'calc(50% + 100px)';
 		const styles = {
 			root: {
 				position: 'relative'
 			},
-			fillBtn: {
+			fillAllBtn: {
 				position: 'absolute',
 				top: 50,
 				left: '50%'
-			},
-			fillAllBtn: {
-				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize -40,
-				left: optionBtnLeft
 			},
 			clearAllBtn: {
 				position: 'absolute',
@@ -327,20 +322,15 @@ class EditPatternSnowflakeMC extends Component {
 					</div>
 				}
 
-				<div style={styles.fillBtn}>
-					<ButtonFillLights
-						btnSize={35}
-						fillColor={'#000'} />
-				</div>
-
 				<div
 					style={styles.fillAllBtn}
-					onClick={this.fillAll} >
-					<ButtonText
-						label={'Fill All Lights'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
+					onClick={this.fillAll}
+					>
+					<ButtonFillLights
+						btnSize={35}
+						fillColor={currentColor} />
 				</div>
+
 				<div
 					style={styles.clearAllBtn}
 					onClick={this.clearAll} >
@@ -396,8 +386,8 @@ class EditPatternSnowflakeMC extends Component {
 	}
 }
 
-function mapStateToProps({ currentPattern, currentLights, selectedColor }) {
-	return { currentPattern, currentLights, selectedColor };
+function mapStateToProps({ currentPattern, currentLights, selectedColor, currentColorPalette }) {
+	return { currentPattern, currentLights, selectedColor, currentColorPalette };
 }
 
 export default connect(mapStateToProps, { updateCurrentLights, updateNumInstances, updateLight })(EditPatternSnowflakeMC);
