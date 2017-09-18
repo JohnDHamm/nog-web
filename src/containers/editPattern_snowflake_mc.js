@@ -10,6 +10,7 @@ import Snowflake from '../components/snowflake';
 import NavBtn from '../components/navBtn';
 import ButtonText from '../components/button_text';
 import ButtonFillLights from '../components/button_fillLights';
+import ButtonCopyLights from '../components/button_copyLights';
 
 class EditPatternSnowflakeMC extends Component {
 
@@ -185,6 +186,16 @@ class EditPatternSnowflakeMC extends Component {
 				top: 50,
 				left: 'calc(50% + 50px)'
 			},
+			copyBtn2: {
+				position: 'absolute',
+				top: 50,
+				left: 'calc(50% + 100px)'
+			},
+			pasteBtn2: {
+				position: 'absolute',
+				top: 50,
+				left: 'calc(50% + 150px)'
+			},
 			copyBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
@@ -323,8 +334,7 @@ class EditPatternSnowflakeMC extends Component {
 
 				<div
 					style={styles.fillAllBtn}
-					onClick={this.fillAll}
-					>
+					onClick={this.fillAll} >
 					<ButtonFillLights
 						btnSize={35}
 						fillColor={currentColor} />
@@ -336,6 +346,20 @@ class EditPatternSnowflakeMC extends Component {
 						btnSize={35}
 						fillColor={'#000'} />
 				</div>
+
+				<div
+					style={styles.copyBtn2}>
+					<ButtonCopyLights
+						type={'copy'}
+						btnSize={35} />
+				</div>
+				<div
+					style={styles.pasteBtn2}>
+					<ButtonCopyLights
+						type={'paste'}
+						btnSize={35} />
+				</div>
+
 				<div
 					style={styles.copyBtn}
 					onClick={this.copyInstance} >
