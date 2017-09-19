@@ -70,7 +70,7 @@ class MultiColorPalette extends Component {
 				height: 40,
 				borderRadius: '50%',
 				marginLeft: 5,
-				border: '1px solid #333',
+				border: `1px solid ${values.nogDarkGray}`,
 				cursor: 'pointer'
 			}
 		}

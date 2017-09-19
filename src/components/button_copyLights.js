@@ -6,10 +6,10 @@ class ButtonCopyLights extends Component {
 	render() {
 		const { btnSize, type } = this.props;
 		const circleDia = btnSize / 2.5;
-		const rootBorderColor = (type === 'paste_disabled') ? '#222' : values.nogGrayText;
-		const paste1BorderColor = (type === 'paste_disabled') ? '#222' : values.nogGreen;
-		const paste2BorderColor = (type === 'paste_disabled') ? '#222' : values.nogGreen;
-		const paste2BgColor = (type === 'paste_disabled') ? '#222' : values.nogGreen;
+		const rootBorderColor = (type === 'paste_disabled') ? values.nogDisabled : values.nogGrayText;
+		const paste1BorderColor = (type === 'paste_disabled') ? values.nogDisabled : values.nogGreen;
+		const paste2BorderColor = (type === 'paste_disabled') ? values.nogDisabled : values.nogGreen;
+		const paste2BgColor = (type === 'paste_disabled') ? values.nogDisabled : values.nogGreen;
 		const styles = {
 			root: {
 				height: btnSize,
@@ -27,7 +27,7 @@ class ButtonCopyLights extends Component {
 				borderRadius: '50%'
 			},
 			copy1: {
-				border: `1px solid #333`,
+				border: `1px solid ${values.nogDarkGray}`,
 			},
 			copy2: {
 				border: `1px solid ${values.nogGreen}`,

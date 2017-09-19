@@ -21,7 +21,7 @@ class ButtonFillLights extends Component {
 				width: circleDia,
 				height: circleDia,
 				backgroundColor: fillColor,
-				border: `1px solid #333`,
+				border: `1px solid ${values.nogDarkGray}`,
 				borderRadius: '50%'
 			}
 		};

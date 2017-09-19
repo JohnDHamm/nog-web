@@ -180,9 +180,12 @@ class EditPatternSnowflakeMC extends Component {
 			},
 			deleteBtn: {
 				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 80,
-				left: optionBtnLeft
+				backgroundImage: 'url("../src/img/delete_instance.svg")',
+				width: optionBtnSize,
+				height: optionBtnSize,
+				top: optionBtnTop,
+				left: `calc(50% - ${optionBtnSize * 3}px - 12.5px)`,
+				cursor: 'pointer'
 			},
 			copyBtn: {
 				position: 'absolute',
@@ -206,9 +209,12 @@ class EditPatternSnowflakeMC extends Component {
 			},
 			addBtn: {
 				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 50,
-				left: optionBtnLeft
+				backgroundImage: 'url("../src/img/add_instance.svg")',
+				width: optionBtnSize,
+				height: optionBtnSize,
+				top: optionBtnTop,
+				left: `calc(50% + ${optionBtnSize * 2}px + 12.5px)`,
+				cursor: 'pointer'
 			}
 		};
 
@@ -325,10 +331,6 @@ class EditPatternSnowflakeMC extends Component {
 				<div
 					style={styles.deleteBtn}
 					onClick={this.deleteInstance} >
-					<ButtonText
-						label={'Delete Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
 				</div>
 				<div
 					style={styles.copyBtn}
@@ -370,10 +372,6 @@ class EditPatternSnowflakeMC extends Component {
 				<div
 					style={styles.addBtn}
 					onClick={this.addInstance} >
-					<ButtonText
-						label={'Add Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
 				</div>
 			</div>
 		);
