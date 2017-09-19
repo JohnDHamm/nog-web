@@ -171,39 +171,40 @@ class EditPatternSnowflakeMC extends Component {
 		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const currentColor = this.props.currentColorPalette[this.props.selectedColor.selectedColor].colorVal;
 		const optionBtnSize = 35,
+			optionBtnTop = currentInstanceTopMargin + currentInstanceSize + 15,
 			optionBtnWidth = 150,
 			optionBtnLeft = 'calc(50% + 120px)';
 		const styles = {
 			root: {
 				position: 'relative'
 			},
-			fillAllBtn: {
+			deleteBtn: {
 				position: 'absolute',
-				top: 50,
-				left: '50%'
-			},
-			clearAllBtn: {
-				position: 'absolute',
-				top: 50,
-				left: 'calc(50% + 50px)'
+				width: optionBtnWidth,
+				top: currentInstanceTopMargin + currentInstanceSize + 80,
+				left: optionBtnLeft
 			},
 			copyBtn: {
 				position: 'absolute',
-				top: 50,
-				left: 'calc(50% + 100px)'
+				top: optionBtnTop,
+				left: `calc(50% - ${optionBtnSize * 2}px - 7.5px)`
 			},
 			pasteBtn: {
 				position: 'absolute',
-				top: 50,
-				left: 'calc(50% + 150px)'
+				top: optionBtnTop,
+				left: `calc(50% - ${optionBtnSize}px - 2.5px)`
+			},
+			fillAllBtn: {
+				position: 'absolute',
+				top: optionBtnTop,
+				left: `calc(50% + 2.5px)`
+			},
+			clearAllBtn: {
+				position: 'absolute',
+				top: optionBtnTop,
+				left: `calc(50% + ${optionBtnSize}px + 7.5px)`
 			},
 			addBtn: {
-				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize + 20,
-				left: optionBtnLeft
-			},
-			deleteBtn: {
 				position: 'absolute',
 				width: optionBtnWidth,
 				top: currentInstanceTopMargin + currentInstanceSize + 50,
@@ -322,20 +323,13 @@ class EditPatternSnowflakeMC extends Component {
 				}
 
 				<div
-					style={styles.fillAllBtn}
-					onClick={this.fillAll} >
-					<ButtonFillLights
-						btnSize={optionBtnSize}
-						fillColor={currentColor} />
+					style={styles.deleteBtn}
+					onClick={this.deleteInstance} >
+					<ButtonText
+						label={'Delete Instance'}
+						color={values.nogGrayText}
+						bgColor={'#000'} />
 				</div>
-				<div
-					style={styles.clearAllBtn}
-					onClick={this.clearAll} >
-					<ButtonFillLights
-						btnSize={optionBtnSize}
-						fillColor={'#000'} />
-				</div>
-
 				<div
 					style={styles.copyBtn}
 					onClick={this.copyInstance} >
@@ -343,7 +337,6 @@ class EditPatternSnowflakeMC extends Component {
 						type={'copy'}
 						btnSize={optionBtnSize} />
 				</div>
-
 				{this.state.showPasteOption ? (
 						<div
 							style={styles.pasteBtn}
@@ -361,18 +354,24 @@ class EditPatternSnowflakeMC extends Component {
 					)
 				}
 				<div
+					style={styles.fillAllBtn}
+					onClick={this.fillAll} >
+					<ButtonFillLights
+						btnSize={optionBtnSize}
+						fillColor={currentColor} />
+				</div>
+				<div
+					style={styles.clearAllBtn}
+					onClick={this.clearAll} >
+					<ButtonFillLights
+						btnSize={optionBtnSize}
+						fillColor={'#000'} />
+				</div>
+				<div
 					style={styles.addBtn}
 					onClick={this.addInstance} >
 					<ButtonText
 						label={'Add Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
-				</div>
-				<div
-					style={styles.deleteBtn}
-					onClick={this.deleteInstance} >
-					<ButtonText
-						label={'Delete Instance'}
 						color={values.nogGrayText}
 						bgColor={'#000'} />
 				</div>
