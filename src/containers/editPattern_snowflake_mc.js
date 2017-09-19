@@ -170,7 +170,8 @@ class EditPatternSnowflakeMC extends Component {
 	render() {
 		const { currentInstanceSize, currentInstanceTopMargin } = this.props;
 		const currentColor = this.props.currentColorPalette[this.props.selectedColor.selectedColor].colorVal;
-		const optionBtnWidth = 150,
+		const optionBtnSize = 35,
+			optionBtnWidth = 150,
 			optionBtnLeft = 'calc(50% + 120px)';
 		const styles = {
 			root: {
@@ -186,27 +187,15 @@ class EditPatternSnowflakeMC extends Component {
 				top: 50,
 				left: 'calc(50% + 50px)'
 			},
-			copyBtn2: {
+			copyBtn: {
 				position: 'absolute',
 				top: 50,
 				left: 'calc(50% + 100px)'
 			},
-			pasteBtn2: {
+			pasteBtn: {
 				position: 'absolute',
 				top: 50,
 				left: 'calc(50% + 150px)'
-			},
-			copyBtn: {
-				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize - 40,
-				left: optionBtnLeft
-			},
-			pasteBtn: {
-				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize - 10,
-				left: optionBtnLeft
 			},
 			addBtn: {
 				position: 'absolute',
@@ -336,53 +325,38 @@ class EditPatternSnowflakeMC extends Component {
 					style={styles.fillAllBtn}
 					onClick={this.fillAll} >
 					<ButtonFillLights
-						btnSize={35}
+						btnSize={optionBtnSize}
 						fillColor={currentColor} />
 				</div>
 				<div
 					style={styles.clearAllBtn}
 					onClick={this.clearAll} >
 					<ButtonFillLights
-						btnSize={35}
+						btnSize={optionBtnSize}
 						fillColor={'#000'} />
-				</div>
-
-				<div
-					style={styles.copyBtn2}>
-					<ButtonCopyLights
-						type={'copy'}
-						btnSize={35} />
-				</div>
-				<div
-					style={styles.pasteBtn2}>
-					<ButtonCopyLights
-						type={'paste'}
-						btnSize={35} />
 				</div>
 
 				<div
 					style={styles.copyBtn}
 					onClick={this.copyInstance} >
-					<ButtonText
-						label={'Copy Instance'}
-						color={values.nogGrayText}
-						bgColor={'#000'} />
+					<ButtonCopyLights
+						type={'copy'}
+						btnSize={optionBtnSize} />
 				</div>
+
 				{this.state.showPasteOption ? (
 						<div
 							style={styles.pasteBtn}
 							onClick={this.pasteInstance} >
-							<ButtonText
-								label={'Paste Instance'}
-								color={values.nogGrayText}
-								bgColor={'#000'} />
+							<ButtonCopyLights
+								type={'paste'}
+								btnSize={optionBtnSize} />
 						</div>
 					) : (
 						<div style={styles.pasteBtn}>
-							<ButtonText
-								label={'Paste Instance'}
-								color={'#222'}
-								bgColor={'#000'} />
+							<ButtonCopyLights
+								type={'paste_disabled'}
+								btnSize={optionBtnSize} />
 						</div>
 					)
 				}
