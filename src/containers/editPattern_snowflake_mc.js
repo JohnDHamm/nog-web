@@ -192,16 +192,10 @@ class EditPatternSnowflakeMC extends Component {
 				top: 50,
 				left: 'calc(50% + 100px)'
 			},
-			pasteBtn2: {
+			pasteBtn: {
 				position: 'absolute',
 				top: 50,
 				left: 'calc(50% + 150px)'
-			},
-			pasteBtn: {
-				position: 'absolute',
-				width: optionBtnWidth,
-				top: currentInstanceTopMargin + currentInstanceSize - 10,
-				left: optionBtnLeft
 			},
 			addBtn: {
 				position: 'absolute',
@@ -349,28 +343,20 @@ class EditPatternSnowflakeMC extends Component {
 						type={'copy'}
 						btnSize={optionBtnSize} />
 				</div>
-				<div
-					style={styles.pasteBtn2}>
-					<ButtonCopyLights
-						type={'paste'}
-						btnSize={optionBtnSize} />
-				</div>
 
 				{this.state.showPasteOption ? (
 						<div
 							style={styles.pasteBtn}
 							onClick={this.pasteInstance} >
-							<ButtonText
-								label={'Paste Instance'}
-								color={values.nogGrayText}
-								bgColor={'#000'} />
+							<ButtonCopyLights
+								type={'paste'}
+								btnSize={optionBtnSize} />
 						</div>
 					) : (
 						<div style={styles.pasteBtn}>
-							<ButtonText
-								label={'Paste Instance'}
-								color={'#222'}
-								bgColor={'#000'} />
+							<ButtonCopyLights
+								type={'paste_disabled'}
+								btnSize={optionBtnSize} />
 						</div>
 					)
 				}
