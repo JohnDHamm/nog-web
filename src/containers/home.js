@@ -12,8 +12,8 @@ class Home extends Component {
 
 
 	render() {
-		// const userId = '59824b41172824a3e8d0d5d6'; //heroku db
-		const userId = '598246abbee2c891bd2cedc8'; //dev db
+		const userId = '59824b41172824a3e8d0d5d6'; //heroku db
+		// const userId = '598246abbee2c891bd2cedc8'; //dev db
 		const styles = {
 			title: {
 				marginTop: 20
