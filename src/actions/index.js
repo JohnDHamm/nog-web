@@ -14,8 +14,8 @@ export const POST_NEW_PATTERN = 'post_new_pattern';
 
 import axios from 'axios';
 
-// export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
-export const ROOT_URL = 'http://localhost:3000/api';
+export const ROOT_URL = 'https://nog-server.herokuapp.com/api';
+// export const ROOT_URL = 'http://localhost:3000/api';
 
 export function getUserPatterns(id) {
 	const request = axios.get(`${ROOT_URL}/userpatterns/${id}`);

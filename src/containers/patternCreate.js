@@ -22,8 +22,8 @@ class PatternCreate extends Component {
 		this.createPattern = this.createPattern.bind(this);
 	}
 
-	componentWillMount() {
-
+	componentDidMount() {
+		// console.log("this.props.nogTypes", this.props.nogTypes);
 	}
 
 	checkUniqueName(patternName) {
@@ -40,7 +40,7 @@ class PatternCreate extends Component {
 		const newPatternObj = {
 			name: this.state.patternName,
 			description: this.state.patternDesc,
-			userId: '598246abbee2c891bd2cedc8',
+			userId: this.props.user.user._id,
 			defaultSpeed: 50,
 			defaultColor: '',
 			customColors: [
@@ -52,7 +52,8 @@ class PatternCreate extends Component {
         "empty",
         "empty",
         "empty"],
-	    nogTypeId: "59923ed22459120fac1d656d",
+	    // nogTypeId: "59923ed22459120fac1d656d", //local dev snowflake nogType id
+	    nogTypeId: "598254b7172824a3e8d0d5d7", //heroku snowflake nogType id
 	    published: false,
 	    singleColor: false,
 	    instances: [
@@ -126,8 +127,8 @@ class PatternCreate extends Component {
 	}
 }
 
-function mapStateToProps({ user, userPatterns, nogTypes }) {
-	return { user, userPatterns, nogTypes };
+function mapStateToProps({ user, nogTypes }) {
+	return { user, nogTypes };
 }
 
 export default withRouter(connect(mapStateToProps, {postNewPattern, addUserPattern })(PatternCreate));
