@@ -4,9 +4,9 @@ export default function() {
 		user:
 			{
 				_id: '59824b41172824a3e8d0d5d6', //heroku
-				name: 'Santa',
-				email: 'santa@nog.com',
-				iconUrl: '../src/img/Santa_profile.jpg'
+				name: 'Buddy Elf',
+				email: 'testUser@nog.com',
+				iconUrl: '../src/img/buddy_elf.png'
 			}
 	}
 }
